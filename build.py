@@ -101,6 +101,15 @@ PHASES = (
 )
 PHASE_KEYS = tuple(p["key"] for p in PHASES)
 
+# Cards shown in the Orientation phase section on the home page. Orientation has
+# no branches, so it surfaces the entry-layer notes instead of a branch grid.
+# (root slug, icon, accent)
+ORIENTATION_ENTRY_CARDS = (
+    ("start-here", "compass", "cyan"),
+    ("must-know", "spark", "violet"),
+    ("index", "nodes", "sky"),
+)
+
 BRANCHES = {
     "foundations": {
         "label": "Foundations",
@@ -245,6 +254,7 @@ UI_STRINGS = {
         "overview": "Overview",
         "updated_short": "updated",
         "nav_toggle": "Toggle navigation",
+        "skip_to_content": "Skip to content",
         "search_placeholder": "Search notes, playbooks, tags...",
         "bc_home": "Home",
         "bc_ai": "AI",
@@ -319,6 +329,7 @@ UI_STRINGS = {
         "overview": "Resumen",
         "updated_short": "actualizado",
         "nav_toggle": "Alternar navegación",
+        "skip_to_content": "Saltar al contenido",
         "search_placeholder": "Buscar notas, playbooks, tags...",
         "bc_home": "Inicio",
         "bc_ai": "IA",
@@ -498,12 +509,22 @@ def load_note(path: Path) -> Note:
     )
 
 
+def is_draft(note: Note) -> bool:
+    value = note.frontmatter.get("draft")
+    return value is True or str(value).strip().lower() == "true"
+
+
 def load_notes() -> list[Note]:
     root = CANONICAL_CONTENT / SECTION
     if not root.exists():
         print(f"[error] missing content root: {root}", file=sys.stderr)
         return []
-    return [load_note(path) for path in sorted(root.rglob("*.md"))]
+    notes = [load_note(path) for path in sorted(root.rglob("*.md"))]
+    published = [n for n in notes if not is_draft(n)]
+    drafts = len(notes) - len(published)
+    if drafts:
+        print(f"[info] skipped {drafts} draft note(s).", file=sys.stderr)
+    return published
 
 
 def loc_root() -> Path:
@@ -678,15 +699,17 @@ def render_sidebar(tree: dict[str, dict[str, list[Note]]], current: Note | None)
     home_href = relpath_from(current, loc_root() / "index.html")
     current_branch = branch_slug(current)
     current_group = branch_group(current_branch) if current_branch else ""
-    root_notes = [n for n in tree.get(SECTION, {}).get("", []) if not n.slug.startswith("reference-registry")]
-    registry_notes = [n for n in tree.get(SECTION, {}).get("", []) if n.slug.startswith("reference-registry")]
+    section_root = tree.get(SECTION, {}).get("", [])
+    root_by_slug = {n.slug: n for n in section_root}
+    entry_notes = [root_by_slug[s] for s in ("index", "start-here", "must-know") if s in root_by_slug]
+    registry_notes = [n for n in section_root if n.slug.startswith("reference-registry")]
 
     lines = ['<nav class="sidebar" aria-label="Primary navigation">']
     lines.append(
         '<div class="sidebar-head">'
         f'<a class="sidebar-brand" href="{html.escape(home_href)}">{icon_svg("nodes", "brand-icon")}'
         f'<span class="brand-text"><span class="brand-title">AI Atlas</span><span class="brand-sub">{html.escape(t("brand_sub"))}</span></span></a>'
-        f'<button class="theme-toggle" id="theme-toggle" type="button" aria-label="{html.escape(t("theme_toggle"))}">'
+        f'<button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="{html.escape(t("theme_toggle"))}">'
         f'<span class="label-light">{icon_svg("sun")} {html.escape(t("light_mode"))}</span>'
         f'<span class="label-dark">{icon_svg("moon")} {html.escape(t("dark_mode"))}</span>'
         '<span class="toggle-pill"></span></button>'
@@ -695,9 +718,9 @@ def render_sidebar(tree: dict[str, dict[str, list[Note]]], current: Note | None)
     lines.append('<div class="sidebar-body">')
     lines.append(f'<a class="sidebar-home" href="{html.escape(home_href)}">{icon_svg("home")}<span>{html.escape(t("atlas_home"))}</span></a>')
 
-    if root_notes:
+    if entry_notes:
         lines.append(f'<section class="sidebar-section"><h3>{html.escape(t("entry_layer"))}</h3>')
-        for note in root_notes:
+        for note in entry_notes:
             label = t("ai_index") if note.slug == "index" else display_title(note)
             lines.append(render_sidebar_link(note, current, label=label))
         lines.append("</section>")
@@ -706,16 +729,23 @@ def render_sidebar(tree: dict[str, dict[str, list[Note]]], current: Note | None)
     for phase in PHASES:
         group = phase["key"]
         branches = [slug for slug in BRANCHES if branch_group(slug) == group and branch_notes(tree, slug)]
-        if not branches and group == "Orientation":
+        phase_note = root_by_slug.get(Path(str(phase["href"])).stem)
+        if not branches and not phase_note:
             continue
         count = sum(branch_note_count(tree, slug) for slug in branches)
-        open_attr = " open" if group == current_group else ""
+        is_current_phase = bool(current and phase_note and current.rel_path == phase_note.rel_path)
+        open_attr = " open" if (group == current_group and current_branch) or is_current_phase else ""
+        count_html = f'<span class="count">{count}</span>' if count else ""
         lines.append(
             f'<details class="nav-group"{open_attr}><summary>'
             f'<span class="nav-summary-left">{icon_svg(str(phase["icon"]), "sec-ico")}<span><span class="phase-num">{html.escape(str(phase["num"]))}</span>{html.escape(group_label(group))}</span></span>'
-            f'<span class="nav-summary-right"><span class="count">{count}</span>{icon_svg("chevron", "chev")}</span>'
+            f'<span class="nav-summary-right">{count_html}{icon_svg("chevron", "chev")}</span>'
             '</summary><div class="nav-children">'
         )
+        if phase_note:
+            phase_href = relpath_from(current, loc_root() / phase_note.rel_path.with_suffix(".html"))
+            phase_active = " active" if is_current_phase else ""
+            lines.append(f'<a class="nav-leaf nav-leaf-overview{phase_active}" href="{html.escape(phase_href)}">{html.escape(t("phase_overview"))}</a>')
         for slug in branches:
             notes = branch_notes(tree, slug)
             index_note = next((n for n in notes if n.slug == "index"), notes[0])
@@ -945,7 +975,7 @@ def seo_head(note: Note, root_href: str) -> str:
     description = note_description(note)
     canonical = canonical_url(note)
     kind = "article" if page_kind(note) in {"concept", "playbook", "registry", "phase", "entry"} else "website"
-    og_image = absolute_site_url("assets/og-image.svg")
+    og_image = absolute_site_url("assets/og-image.png")
     lines = [
         f"<title>{html.escape(title)}</title>",
         f'<meta name="description" content="{html.escape(description)}">',
@@ -958,6 +988,8 @@ def seo_head(note: Note, root_href: str) -> str:
         '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">',
         f'<link rel="canonical" href="{html.escape(canonical)}">',
         f'<link rel="icon" href="{html.escape(root_asset(root_href, "favicon.svg"))}" type="image/svg+xml">',
+        f'<link rel="icon" sizes="192x192" href="{html.escape(root_asset(root_href, "assets/icon-192.png"))}" type="image/png">',
+        f'<link rel="apple-touch-icon" href="{html.escape(root_asset(root_href, "apple-touch-icon.png"))}">',
         f'<link rel="manifest" href="{html.escape(root_asset(root_href, "site.webmanifest"))}">',
         f'<meta property="og:site_name" content="{html.escape(SITE_NAME)}">',
         f'<meta property="og:locale" content="{OG_LOCALE.get(CURRENT_LOCALE, "en_US")}">',
@@ -967,7 +999,10 @@ def seo_head(note: Note, root_href: str) -> str:
         f'<meta property="og:description" content="{html.escape(description)}">',
         f'<meta property="og:url" content="{html.escape(canonical)}">',
         f'<meta property="og:image" content="{html.escape(og_image)}">',
-        '<meta property="og:image:type" content="image/svg+xml">',
+        '<meta property="og:image:type" content="image/png">',
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        f'<meta property="og:image:alt" content="{html.escape(SITE_NAME)}">',
         '<meta name="twitter:card" content="summary_large_image">',
         f'<meta name="twitter:title" content="{html.escape(title)}">',
         f'<meta name="twitter:description" content="{html.escape(description)}">',
@@ -991,6 +1026,7 @@ PAGE_TEMPLATE = """<!doctype html>
 <link rel="stylesheet" href="{css_href}?v={asset_ver}">
 </head>
 <body id="top" data-root="{root_href}" data-locale-root="{locale_root}">
+<a class="skip-link" href="#main">{skip_to_content}</a>
 <div class="app {layout_class}">
 {sidebar}
 <div class="main-col">
@@ -1008,7 +1044,7 @@ PAGE_TEMPLATE = """<!doctype html>
 </header>
 <div id="search-results" hidden></div>
 <div class="main-row">
-<main class="content">
+<main class="content" id="main" tabindex="-1">
 {breadcrumbs}
 <header class="page-hero">
 {page_meta}
@@ -1061,6 +1097,7 @@ def render_page(note: Note, body: str, sidebar: str, tree: dict[str, dict[str, l
         layout_class="with-toc" if toc else "no-toc",
         sidebar=sidebar,
         nav_toggle=html.escape(t("nav_toggle")),
+        skip_to_content=html.escape(t("skip_to_content")),
         menu_icon=icon_svg("menu"),
         search_icon=icon_svg("search", "search-ico"),
         search_placeholder=html.escape(t("search_placeholder")),
@@ -1137,7 +1174,9 @@ def related_notes_html(note: Note, all_notes: list[Note]) -> str:
 
 def build_home(tree: dict[str, dict[str, list[Note]]], notes: list[Note]) -> str:
     note_count = len(notes)
-    registry_notes = [n for n in tree.get(SECTION, {}).get("", []) if n.slug.startswith("reference-registry")]
+    section_root = tree.get(SECTION, {}).get("", [])
+    root_by_slug = {n.slug: n for n in section_root}
+    registry_notes = [n for n in section_root if n.slug.startswith("reference-registry")]
     playbook_count = branch_note_count(tree, "ai-playbooks")
     lines: list[str] = []
     lines.append('<section class="home-hero">')
@@ -1163,23 +1202,12 @@ def build_home(tree: dict[str, dict[str, list[Note]]], notes: list[Note]) -> str
     lines.append(f'<a class="path-intro-cta" href="ai/start-here.html">{html.escape(t("path_cta"))}{icon_svg("arrow")}</a>')
     lines.append("</section>")
 
-    lines.append('<section class="phase-track" aria-label="Learning phases">')
     for phase in PHASES:
         group = str(phase["key"])
-        branches = [slug for slug in BRANCHES if branch_group(slug) == group]
-        group_count = sum(branch_note_count(tree, slug) for slug in branches)
-        lines.append(
-            f'<a class="phase-step{" phase-step-always" if group == "Always-on" else ""}" href="{html.escape(str(phase["href"]))}">'
-            f'<span class="ps-num">{html.escape(str(phase["num"]))}</span><span class="ps-body">'
-            f'<span class="ps-tag">{html.escape(t("tag_" + group))}</span><strong>{html.escape(group_label(group))}</strong>'
-            f'<small>{count_label(len(branches), "branch_singular", "branch_plural")} · {count_label(group_count, "note_singular", "note_plural")}</small>'
-            '</span></a>'
-        )
-    lines.append("</section>")
-
-    for phase in PHASES:
-        group = str(phase["key"])
-        branches = [slug for slug in BRANCHES if branch_group(slug) == group]
+        branches = [slug for slug in BRANCHES if branch_group(slug) == group and branch_notes(tree, slug)]
+        entry_cards = ORIENTATION_ENTRY_CARDS if group == "Orientation" else []
+        if not branches and not entry_cards:
+            continue
         lines.append(f'<section class="phase-section" id="phase-{slugify(group)}">')
         lines.append(
             '<header class="phase-section-head">'
@@ -1189,24 +1217,38 @@ def build_home(tree: dict[str, dict[str, list[Note]]], notes: list[Note]) -> str
             f'<a class="phs-open" href="{html.escape(str(phase["href"]))}">{html.escape(t("phase_overview"))}{icon_svg("arrow")}</a>'
             '</header>'
         )
-        if branches:
-            lines.append('<div class="branch-grid">')
-            for slug in branches:
-                notes_for_branch = branch_notes(tree, slug)
-                href = f"ai/{slug}/index.html"
-                index_note = next((n for n in notes_for_branch if n.slug == "index"), None)
-                if index_note:
-                    href = index_note.url
-                lines.append(
-                    f'<a class="branch-card accent-{html.escape(branch_accent(slug))}" href="{html.escape(href)}">'
-                    f'<div class="bc-head"><span class="bc-icon">{icon_svg(BRANCHES[slug]["icon"])}</span><span class="bc-count">{len(notes_for_branch)} {html.escape(t("branch_notes_suffix"))}</span></div>'
-                    f'<h3>{html.escape(branch_label(slug))}</h3><p>{html.escape(branch_summary(slug))}</p>'
-                    f'<span class="bc-link">{html.escape(t("branch_explore"))}{icon_svg("arrow")}</span></a>'
-                )
-            lines.append("</div>")
+        lines.append('<div class="branch-grid">')
+        for slug, icon, accent in entry_cards:
+            note = root_by_slug.get(slug)
+            if not note:
+                continue
+            label = t("ai_index") if slug == "index" else display_title(note)
+            lines.append(
+                f'<a class="branch-card entry-card accent-{accent}" href="{html.escape(note.url)}">'
+                f'<div class="bc-head"><span class="bc-icon">{icon_svg(icon)}</span></div>'
+                f'<h3>{html.escape(label)}</h3><p>{html.escape(display_description(note))}</p>'
+                f'<span class="bc-link">{html.escape(t("branch_explore"))}{icon_svg("arrow")}</span></a>'
+            )
+        for slug in branches:
+            notes_for_branch = branch_notes(tree, slug)
+            href = f"ai/{slug}/index.html"
+            index_note = next((n for n in notes_for_branch if n.slug == "index"), None)
+            if index_note:
+                href = index_note.url
+            lines.append(
+                f'<a class="branch-card accent-{html.escape(branch_accent(slug))}" href="{html.escape(href)}">'
+                f'<div class="bc-head"><span class="bc-icon">{icon_svg(BRANCHES[slug]["icon"])}</span><span class="bc-count">{count_label(len(notes_for_branch), "note_singular", "note_plural")}</span></div>'
+                f'<h3>{html.escape(branch_label(slug))}</h3><p>{html.escape(branch_summary(slug))}</p>'
+                f'<span class="bc-link">{html.escape(t("branch_explore"))}{icon_svg("arrow")}</span></a>'
+            )
+        lines.append("</div>")
         lines.append("</section>")
 
-    featured = find_note(notes, "ai/llms/transformer-attention-map.md") or next((n for n in notes if branch_slug(n) == "llms" and n.slug != "index"), None)
+    featured = (
+        next((n for n in notes if n.frontmatter.get("featured") is True and page_kind(n) in {"concept", "playbook"}), None)
+        or next((n for n in notes if page_kind(n) == "concept"), None)
+        or next((n for n in notes if page_kind(n) == "playbook"), None)
+    )
     if featured:
         lines.append('<section class="featured-section">')
         lines.append(f'<div class="section-eyebrow">{html.escape(t("featured_label"))}</div>')
@@ -1231,13 +1273,6 @@ def build_home(tree: dict[str, dict[str, list[Note]]], notes: list[Note]) -> str
     lines.append(f'<div class="footer-links"><a href="{html.escape(GITHUB_URL)}" target="_blank" rel="noopener">GitHub</a><a href="ai/start-here.html">{html.escape(t("footer_start"))}</a><a href="ai/index.html">{html.escape(t("footer_index"))}</a></div>')
     lines.append("</footer>")
     return "\n".join(lines)
-
-
-def find_note(notes: list[Note], rel: str) -> Note | None:
-    for note in notes:
-        if note.rel_path.as_posix() == rel:
-            return note
-    return None
 
 
 def count_label(count: int, singular_key: str, plural_key: str) -> str:
@@ -1459,7 +1494,12 @@ def write_manifest() -> None:
         "display": "standalone",
         "background_color": "#0b1020",
         "theme_color": THEME_COLOR,
-        "icons": [{"src": "favicon.svg", "sizes": "any", "type": "image/svg+xml"}],
+        "icons": [
+            {"src": "favicon.svg", "sizes": "any", "type": "image/svg+xml"},
+            {"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+            {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+            {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+        ],
     }
     (OUT / "site.webmanifest").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
@@ -1623,6 +1663,28 @@ def build_locale(notes: list[Note], tree: dict[str, dict[str, list[Note]]], by_s
 ASSET_VER = "0"
 
 
+def validate_taxonomy(notes: list[Note]) -> int:
+    """Warn about structural drift between content and the BRANCHES/PHASES config.
+
+    Non-fatal: a typo in a branch group or a content folder without a BRANCHES
+    entry would otherwise silently drop cards/labels from the site.
+    """
+    warnings: list[str] = []
+    for slug, meta in BRANCHES.items():
+        if meta.get("group") not in PHASE_KEYS:
+            warnings.append(f"branch '{slug}' has group '{meta.get('group')}' with no matching phase")
+    content_branches = {branch_slug(n) for n in notes if branch_slug(n)}
+    for slug in sorted(content_branches):
+        if slug not in BRANCHES:
+            warnings.append(f"content folder 'ai/{slug}/' has no BRANCHES entry (no card, label, or accent)")
+    for slug in BRANCHES:
+        if slug not in content_branches:
+            warnings.append(f"branch '{slug}' is configured but has no notes in content/ yet")
+    for message in warnings:
+        print(f"[warn] {message}", file=sys.stderr)
+    return len(warnings)
+
+
 def main() -> int:
     global ASSET_VER, CURRENT_LOCALE
     ASSET_VER = compute_asset_version()
@@ -1630,6 +1692,7 @@ def main() -> int:
     if not notes:
         print("[error] loaded 0 notes; refusing to clear site/.", file=sys.stderr)
         return 1
+    validate_taxonomy(notes)
     if OUT.exists():
         shutil.rmtree(OUT)
     (OUT / "assets").mkdir(parents=True, exist_ok=True)

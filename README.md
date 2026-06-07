@@ -11,14 +11,20 @@ cyan, indigo, violet, and neutral knowledge-tool surfaces.
 ## Structure
 
 ```text
-build.py                 # Static site generator
-content/en/ai/           # Canonical English Markdown notes
-content/es/ai/           # Spanish overlays with matching paths
-static/favicon.svg       # Shared favicon
-static/assets/atlas.css  # Design system and responsive layout
-static/assets/search.js  # Theme, drawer, language memory, client search
-static/assets/og-image.svg
-site/                    # Generated output
+build.py                       # Static site generator
+content/en/ai/                 # Canonical English Markdown notes
+content/es/ai/                 # Spanish overlays with matching paths
+static/favicon.svg             # Shared favicon (SVG source)
+static/apple-touch-icon.png    # iOS home-screen icon (generated)
+static/assets/atlas.css        # Design system and responsive layout
+static/assets/search.js        # Theme, drawer, language memory, client search
+static/assets/og-image.svg     # Social card source
+static/assets/og-image.png     # Social card raster (generated, 1200x630)
+static/assets/icon-192.png     # PWA icon (generated)
+static/assets/icon-512.png     # PWA icon (generated, also maskable)
+scripts/rasterize-brand-assets.sh   # SVG -> PNG generator
+.github/workflows/deploy.yml   # GitHub Pages CI (build + deploy)
+site/                          # Generated output
 ```
 
 Generated pages are written to:
@@ -72,11 +78,21 @@ description: Short SEO/search description.
 tags: [llms, evaluation]
 order: 2
 updated: 2026-06-07
+# featured: true   # optional — promotes this note to the home "Featured" card
+# draft: true      # optional — keeps the note out of the build until removed
 ---
 # My New Note
 
 Atomic note body.
 ```
+
+Frontmatter flags:
+
+- `order` sorts notes inside a branch (lower first; index is always pinned on top).
+- `featured: true` selects the single note shown in the home "Featured note" card.
+  If none is set, the first concept/playbook note is used.
+- `draft: true` excludes the note from the build (and from search/sitemap), so you
+  can write in-tree without publishing. The build logs how many drafts it skipped.
 
 Use wikilinks for internal references:
 
@@ -120,7 +136,8 @@ The build emits:
 
 - Canonical URLs
 - `hreflang` alternates for EN/ES and `x-default`
-- OpenGraph and Twitter metadata
+- OpenGraph and Twitter metadata with a **PNG** social image (1200x630)
+- `apple-touch-icon` + PWA icons (192/512, including a maskable variant)
 - JSON-LD breadcrumbs/articles
 - `site/sitemap.xml`
 - `site/robots.txt`
@@ -134,6 +151,26 @@ SITE_URL="https://example.com/ai-notes" \
 GITHUB_URL="https://github.com/your-user/ai-notes" \
 python3 build.py
 ```
+
+### Brand assets (SVG -> PNG)
+
+Social/share platforms do not render SVG, so the PNG icons and the OG image are
+committed to `static/`. Regenerate them after editing `static/favicon.svg` or
+`static/assets/og-image.svg`:
+
+```bash
+./scripts/rasterize-brand-assets.sh
+```
+
+The script uses `rsvg-convert`, `magick`, or `inkscape` if installed, and falls
+back to the macOS built-in `qlmanage`/`sips` (no install required).
+
+### Continuous deployment
+
+`.github/workflows/deploy.yml` builds the site and publishes it to GitHub Pages
+on every push to `main`. It runs `python build.py` with `SITE_URL` set to the
+Pages base URL, then uploads `site/` as the Pages artifact — the generated
+`site/` folder does not need to be committed once CI is enabled.
 
 ## Initial Content
 

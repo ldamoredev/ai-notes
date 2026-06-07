@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AI Atlas">
-  <rect width="64" height="64" rx="12" fill="#0b1020"/>
-  <circle cx="18" cy="18" r="5" fill="#22d3ee"/>
-  <circle cx="46" cy="20" r="5" fill="#818cf8"/>
-  <circle cx="32" cy="46" r="5" fill="#c084fc"/>
-  <path d="M22 19.5 41.5 20.5M20.5 22 29.5 42M44 24 35 42" fill="none" stroke="#e5eefb" stroke-width="3" stroke-linecap="round"/>
-</svg>

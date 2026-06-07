@@ -4,6 +4,7 @@ description: A short conceptual note on attention as routing over token represen
 tags: [llms, transformers, attention]
 order: 1
 updated: 2026-06-07
+featured: true
 ---
 # Transformer Attention Map
 
