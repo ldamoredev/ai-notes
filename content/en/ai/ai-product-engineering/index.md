@@ -35,6 +35,11 @@ its cost.
 - [[ai/ai-product-engineering/product-guardrails|Product guardrails]]
 - [[ai/ai-product-engineering/evals-inside-the-product|Evals inside the product]]
 
+## Architecture & model choice
+
+- [[ai/ai-product-engineering/the-ai-application-stack|The AI application stack]] maps how model, context, retrieval, tools, guardrails, and evals fit together.
+- [[ai/ai-product-engineering/choosing-a-model|Choosing a model]] picks the cheapest model that clears a task's quality bar.
+
 ## Core sources
 
 - The Shape of AI — UX patterns for AI product interfaces.

@@ -36,6 +36,11 @@ compared, and improved without tuning by vibes.
 - [[ai/evaluation/evaluating-agent-systems|Evaluating agent systems]] scores outcomes, trajectories, tool use, and autonomy control.
 - [[ai/ai-product-engineering/evals-inside-the-product|Evals inside the product]] shows where these checks live in delivery.
 
+## Practice & process
+
+- [[ai/evaluation/eval-driven-development|Eval-driven development]] makes the eval set the spec you build against, like unit tests for AI.
+- [[ai/evaluation/nondeterminism-and-reproducibility|Nondeterminism & reproducibility]] explains why the same input varies and how to test for distributions.
+
 ## Core sources
 
 - Hamel Husain, **Your AI Product Needs Evals** and **LLM-as-a-Judge**.

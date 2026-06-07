@@ -44,6 +44,10 @@ service of that.**
 
 - [[ai/foundations/mental-models-for-ai|Mental models for AI systems]]
 
+## Knowing the limits
+
+- [[ai/foundations/when-not-to-use-ai|When not to use AI]] recognizes where rules, humans, or simpler software beat a model.
+
 ## Core sources
 
 - 3Blue1Brown — *Essence of Linear Algebra* and *Neural Networks* (visual intuition).

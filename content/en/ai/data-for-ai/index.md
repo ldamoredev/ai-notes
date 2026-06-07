@@ -36,6 +36,10 @@ treating the dataset, not the model, as the primary thing you iterate on.
 - [[ai/data-for-ai/data-pipelines-versioning-and-lineage|Data pipelines, versioning, and lineage]] keeps datasets reproducible and auditable.
 - [[ai/data-for-ai/privacy-and-pii-in-datasets|Privacy and PII in datasets]] handles consent, minimization, anonymization, and access boundaries.
 
+## Data strategy
+
+- [[ai/data-for-ai/the-data-flywheel|The data flywheel]] turns usage into a compounding loop of better data and a better product.
+
 ## Core sources
 
 - Andrew Ng / DeepLearning.AI, **Data-Centric AI**.

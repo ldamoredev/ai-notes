@@ -41,6 +41,11 @@ language, and it's the substrate every [[ai/llms/index|LLM]] is built on.
 - [[ai/deep-learning/embeddings-and-latent-spaces|Embeddings & latent spaces]]
 - [[ai/deep-learning/scaling-laws|Scaling laws: why bigger keeps working]]
 
+## Paradigms & strategy
+
+- [[ai/deep-learning/reinforcement-learning-essentials|Reinforcement learning, the essentials]] covers reward, policy, and the paradigm behind RLHF and reasoning models.
+- [[ai/deep-learning/the-bitter-lesson|The bitter lesson]] explains why general, compute-hungry methods keep beating hand-crafted structure.
+
 ## Core sources
 
 - Andrej Karpathy — *Neural Networks: Zero to Hero* (micrograd → makemore → GPT).

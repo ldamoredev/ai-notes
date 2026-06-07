@@ -35,6 +35,11 @@ to prompts, retrieval, tools, traces, and product feedback.
 - [[ai/mlops/human-in-the-loop-production|Human-in-the-loop in production]]
 - [[ai/mlops/feedback-loops|Feedback loops]]
 
+## Platform decisions
+
+- [[ai/mlops/build-vs-buy-api-vs-self-hosting|Build vs buy: API vs self-hosting]] weighs hosted APIs against running your own models.
+- [[ai/mlops/model-deprecation-and-migration|Model deprecation and migration]] insulates production from retired or silently updated models.
+
 ## Core sources
 
 - Chip Huyen — *Designing Machine Learning Systems* and *AI Engineering*.
