@@ -30,7 +30,7 @@ knowledge domain); promoted `fine-tuning-and-alignment` out of LLMs; reframed
 - [x] **fine-tuning-and-alignment** — 12 notes
 - [x] **mlops** — 12 notes
 - [x] **ai-product-engineering** — 12 notes
-- [ ] evaluation
+- [x] evaluation — 12 notes
 - [ ] ai-safety-and-security
 - [ ] ai-playbooks (procedural; grows organically)
 - [ ] **ES overlay pass** (after EN notes land)
