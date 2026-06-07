@@ -2,7 +2,7 @@
 title: Mental Models for AI Systems
 description: A compact set of mental models for thinking about AI systems beyond model demos.
 tags: [foundations, systems, evaluation]
-order: 1
+order: 13
 updated: 2026-06-07
 ---
 # Mental Models for AI Systems

@@ -140,9 +140,9 @@ BRANCHES = {
         "icon": "nodes",
     },
     "prompt-engineering": {
-        "label": "Prompt Engineering",
+        "label": "Prompting & Context Engineering",
         "group": "Engineering",
-        "summary": "Task framing, examples, constraints, structured outputs, and prompt iteration discipline.",
+        "summary": "Prompting techniques plus context engineering: what the model knows — system prompts, examples, structured output, memory, and assembled context.",
         "accent": "amber",
         "icon": "message",
     },
@@ -188,12 +188,12 @@ BRANCHES = {
         "accent": "orange",
         "icon": "layout",
     },
-    "research-notes": {
-        "label": "Research Notes",
-        "group": "Always-on",
-        "summary": "Paper notes, experiment logs, open questions, and claims worth revisiting.",
-        "accent": "slate",
-        "icon": "file",
+    "fine-tuning-and-alignment": {
+        "label": "Fine-tuning & Alignment",
+        "group": "Engineering",
+        "summary": "When to adapt a model, SFT, LoRA/QLoRA, RLHF and DPO, data quality, distillation, and evaluating fine-tunes.",
+        "accent": "violet",
+        "icon": "spark",
     },
     "ai-playbooks": {
         "label": "AI Playbooks",
@@ -209,14 +209,14 @@ BRANCHES_ES = {
     "machine-learning": {"label": "Machine Learning", "summary": "Datasets, objetivos, features, ciclos de entrenamiento, generalización y análisis de errores."},
     "deep-learning": {"label": "Deep Learning", "summary": "Redes neuronales, representaciones, optimización, embeddings y comportamiento al escalar."},
     "llms": {"label": "LLMs", "summary": "Transformers, tokenización, pretraining, instruction tuning, contexto y comportamiento generativo."},
-    "prompt-engineering": {"label": "Prompt Engineering", "summary": "Encuadre de tareas, ejemplos, restricciones, salidas estructuradas e iteración disciplinada de prompts."},
+    "prompt-engineering": {"label": "Prompting y Context Engineering", "summary": "Técnicas de prompting más context engineering: qué sabe el modelo — system prompts, ejemplos, salida estructurada, memoria y contexto ensamblado."},
     "agents-and-tools": {"label": "Agentes y Herramientas", "summary": "Tool calling, bucles de planificación, memoria, handoffs, límites de autonomía y controles de operador."},
     "rag-and-retrieval": {"label": "RAG y Retrieval", "summary": "Indexación, chunking, embeddings, ranking, citas, grounding y evaluación de recuperación."},
     "evaluation": {"label": "Evaluación", "summary": "Rúbricas de calidad, eval sets, regresiones, comparación de modelos y análisis de fallas."},
     "ai-safety-and-security": {"label": "Seguridad de IA", "summary": "Modelado de amenazas, misuse, prompt injection, fuga de datos, safety cases y controles de despliegue."},
     "mlops": {"label": "MLOps", "summary": "Pipelines, datasets, monitoreo, releases de modelos, reproducibilidad y loops de feedback en producción."},
     "ai-product-engineering": {"label": "Ingeniería de Producto con IA", "summary": "UX, latencia, costo, observabilidad, revisión humana, métricas de producto y tradeoffs de entrega."},
-    "research-notes": {"label": "Notas de Investigación", "summary": "Notas de papers, logs de experimentos, preguntas abiertas y afirmaciones para revisar."},
+    "fine-tuning-and-alignment": {"label": "Fine-tuning y Alignment", "summary": "Cuándo adaptar un modelo, SFT, LoRA/QLoRA, RLHF y DPO, calidad de datos, distillation y evaluación de fine-tunes."},
     "ai-playbooks": {"label": "Playbooks de IA", "summary": "Procedimientos repetibles para construir, evaluar, depurar y entregar sistemas con IA."},
 }
 
@@ -1361,15 +1361,30 @@ def simple_markdown_to_html(md_text: str) -> str:
         if ul_match or ol_match:
             flush_paragraph()
             tag = "ol" if ol_match else "ul"
-            items = []
             pattern = r"^\d+\.\s+(.+)$" if ol_match else r"^[-*+]\s+(.+)$"
+            items: list[str] = []
+            current: str | None = None
             while i < len(lines):
-                m = re.match(pattern, lines[i].strip())
-                if not m:
-                    break
-                items.append("<li>" + parse_inline(m.group(1)) + "</li>")
-                i += 1
-            out.append(f"<{tag}>" + "".join(items) + f"</{tag}>")
+                s = lines[i].strip()
+                m = re.match(pattern, s)
+                if m:
+                    if current is not None:
+                        items.append(current)
+                    current = m.group(1)
+                    i += 1
+                    continue
+                # Lazy continuation: a wrapped line that is not a new block joins
+                # the current item (mirrors how real Markdown treats soft wraps).
+                if (current is not None and s and "|" not in s
+                        and not s.startswith(("#", ">", "```", "- ", "* ", "+ "))
+                        and not re.match(r"^\d+\.\s", s)):
+                    current += " " + s
+                    i += 1
+                    continue
+                break
+            if current is not None:
+                items.append(current)
+            out.append(f"<{tag}>" + "".join("<li>" + parse_inline(it) + "</li>" for it in items) + f"</{tag}>")
             continue
         paragraph.append(line)
         i += 1

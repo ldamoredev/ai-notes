@@ -172,17 +172,13 @@ on every push to `main`. It runs `python build.py` with `SITE_URL` set to the
 Pages base URL, then uploads `site/` as the Pages artifact — the generated
 `site/` folder does not need to be committed once CI is enabled.
 
-## Initial Content
+## Content
 
-The skeleton includes:
+The knowledge taxonomy is **12 branches + playbooks**, grouped into phases
+(Foundations, Models, Engineering, Evaluation, Always-on). Each branch targets
+**10–15 rich, source-backed atomic notes**.
 
-- Main AI index
-- Start Here and Must Know
-- Six phase pages
-- Thirteen branch index placeholders
-- Three short example notes
-- One AI playbook
-- One reference registry
-
-It is intentionally small so the atlas can grow from real notes instead of a
-large invented knowledge base.
+See [CONTENT-PLAN.md](CONTENT-PLAN.md) for the full taxonomy, per-branch note
+outlines, curated sources, and progress checklist. Notes are written EN-first;
+Spanish overlays follow in a second pass (pages fall back to English with a banner
+until translated).
