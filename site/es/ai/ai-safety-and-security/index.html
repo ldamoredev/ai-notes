@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seguridad de IA Notas | AI Atlas</title>
+<meta name="description" content="Modelado de amenazas, prompt injection, fuga de datos, misuse y controles de despliegue.">
+<meta name="author" content="Nicolas Bottarini">
+<meta name="application-name" content="AI Atlas">
+<meta name="keywords" content="AI, artificial intelligence, machine learning, deep learning, large language models, RAG, agents, AI evaluation, AI safety, MLOps, Seguridad de IA, ai-safety, security">
+<meta name="theme-color" content="#22d3ee">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://ldamoredev.github.io/ai-notes/es/ai/ai-safety-and-security/index.html">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="../../../site.webmanifest">
+<meta property="og:site_name" content="AI Atlas">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Seguridad de IA Notas | AI Atlas">
+<meta property="og:description" content="Modelado de amenazas, prompt injection, fuga de datos, misuse y controles de despliegue.">
+<meta property="og:url" content="https://ldamoredev.github.io/ai-notes/es/ai/ai-safety-and-security/index.html">
+<meta property="og:image" content="https://ldamoredev.github.io/ai-notes/assets/og-image.svg">
+<meta property="og:image:type" content="image/svg+xml">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Seguridad de IA Notas | AI Atlas">
+<meta name="twitter:description" content="Modelado de amenazas, prompt injection, fuga de datos, misuse y controles de despliegue.">
+<meta name="twitter:image" content="https://ldamoredev.github.io/ai-notes/assets/og-image.svg">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://ldamoredev.github.io/ai-notes/es/ai/ai-safety-and-security/index.html#page","name":"Seguridad de IA Notas | AI Atlas","headline":"Seguridad de IA","description":"Modelado de amenazas, prompt injection, fuga de datos, misuse y controles de despliegue.","url":"https://ldamoredev.github.io/ai-notes/es/ai/ai-safety-and-security/index.html","inLanguage":"es","isPartOf":{"@type":"WebSite","@id":"https://ldamoredev.github.io/ai-notes/#website","name":"AI Atlas","url":"https://ldamoredev.github.io/ai-notes/"},"author":{"@type":"Person","@id":"https://ldamoredev.github.io/ai-notes/#author","name":"Nicolas Bottarini"},"dateModified":"2026-06-07","keywords":["AI","artificial intelligence","machine learning","deep learning","large language models","RAG","agents","AI evaluation","AI safety","MLOps","Seguridad de IA","ai-safety","security"]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://ldamoredev.github.io/ai-notes/es/"},{"@type":"ListItem","position":2,"name":"IA","item":"https://ldamoredev.github.io/ai-notes/es/ai/index.html"},{"@type":"ListItem","position":3,"name":"Seguridad de IA","item":"https://ldamoredev.github.io/ai-notes/es/ai/ai-safety-and-security/index.html"},{"@type":"ListItem","position":4,"name":"Seguridad de IA","item":"https://ldamoredev.github.io/ai-notes/es/ai/ai-safety-and-security/index.html"}]}]</script>
+<link rel="alternate" hreflang="en" href="https://ldamoredev.github.io/ai-notes/en/ai/ai-safety-and-security/index.html">
+<link rel="alternate" hreflang="es" href="https://ldamoredev.github.io/ai-notes/es/ai/ai-safety-and-security/index.html">
+<link rel="alternate" hreflang="x-default" href="https://ldamoredev.github.io/ai-notes/en/ai/ai-safety-and-security/index.html">
+<script>(function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../../../assets/atlas.css?v=4f8adb683f">
+</head>
+<body id="top" data-root="../../.." data-locale-root="../..">
+<div class="app no-toc">
+<nav class="sidebar" aria-label="Primary navigation">
+<div class="sidebar-head"><a class="sidebar-brand" href="../../index.html"><svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="12" cy="18" r="3"/><path d="M8.6 7.4 15.4 6.6M7.5 8.5 10.5 15.5M16.5 9.5 13.5 15.5"/></svg><span class="brand-text"><span class="brand-title">AI Atlas</span><span class="brand-sub">Atlas de Conocimiento</span></span></a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema"><span class="label-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg> Claro</span><span class="label-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg> Oscuro</span><span class="toggle-pill"></span></button></div>
+<div class="sidebar-body">
+<a class="sidebar-home" href="../../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/></svg><span>Inicio del Atlas</span></a>
+<section class="sidebar-section"><h3>Capa de entrada</h3>
+<a class="sidebar-link kind-index" href="../index.html">Índice de IA</a>
+<a class="sidebar-link kind-entry" href="../start-here.html">Empezar acá</a>
+<a class="sidebar-link kind-entry" href="../must-know.html">Must Know</a>
+<a class="sidebar-link kind-phase" href="../phase-00-orientation.html">Fase 00 Orientación</a>
+<a class="sidebar-link kind-phase" href="../phase-01-foundations.html">Fase 01 Fundamentos</a>
+<a class="sidebar-link kind-phase" href="../phase-02-models-and-architectures.html">Fase 02 Modelos y Arquitecturas</a>
+<a class="sidebar-link kind-phase" href="../phase-03-building-and-engineering.html">Fase 03 Construcción e Ingeniería</a>
+<a class="sidebar-link kind-phase" href="../phase-04-evaluation-and-security.html">Fase 04 Evaluación y Seguridad</a>
+<a class="sidebar-link kind-phase" href="../phase-always-active.html">Siempre activo</a>
+</section>
+<section class="sidebar-section"><h3>Ruta de aprendizaje</h3>
+<details class="nav-group"><summary><span class="nav-summary-left"><svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span><span class="phase-num">01</span>Fundamentos</span></span><span class="nav-summary-right"><span class="count">3</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-children">
+<details class="nav-branch accent-cyan"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Fundamentos</span></span><span class="nav-summary-right"><span class="count">2</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../foundations/index.html">Resumen</a>
+<a class="nav-leaf" href="../foundations/mental-models-for-ai.html" title="Modelos mentales para sistemas de IA">Modelos mentales para sistemas de IA</a>
+</div></details>
+<details class="nav-branch accent-indigo"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Machine Learning</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../machine-learning/index.html">Resumen</a>
+</div></details>
+</div></details>
+<details class="nav-group"><summary><span class="nav-summary-left"><svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="12" cy="18" r="3"/><path d="M8.6 7.4 15.4 6.6M7.5 8.5 10.5 15.5M16.5 9.5 13.5 15.5"/></svg><span><span class="phase-num">02</span>Modelos y Arquitecturas</span></span><span class="nav-summary-right"><span class="count">3</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-children">
+<details class="nav-branch accent-violet"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>Deep Learning</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../deep-learning/index.html">Resumen</a>
+</div></details>
+<details class="nav-branch accent-sky"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="12" cy="18" r="3"/><path d="M8.6 7.4 15.4 6.6M7.5 8.5 10.5 15.5M16.5 9.5 13.5 15.5"/></svg><span>LLMs</span></span><span class="nav-summary-right"><span class="count">2</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../llms/index.html">Resumen</a>
+<a class="nav-leaf" href="../llms/transformer-attention-map.html" title="Mapa de atención en transformers">Mapa de atención en transformers</a>
+</div></details>
+</div></details>
+<details class="nav-group"><summary><span class="nav-summary-left"><svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg><span><span class="phase-num">03</span>Construcción / Engineering</span></span><span class="nav-summary-right"><span class="count">6</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-children">
+<details class="nav-branch accent-amber"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg><span>Prompt Engineering</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../prompt-engineering/index.html">Resumen</a>
+</div></details>
+<details class="nav-branch accent-teal"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-8 8l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 8-8z"/></svg><span>Agentes y Herramientas</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../agents-and-tools/index.html">Resumen</a>
+</div></details>
+<details class="nav-branch accent-emerald"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg><span>RAG y Retrieval</span></span><span class="nav-summary-right"><span class="count">2</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../rag-and-retrieval/index.html">Resumen</a>
+<a class="nav-leaf" href="../rag-and-retrieval/rag-first-pass-design.html" title="Diseño RAG de primera pasada">Diseño RAG de primera pasada</a>
+</div></details>
+<details class="nav-branch accent-blue"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="6" height="6" rx="1"/><rect x="15" y="14" width="6" height="6" rx="1"/><path d="M9 7h3a3 3 0 0 1 3 3v4"/></svg><span>MLOps</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../mlops/index.html">Resumen</a>
+</div></details>
+<details class="nav-branch accent-orange"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg><span>Ingeniería de Producto con IA</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../ai-product-engineering/index.html">Resumen</a>
+</div></details>
+</div></details>
+<details class="nav-group" open><summary><span class="nav-summary-left"><svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><path d="M12 12l4-4"/><path d="M7.5 15.5h9"/></svg><span><span class="phase-num">04</span>Evaluación y Seguridad</span></span><span class="nav-summary-right"><span class="count">2</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-children">
+<details class="nav-branch accent-rose"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><path d="M12 12l4-4"/><path d="M7.5 15.5h9"/></svg><span>Evaluación</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../evaluation/index.html">Resumen</a>
+</div></details>
+<details class="nav-branch accent-red active" open><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>Seguridad de IA</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview active" href="index.html">Resumen</a>
+</div></details>
+</div></details>
+<details class="nav-group"><summary><span class="nav-summary-left"><svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg><span><span class="phase-num">★</span>Siempre activo</span></span><span class="nav-summary-right"><span class="count">3</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-children">
+<details class="nav-branch accent-slate"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>Notas de Investigación</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../research-notes/index.html">Resumen</a>
+</div></details>
+<details class="nav-branch accent-fuchsia"><summary><span class="nav-summary-left"><svg class="branch-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><path d="m10 8 4 4-4 4"/></svg><span>Playbooks de IA</span></span><span class="nav-summary-right"><span class="count">2</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-leaves">
+<a class="nav-leaf nav-leaf-overview" href="../ai-playbooks/index.html">Resumen</a>
+<a class="nav-leaf" href="../ai-playbooks/evaluate-rag-answer-quality.html" title="Evaluar calidad de respuestas RAG">Evaluar calidad de respuestas RAG</a>
+</div></details>
+</div></details>
+</section>
+<section class="sidebar-section"><h3>Sistema de referencia</h3>
+<details class="nav-group"><summary><span class="nav-summary-left"><svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg><span>Registros</span></span><span class="nav-summary-right"><span class="count">1</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary><div class="nav-children">
+<a class="nav-child kind-registry" href="../reference-registry.html">Registro de Referencia</a>
+</div></details></section>
+</div>
+<div class="sidebar-footer"><span>actualizado · 2026-06-07</span><span>v0.1</span></div>
+</nav>
+<div class="main-col">
+<header class="topbar">
+  <button id="sidebar-toggle" class="icon-btn menu-toggle" title="Alternar navegación" aria-label="Alternar navegación"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <div class="topbar-search search-shell">
+    <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="search" type="search" placeholder="Buscar notas, playbooks, tags..." autocomplete="off" aria-label="Buscar notas, playbooks, tags...">
+    <kbd>⌘K</kbd>
+  </div>
+  <div class="topbar-actions">
+    <div class="lang-switch" role="group" aria-label="Idioma"><a class="lang-link" hreflang="en" href="../../../en/ai/ai-safety-and-security/index.html" aria-current="false">EN</a><a class="lang-link active" hreflang="es" href="index.html" aria-current="page">ES</a></div>
+    <a class="github-link" href="https://github.com/ldamoredev/ai-notes" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M12 .5C5.7.5.7 5.6.7 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.2-1.3-5.2-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.1v3.1c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.3 5.6 18.3.5 12 .5z"/></svg><span class="gh-label">GitHub</span></a>
+  </div>
+</header>
+<div id="search-results" hidden></div>
+<div class="main-row">
+<main class="content">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../index.html">Inicio</a><span class="sep">/</span><a href="../index.html">IA</a><span class="sep">/</span><a href="index.html">Seguridad de IA</a><span class="sep">/</span><span>Seguridad de IA</span></nav>
+<header class="page-hero">
+<div class="page-meta"><span class="meta-chip">index</span><span class="meta-chip accent-red">Seguridad de IA</span><span class="meta-chip tag">#ai-safety</span><span class="meta-chip tag">#security</span></div>
+</header>
+<article class="article-note">
+<h1 id="seguridad-de-ia">Seguridad de IA</h1>
+<p>Esta rama va a reunir notas sobre modelado de amenazas, prompt injection, fuga de datos, misuse, control de acceso y safety de despliegue.</p>
+</article>
+</main>
+
+</div>
+</div>
+</div>
+<script src="../../../assets/search.js?v=4f8adb683f"></script>
+</body>
+</html>

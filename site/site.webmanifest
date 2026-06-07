@@ -1,0 +1,16 @@
+{
+  "name": "AI Atlas",
+  "short_name": "AI Atlas",
+  "description": "A personal AI knowledge atlas for foundations, machine learning, LLMs, agents, RAG, evaluation, safety, product engineering, and repeatable playbooks.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#22d3ee",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

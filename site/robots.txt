@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ldamoredev.github.io/ai-notes/sitemap.xml
