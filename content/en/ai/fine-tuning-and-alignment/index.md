@@ -1,36 +1,44 @@
 ---
 title: Fine-tuning & Alignment
-description: When and how to adapt a base model — SFT, LoRA/QLoRA, RLHF, DPO, distillation — and how to know it worked.
+description: When and how to adapt a model — SFT, LoRA/QLoRA, RLHF, DPO, distillation, dataset quality, evaluation, cost, and hardware.
 tags: [fine-tuning, alignment, lora, rlhf, dpo]
 order: 0
 updated: 2026-06-07
 ---
 # Fine-tuning & Alignment
 
-Fine-tuning changes a model's **weights** to shape its behavior. The single most
-important idea in this branch: **fine-tuning is for form, not facts.** Use it to
-change style, format, tone, refusal patterns, and task-specific behavior — not to
-inject knowledge that changes weekly (that is what retrieval is for).
+Fine-tuning changes a model's weights. Use it when you need to reshape behavior,
+format, style, or task skill — not when you merely need fresher facts.
 
-The pragmatic adaptation ladder, cheapest first:
+> The adaptation ladder is **prompt → RAG → fine-tune → distill**. Climb only when
+> the cheaper rung cannot deliver the behavior you need.
 
-> **Prompt → RAG → Fine-tune → Distill**
+## Decision frame
 
-Climb only when the cheaper rung stops working. Most teams over-reach for
-fine-tuning when a better prompt or a retrieval pass would have solved it.
+- [[ai/fine-tuning-and-alignment/when-to-fine-tune|When to fine-tune vs prompt vs RAG]]
+- [[ai/fine-tuning-and-alignment/data-quality-for-finetuning|Data quality > quantity]]
+- [[ai/fine-tuning-and-alignment/building-the-finetuning-dataset|Building the fine-tuning dataset]]
+- [[ai/fine-tuning-and-alignment/evaluating-a-finetune|Evaluating a fine-tune]]
 
-## What this branch covers
+## Training methods
 
-- **When** to fine-tune versus prompt or retrieve, and how to tell the difference.
-- **Parameter-efficient** methods (LoRA, QLoRA) that make adaptation cheap.
-- **Preference alignment** (RLHF, DPO) for shaping *which* answers a model prefers.
-- **Data and evaluation** — the parts that actually decide whether a fine-tune helps.
+- [[ai/fine-tuning-and-alignment/supervised-fine-tuning|Supervised fine-tuning / instruction tuning]]
+- [[ai/fine-tuning-and-alignment/lora-and-adapters|LoRA and adapters]]
+- [[ai/fine-tuning-and-alignment/qlora-and-4bit-finetuning|QLoRA and 4-bit fine-tuning]]
+- [[ai/fine-tuning-and-alignment/rlhf-with-ppo|RLHF with PPO, conceptually]]
+- [[ai/fine-tuning-and-alignment/direct-preference-optimization|Direct Preference Optimization]]
+
+## Failure modes and deployment economics
+
+- [[ai/fine-tuning-and-alignment/catastrophic-forgetting|Catastrophic forgetting]]
+- [[ai/fine-tuning-and-alignment/distillation|Distillation]]
+- [[ai/fine-tuning-and-alignment/cost-and-hardware|Cost and hardware]]
 
 ## Core sources
 
-- Sebastian Raschka — *Build a Large Language Model (From Scratch)* and his fine-tuning articles.
-- Hugging Face **PEFT** documentation (LoRA/QLoRA in practice).
-- **Unsloth** docs — practical, low-VRAM fine-tuning guide.
-- Foundational papers: *LoRA*, *QLoRA*, *Direct Preference Optimization (DPO)*.
-
-> Notes are being written. This branch index will link them as they land.
+- Hugging Face — **PEFT** documentation for LoRA, QLoRA, adapters, and trainer patterns.
+- Unsloth docs — practical low-VRAM fine-tuning workflows and quantized training.
+- Hu et al. — *LoRA: Low-Rank Adaptation of Large Language Models*.
+- Dettmers et al. — *QLoRA: Efficient Finetuning of Quantized LLMs*.
+- Ouyang et al. — *Training language models to follow instructions with human feedback*; Rafailov et al. — *Direct Preference Optimization*.
+- Sebastian Raschka — fine-tuning articles, LoRA experiments, and *Build a Large Language Model (From Scratch)*.

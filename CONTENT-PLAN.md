@@ -27,7 +27,7 @@ knowledge domain); promoted `fine-tuning-and-alignment` out of LLMs; reframed
 - [x] **prompt-engineering** — 12 notes
 - [x] **rag-and-retrieval** — 12 notes
 - [x] **agents-and-tools** — 12 notes
-- [ ] fine-tuning-and-alignment  *(index only)*
+- [x] **fine-tuning-and-alignment** — 12 notes
 - [ ] mlops
 - [ ] ai-product-engineering
 - [ ] evaluation
