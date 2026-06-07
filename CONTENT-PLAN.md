@@ -31,8 +31,8 @@ knowledge domain); promoted `fine-tuning-and-alignment` out of LLMs; reframed
 - [x] **mlops** — 12 notes
 - [x] **ai-product-engineering** — 12 notes
 - [x] evaluation — 12 notes
-- [ ] ai-safety-and-security
-- [ ] ai-playbooks (procedural; grows organically)
+- [x] ai-safety-and-security — 12 notes
+- [x] ai-playbooks — 12 procedural playbooks
 - [ ] **ES overlay pass** (after EN notes land)
 
 ## Per-branch note outlines + core sources

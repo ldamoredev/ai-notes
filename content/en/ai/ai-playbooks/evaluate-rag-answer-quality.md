@@ -1,22 +1,46 @@
 ---
-title: Evaluate RAG Answer Quality
-description: A small playbook for checking answer quality, evidence use, and retrieval fit.
+title: "Evaluate RAG answer quality"
+description: A procedural checklist for checking retrieval, answer quality, citations, groundedness, and product fit in a RAG system.
 tags: [playbook, rag, evaluation]
 order: 1
 updated: 2026-06-07
 ---
-# Evaluate RAG Answer Quality
+# Evaluate RAG answer quality
 
-Use this playbook when a RAG prototype starts producing plausible answers and needs a disciplined quality check.
+Use this playbook when a RAG prototype produces plausible answers and needs a disciplined
+quality check before deeper tuning or release.
 
-## Steps
+## Inputs
 
-1. Create 20 representative questions with expected evidence.
-2. Log retrieved chunks, final answer, citations, and latency.
-3. Score retrieval relevance before scoring the answer.
-4. Mark answer failures as missing evidence, wrong evidence, bad synthesis, or unsafe response.
-5. Promote recurring failures into regression tests.
+- A representative set of user questions.
+- Retrieved chunks for each question.
+- Generated answers, citations, latency, token counts, and model version.
+- Expected answer or grading rubric for each question.
+
+## Procedure
+
+1. Pick 20-50 questions from real usage or realistic workflows.
+2. Mark the source documents or chunks that should support each answer.
+3. Run the current system and log query, retrieved chunks, answer, citations, latency, and cost.
+4. Score retrieval first: needed evidence present, ranking quality, and context noise.
+5. Score generation second: answer relevance, groundedness, citation support, and refusal behavior.
+6. Label each failure as missing evidence, wrong evidence, bad synthesis, weak citation, unsafe answer, or product mismatch.
+7. Group failures by root cause and choose one system change to test next.
+8. Add recurring failures to the regression suite.
 
 ## Output
 
-Produce a short eval note with pass rate, failure clusters, examples, and the next change to test.
+| Artifact | Contents |
+|---|---|
+| Eval summary | pass rate, top failure clusters, cost, latency |
+| Failure table | question, retrieved context, answer, label, owner |
+| Next experiment | one retrieval, prompt, chunking, reranking, or UI change |
+
+## Pitfall
+
+Do not tune the prompt before checking retrieval. If the right evidence is missing from
+the context, the generator is being asked to solve the wrong problem.
+
+**Connects to:** [[ai/evaluation/evaluating-rag-systems|evaluating RAG systems]] ·
+[[ai/rag-and-retrieval/evaluating-rag|retriever vs generator eval]] ·
+[[ai/rag-and-retrieval/grounding-and-citations|grounding and citations]]
