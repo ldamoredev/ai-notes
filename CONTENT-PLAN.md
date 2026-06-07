@@ -28,8 +28,8 @@ knowledge domain); promoted `fine-tuning-and-alignment` out of LLMs; reframed
 - [x] **rag-and-retrieval** — 12 notes
 - [x] **agents-and-tools** — 12 notes
 - [x] **fine-tuning-and-alignment** — 12 notes
-- [ ] mlops
-- [ ] ai-product-engineering
+- [x] **mlops** — 12 notes
+- [x] **ai-product-engineering** — 12 notes
 - [ ] evaluation
 - [ ] ai-safety-and-security
 - [ ] ai-playbooks (procedural; grows organically)
