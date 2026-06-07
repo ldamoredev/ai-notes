@@ -108,7 +108,8 @@ need to be committed once CI is enabled.
 
 ## What's next
 
-See the `CONTENT-PLAN.md` checklist. Remaining EN branches: **fine-tuning-and-alignment**
-(index exists, needs its notes), **mlops**, **ai-product-engineering**, **evaluation**,
-**ai-safety-and-security**, **ai-playbooks** — then the **ES overlay pass**. Do them one
-branch at a time; build + verify after each.
+See the `CONTENT-PLAN.md` checklist. The original 13 branches are written. The **4 new
+branches each have an `index.md` but still need their notes**: `data-for-ai`,
+`multimodal-and-generative`, `inference-and-optimization`, `ai-ethics-and-governance`
+(outlines + sources in CONTENT-PLAN.md / SOURCES.md). After those, the **ES overlay
+pass**. Do one branch at a time; build + verify 0 unresolved after each.

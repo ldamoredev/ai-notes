@@ -125,6 +125,13 @@ BRANCHES = {
         "accent": "indigo",
         "icon": "chart",
     },
+    "data-for-ai": {
+        "label": "Data for AI",
+        "group": "Foundations",
+        "summary": "Data-centric AI: quality, labeling, dataset design, synthetic data, contamination, documentation, and pipelines.",
+        "accent": "slate",
+        "icon": "database",
+    },
     "deep-learning": {
         "label": "Deep Learning",
         "group": "Models",
@@ -138,6 +145,13 @@ BRANCHES = {
         "summary": "Transformers, tokenization, pretraining, instruction tuning, context, and generation behavior.",
         "accent": "sky",
         "icon": "nodes",
+    },
+    "multimodal-and-generative": {
+        "label": "Multimodal & Generative",
+        "group": "Models",
+        "summary": "Beyond text: diffusion models, image/audio/video generation, vision transformers, CLIP, and vision-language models.",
+        "accent": "fuchsia",
+        "icon": "image",
     },
     "prompt-engineering": {
         "label": "Prompting & Context Engineering",
@@ -174,6 +188,13 @@ BRANCHES = {
         "accent": "red",
         "icon": "shield",
     },
+    "ai-ethics-and-governance": {
+        "label": "AI Ethics & Governance",
+        "group": "Evaluation",
+        "summary": "Fairness and bias, transparency, model documentation, privacy, regulation (EU AI Act), governance frameworks, and societal impact.",
+        "accent": "amber",
+        "icon": "scale",
+    },
     "mlops": {
         "label": "MLOps",
         "group": "Engineering",
@@ -195,6 +216,13 @@ BRANCHES = {
         "accent": "violet",
         "icon": "spark",
     },
+    "inference-and-optimization": {
+        "label": "Inference & Optimization",
+        "group": "Engineering",
+        "summary": "Serving LLMs fast and cheap: quantization, KV cache, batching, speculative decoding, serving engines, and the cost/latency knobs.",
+        "accent": "cyan",
+        "icon": "chip",
+    },
     "ai-playbooks": {
         "label": "AI Playbooks",
         "group": "Always-on",
@@ -207,16 +235,20 @@ BRANCHES = {
 BRANCHES_ES = {
     "foundations": {"label": "Fundamentos", "summary": "Vocabulario base, encuadre de problemas, datos, incertidumbre y límites del comportamiento de modelos."},
     "machine-learning": {"label": "Machine Learning", "summary": "Datasets, objetivos, features, ciclos de entrenamiento, generalización y análisis de errores."},
+    "data-for-ai": {"label": "Datos para IA", "summary": "IA centrada en datos: calidad, labeling, diseño de datasets, datos sintéticos, contaminación, documentación y pipelines."},
     "deep-learning": {"label": "Deep Learning", "summary": "Redes neuronales, representaciones, optimización, embeddings y comportamiento al escalar."},
     "llms": {"label": "LLMs", "summary": "Transformers, tokenización, pretraining, instruction tuning, contexto y comportamiento generativo."},
+    "multimodal-and-generative": {"label": "Multimodal y Generativo", "summary": "Más allá del texto: modelos de difusión, generación de imagen/audio/video, vision transformers, CLIP y modelos visión-lenguaje."},
     "prompt-engineering": {"label": "Prompting y Context Engineering", "summary": "Técnicas de prompting más context engineering: qué sabe el modelo — system prompts, ejemplos, salida estructurada, memoria y contexto ensamblado."},
     "agents-and-tools": {"label": "Agentes y Herramientas", "summary": "Tool calling, bucles de planificación, memoria, handoffs, límites de autonomía y controles de operador."},
     "rag-and-retrieval": {"label": "RAG y Retrieval", "summary": "Indexación, chunking, embeddings, ranking, citas, grounding y evaluación de recuperación."},
     "evaluation": {"label": "Evaluación", "summary": "Rúbricas de calidad, eval sets, regresiones, comparación de modelos y análisis de fallas."},
     "ai-safety-and-security": {"label": "Seguridad de IA", "summary": "Modelado de amenazas, misuse, prompt injection, fuga de datos, safety cases y controles de despliegue."},
+    "ai-ethics-and-governance": {"label": "Ética y Gobernanza de IA", "summary": "Fairness y sesgo, transparencia, documentación de modelos, privacidad, regulación (EU AI Act), frameworks de gobernanza e impacto social."},
     "mlops": {"label": "MLOps", "summary": "Pipelines, datasets, monitoreo, releases de modelos, reproducibilidad y loops de feedback en producción."},
     "ai-product-engineering": {"label": "Ingeniería de Producto con IA", "summary": "UX, latencia, costo, observabilidad, revisión humana, métricas de producto y tradeoffs de entrega."},
     "fine-tuning-and-alignment": {"label": "Fine-tuning y Alignment", "summary": "Cuándo adaptar un modelo, SFT, LoRA/QLoRA, RLHF y DPO, calidad de datos, distillation y evaluación de fine-tunes."},
+    "inference-and-optimization": {"label": "Inferencia y Optimización", "summary": "Servir LLMs rápido y barato: quantization, KV cache, batching, speculative decoding, motores de serving y las perillas de costo/latencia."},
     "ai-playbooks": {"label": "Playbooks de IA", "summary": "Procedimientos repetibles para construir, evaluar, depurar y entregar sistemas con IA."},
 }
 
@@ -1601,6 +1633,9 @@ ICON_PATHS = {
     "arrow": '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',
     "book": '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     "chart": '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+    "chip": '<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+    "image": '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-4.5-4.5L7 20"/>',
+    "scale": '<path d="M12 3v18"/><path d="M8 21h8"/><line x1="4" y1="7" x2="20" y2="7"/><path d="M4 7l-2 6h4z"/><path d="M20 7l-2 6h4z"/>',
     "chevron": '<polyline points="6 9 12 15 18 9"/>',
     "compass": '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
     "database": '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/>',

@@ -7,16 +7,18 @@ are a second pass (the build falls back to EN with a banner meanwhile).
 ## Taxonomy (phase → branch)
 
 - **00 Orientation** — entry notes only (start-here, must-know)
-- **01 Foundations** — `foundations` · `machine-learning`
-- **02 Models** — `deep-learning` · `llms`
-- **03 Engineering** — `prompt-engineering` (Prompting & Context Engineering) · `rag-and-retrieval` · `agents-and-tools` · `fine-tuning-and-alignment` · `mlops` · `ai-product-engineering`
-- **04 Evaluation** — `evaluation` · `ai-safety-and-security`
+- **01 Foundations** — `foundations` · `machine-learning` · `data-for-ai`
+- **02 Models** — `deep-learning` · `llms` · `multimodal-and-generative`
+- **03 Engineering** — `prompt-engineering` (Prompting & Context Engineering) · `rag-and-retrieval` · `agents-and-tools` · `fine-tuning-and-alignment` · `mlops` · `ai-product-engineering` · `inference-and-optimization`
+- **04 Evaluation** — `evaluation` · `ai-safety-and-security` · `ai-ethics-and-governance`
 - **★ Always-on** — `ai-playbooks`
 
-Taxonomy decisions (applied 2026-06): removed `research-notes` (a log, not a
-knowledge domain); promoted `fine-tuning-and-alignment` out of LLMs; reframed
-`prompt-engineering` → Prompting & Context Engineering. Optional branches NOT added
-(kept LLM-centric): *Inference & Optimization*, *Multimodal & Generative*.
+Taxonomy decisions: removed `research-notes` (a log, not a knowledge domain); promoted
+`fine-tuning-and-alignment` out of LLMs; reframed `prompt-engineering` → Prompting &
+Context Engineering. **Expansion (2026-06): added 4 branches** to reach 17 (parity with
+cibersecurity-notes) — `data-for-ai`, `multimodal-and-generative`,
+`inference-and-optimization`, `ai-ethics-and-governance`. All four have a written
+`index.md` (taxonomy wired in `build.py`); their notes still need to be written.
 
 ## Progress
 
@@ -33,6 +35,10 @@ knowledge domain); promoted `fine-tuning-and-alignment` out of LLMs; reframed
 - [x] evaluation — 12 notes
 - [x] ai-safety-and-security — 12 notes
 - [x] ai-playbooks — 12 procedural playbooks
+- [x] **data-for-ai** — 12 notes
+- [x] **multimodal-and-generative** — 12 notes
+- [x] **inference-and-optimization** — 12 notes
+- [x] **ai-ethics-and-governance** — 12 notes
 - [ ] **ES overlay pass** (after EN notes land)
 
 ## Per-branch note outlines + core sources
@@ -116,6 +122,40 @@ apps · Guardrails (input/output) · Red teaming · Defense-in-depth & least pri
 Evaluate RAG answer quality · Build an eval set from scratch · Debug an agent stuck in a loop ·
 Audit an app for prompt injection · Decide prompt vs RAG vs fine-tune · Measure & cut inference
 cost · Ship a prompt change safely · Stand up LLM observability
+
+### data-for-ai  *(NEW — phase 01 Foundations)*
+*Sources: Andrew Ng Data-Centric AI, Chip Huyen "Designing ML Systems", Datasheets for Datasets (Gebru et al.), HF Datasets, Great Expectations*
+Data-centric AI: why data beats model tweaks · Data quality dimensions · Labeling &
+annotation (IAA, weak supervision) · Dataset design & sampling · Data cleaning &
+deduplication · Synthetic data (uses, risks, model collapse) · Data contamination &
+benchmark leakage · Data for LLMs (pretraining corpora, dedup at scale) · Data pipelines,
+versioning & lineage · Privacy & PII in datasets · Datasheets & documentation · Feedback
+data & active learning
+
+### multimodal-and-generative  *(NEW — phase 02 Models)*
+*Sources: Lilian Weng "Diffusion Models", Jay Alammar "Illustrated Stable Diffusion", papers DDPM/Latent Diffusion/CLIP/ViT, HF Diffusers, fast.ai Part 2*
+Beyond text: the multimodal landscape · Diffusion models intuitively · Latent diffusion &
+Stable Diffusion · Text-to-image: conditioning & CFG · CLIP & shared embedding spaces ·
+Vision Transformers (ViT) · Vision-language models & multimodal LLMs · Controlling image
+generation (ControlNet, inpainting) · Audio & speech (TTS, ASR, music) · Video generation ·
+Evaluating generative media (FID, CLIPScore) · Risks: deepfakes, provenance, C2PA &
+watermarking
+
+### inference-and-optimization  *(NEW — phase 03 Engineering)*
+*Sources: Lilian Weng "Inference Optimization", vLLM/TGI docs, papers FlashAttention/Speculative Decoding/GPTQ/AWQ, NVIDIA TensorRT-LLM, Chip Huyen AI Engineering*
+Why inference is the real cost · Latency vs throughput (TTFT, prefill vs decode) · KV cache
+& memory (PagedAttention) · Quantization for inference (int8/4-bit, GPTQ/AWQ) · Batching
+(static vs continuous) · Speculative decoding · FlashAttention & efficient attention ·
+Serving engines (vLLM, TGI, TensorRT-LLM) · GPU & hardware basics · Caching (prefix &
+semantic) · Cost modeling · Right-sizing: size vs distillation vs routing
+
+### ai-ethics-and-governance  *(NEW — phase 04 Evaluation)*
+*Sources: EU AI Act, NIST AI RMF, Model Cards (Mitchell et al.), Fairness and Machine Learning (fairmlbook.org), OECD AI Principles, provider policies*
+Responsible AI landscape · Bias & fairness: sources and types · Fairness metrics &
+impossibility tradeoffs · Measuring & mitigating bias · Transparency & explainability
+(SHAP/LIME, limits) · Model cards & documentation · Privacy, consent & data rights · The
+EU AI Act & risk tiers · Governance frameworks (NIST AI RMF, ISO/IEC 42001) ·
+Accountability & human oversight · Societal & labor impact · Environmental cost of AI
 
 ## Conventions
 

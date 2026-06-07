@@ -104,6 +104,34 @@ before relying on it; treat these as the canonical starting points, not gospel.
 - Lilian Weng — *Adversarial Attacks on LLMs*
 - NIST AI Risk Management Framework; MITRE ATLAS (adversarial ML threat matrix)
 
+## data-for-ai  *(new branch)*
+- Andrew Ng / DeepLearning.AI — *Data-Centric AI* — datacentricai.org
+- Chip Huyen — *Designing Machine Learning Systems* (data engineering chapters)
+- Gebru et al. — *Datasheets for Datasets*; Google — *Data Cards* / *Rules of ML* (Zinkevich)
+- Hugging Face — *Datasets* docs; Great Expectations (data validation); Snorkel / Label Studio (labeling)
+- Shumailov et al. — *The Curse of Recursion* (model collapse from synthetic data)
+
+## multimodal-and-generative  *(new branch)*
+- Lilian Weng — *What are Diffusion Models?* — lilianweng.github.io
+- Jay Alammar — *The Illustrated Stable Diffusion* — jalammar.github.io
+- Papers: Ho et al. *DDPM*; Rombach et al. *Latent Diffusion (Stable Diffusion)*; Radford et al. *CLIP*; Dosovitskiy et al. *ViT*
+- Hugging Face — *Diffusers* docs — huggingface.co/docs/diffusers
+- fast.ai — *Practical Deep Learning Part 2* (diffusion from scratch); C2PA (content provenance) — c2pa.org
+
+## inference-and-optimization  *(new branch)*
+- Lilian Weng — *Large Transformer Model Inference Optimization*
+- **vLLM** docs (PagedAttention) — docs.vllm.ai; Hugging Face **TGI** docs
+- Papers: Dao et al. *FlashAttention*; Leviathan et al. *Speculative Decoding*; *GPTQ*; *AWQ*
+- NVIDIA technical blogs — *TensorRT-LLM*, inference quantization
+- Chip Huyen — *AI Engineering* (inference & cost chapters)
+
+## ai-ethics-and-governance  *(new branch)*
+- **EU AI Act** — artificialintelligenceact.eu; **NIST** — *AI Risk Management Framework* (nist.gov)
+- Mitchell et al. — *Model Cards for Model Reporting*; Gebru et al. — *Datasheets for Datasets*
+- Barocas, Hardt, Narayanan — *Fairness and Machine Learning* — fairmlbook.org
+- OECD AI Principles; Partnership on AI; ISO/IEC 42001 (AI management systems)
+- Provider policies — Anthropic *Responsible Scaling Policy*; OpenAI usage policies
+
 ## ai-playbooks (procedural)
 Draw on the relevant branch sources above; playbooks turn those concepts into
 step-by-step procedures.
