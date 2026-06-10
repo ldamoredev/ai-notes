@@ -3,7 +3,7 @@ title: RAG and Retrieval
 description: Retrieval-augmented generation as an information system — chunking, embeddings, hybrid search, reranking, grounding, and how to evaluate every stage.
 tags: [rag, retrieval]
 order: 0
-updated: 2026-06-07
+updated: 2026-06-10
 ---
 # RAG and Retrieval
 
@@ -44,7 +44,8 @@ knowledge-grounded AI, because it fixes the model's two biggest weaknesses —
 
 ## Core sources
 
-- Anthropic — *Contextual Retrieval*.
-- Pinecone / Weaviate — learning guides (chunking, hybrid, reranking).
-- LlamaIndex & LangChain — advanced RAG docs.
-- RAGAS — retrieval/generation evaluation; Jason Liu & Eugene Yan — RAG patterns.
+- [Anthropic — Contextual Retrieval (2024)](https://www.anthropic.com/news/contextual-retrieval) — the single most useful applied-RAG write-up: technique, measured failure-rate reductions, costs, and the runnable cookbook.
+- [Lewis et al. 2020 — Retrieval-Augmented Generation (arXiv:2005.11401)](https://arxiv.org/abs/2005.11401) — the original paper; the retriever-generator factorization that still defines the field.
+- [RAGAS docs](https://docs.ragas.io/) — the standard vocabulary and tooling for RAG evaluation (faithfulness, context precision/recall).
+- [pgvector](https://github.com/pgvector/pgvector) — the reference Postgres vector store; the README doubles as an ANN-tuning crash course.
+- [Pinecone Learning Center](https://www.pinecone.io/learn/) — consistently solid explainers on chunking, hybrid search, and reranking (vendor-hosted, technique-focused).

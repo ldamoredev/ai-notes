@@ -4,6 +4,7 @@ description: Indexación, chunking, embeddings, ranking, citas, grounding y eval
 tags: [rag, retrieval]
 order: 0
 updated: 2026-06-07
+translation: stale
 ---
 # RAG y Retrieval
 

@@ -48,7 +48,7 @@ Branch config (label / group / accent / icon) lives in the `BRANCHES` dict in
 `group`, which must match a key in `PHASES`. `build.py`'s `validate_taxonomy()` warns
 on drift.
 
-## How to write a note (match the bar — study `content/en/ai/foundations/*`)
+## How to write a note (match the bar — study `content/en/ai/rag-and-retrieval/*`)
 
 Frontmatter:
 ```yaml
@@ -60,22 +60,35 @@ order: 4              # position within the branch (index is order 0)
 updated: 2026-06-07
 # featured: true      # at most ONE note across the whole atlas
 # draft: true         # stage WIP; excluded from build/search/sitemap
+# translation: stale  # ES files only: EN counterpart was rewritten, translation pending
 ---
 ```
 
-Body shape (≈40–80 lines, dense, concrete, **no marketing**):
+Body shape (≈150–250 lines, density before length, **no marketing** — the
+deep-rewrite standard; see `MIGRATION_NOTES.md`):
 - `#` H1 = the title.
-- 1–2 sentence framing of why the concept matters.
-- 2–4 `##` sections using bullets and/or tables.
-- A **Pitfall** or **In practice** angle.
-- Close with `**Connects to:**` + a line of `[[wikilinks]]`.
+- **Mental model first** — 2–4 sentences that compress the idea so it survives alone.
+- **How it really works** — the mechanism, with correct math/notation where it matters.
+- **At least one executable artifact** — TypeScript preferred (Anthropic SDK, Fastify,
+  pgvector, Drizzle), Python where the ecosystem demands, or a config/CLI/prompt
+  template. Must run as written.
+- **Named things** — papers, techniques, tools, benchmarks, with dates and arXiv/doc
+  links. No "studies show".
+- **Failure modes & trade-offs** — when it breaks, what it costs, a decision rule.
+- **Production lens** — latency/cost/observability implications (Langfuse/OTel).
+- Close with `**Connects to:**` + `[[wikilinks]]`, then `## Sources` — 3–8 primary
+  links, each with one line on why it's worth reading. Never fabricate a citation;
+  unverifiable claims get `> ⚠️ Unverified — needs source`.
 
 Links: `[[ai/<branch>/<slug>|Label]]` (path form) or `[[slug|Label]]`. Anchors:
 `[[ai/x/y#heading|Label]]`. **Never leave an unresolved link** — only link to notes /
 indexes that already exist. Add the new notes' `[[links]]` to the branch `index.md`.
 
 Sources: each branch `index.md` ends with `## Core sources` listing 3–5 real,
-authoritative sources pulled from `SOURCES.md`.
+authoritative sources (full URLs) drawn from `SOURCES.md` and the notes' research.
+
+Pre-rewrite notes (≈40–80 lines, no Sources section) still exist in branches that
+haven't had their deep-rewrite batch yet — `MIGRATION_NOTES.md` tracks which.
 
 ## Renderer gotcha (important)
 

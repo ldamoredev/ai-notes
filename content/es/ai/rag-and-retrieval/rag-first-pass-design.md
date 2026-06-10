@@ -4,6 +4,7 @@ description: Una checklist chica para diseñar un primer sistema RAG útil.
 tags: [rag, retrieval, engineering]
 order: 1
 updated: 2026-06-07
+translation: stale
 ---
 # Diseño RAG de primera pasada
 
