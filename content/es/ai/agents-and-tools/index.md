@@ -4,6 +4,7 @@ description: Tool calling, loops de planificación, memoria, handoffs y límites
 tags: [agents, tools]
 order: 0
 updated: 2026-06-07
+translation: stale
 ---
 # Agentes y Herramientas
 

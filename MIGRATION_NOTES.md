@@ -394,6 +394,7 @@ Divergence tracking mechanism (no silent drift):
 |---|---|---|
 | `content/es/ai/rag-and-retrieval/index.md` | 1 | `translation: stale` flagged |
 | `content/es/ai/rag-and-retrieval/rag-first-pass-design.md` | 1 | `translation: stale` flagged |
+| `content/es/ai/agents-and-tools/index.md` | 2 | `translation: stale` flagged |
 
 ---
 
@@ -434,3 +435,20 @@ resolve, items flagged for manual review.)
   ($0.02–$0.18/M tokens, varies by vendor); "refusals 5–15% of traffic" is
   experience-based judgment, not a sourced stat (phrased as such in the note).
   ES tracker: 2 files flagged stale.
+- 2026-06-11 — **Batch 2: agents-and-tools** (12 notes + index rewritten).
+  Substantive updates vs old notes: workflows-vs-agents grounded in Anthropic's
+  Dec 2024 taxonomy + compounding-error math (0.95^10 ≈ 0.60); tool-calling now
+  carries a full typed TS loop with `strict: true` (GA 2025); ACI note rebuilt
+  around SWE-agent (arXiv:2405.15793, 3.8%→12.5% interface result); MCP note
+  rewritten against current spec **2025-11-25** (verified at modelcontextprotocol.io;
+  2026-07-28 is an RC) + lethal-trifecta security framing; multi-agent now presents
+  both Anthropic's +90.2% / ~15× tokens result AND Cognition's counter-position
+  with a read-vs-write decision rule; evaluating-agents adds pass^k (τ-bench) and
+  the 2026 benchmark table; ReAct/planning/memory updated from prompt-pattern
+  descriptions to 2026 native-tool-use reality (plan-as-artifact, MemGPT lineage,
+  Anthropic memory tool `memory_20250818`, compaction).
+  Not fully verifiable, marked for review: SWE-agent 3.8%→12.5% figures cited from
+  memory of the paper (direction certain, exact decimals worth a check); METR
+  task-horizon claim summarized without quoting numbers; OSWorld/SWE-bench 2026
+  SOTA numbers deliberately omitted (third-party aggregators disagreed).
+  ES tracker: 1 file flagged (index only — branch had no ES note translations).
