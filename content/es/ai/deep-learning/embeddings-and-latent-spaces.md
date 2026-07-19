@@ -16,7 +16,7 @@ vuelven fáciles.
 
 Un **embedding** es un vector denso que representa un ítem (palabra, oración, imagen,
 usuario). La red aprende a ubicar ítems relacionados cerca e ítems no relacionados lejos,
-así que [[ai/foundations/linear-algebra-for-ml|distancia y dirección]] cargan semántica:
+así que [[ai/mathematics-for-ai/vectors-matrices-and-tensors|distancia y dirección]] cargan semántica:
 cosas similares → baja distancia coseno; direcciones conceptuales se vuelven aritmética
 ("rey − hombre + mujer ≈ reina").
 
@@ -49,6 +49,6 @@ compares vectores de dos modelos de embeddings distintos, y re-embeddeá todo cu
 cambiás de modelo. Además: cosine similarity asume vectores normalizados; normalizá
 antes de comparar.
 
-**Se conecta con:** [[ai/foundations/linear-algebra-for-ml|vectores y similitud]] ·
+**Conecta con:** [[ai/mathematics-for-ai/vectors-matrices-and-tensors|vectores y similitud]] ·
 [[ai/rag-and-retrieval/index|retrieval]] ·
 [[ai/foundations/features-and-dimensionality|representaciones]]

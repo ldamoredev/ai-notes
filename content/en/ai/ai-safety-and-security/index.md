@@ -11,7 +11,11 @@ AI safety and security is the discipline of making AI systems resistant to misus
 accidents, data exposure, and model-mediated attacks. The core move is to treat the
 model as an unreliable component inside a security boundary, not as the boundary.
 
-## Threat landscape
+## Mental model
+
+An AI application crosses trust boundaries whenever untrusted data can influence model output and that output can reach data, code, money, or people. Security therefore constrains authority and validates effects outside the model; a prompt is never the sole enforcement layer.
+
+## Roadmap: threat landscape to assurance
 
 - [[ai/ai-safety-and-security/owasp-llm-top-10-overview|OWASP LLM Top 10 overview]] gives the shared vocabulary for LLM application risk.
 - [[ai/ai-safety-and-security/direct-prompt-injection|Direct prompt injection]] covers user-provided instructions that try to override the system.
@@ -32,10 +36,11 @@ model as an unreliable component inside a security boundary, not as the boundary
 - [[ai/ai-safety-and-security/defense-in-depth-and-least-privilege|Defense in depth and least privilege]] explains why prompts are only one layer.
 - [[ai/ai-safety-and-security/privacy-and-data-governance|Privacy and data governance]] defines data minimization, retention, access, and audit controls.
 
+**Connects to:** [[ai/agents-and-tools/autonomy-and-control|Autonomy and Control]] · [[ai/evaluation/index|Evaluation]] · [[ai/ai-ethics-and-governance/index|AI Ethics and Governance]]
+
 ## Core sources
 
-- OWASP, **Top 10 for LLM Applications (2025)** and **Agentic AI / Agentic Security Top 10**.
-- Simon Willison's prompt-injection writing and practical demonstrations.
-- Lilian Weng, **Adversarial Attacks on LLMs**.
-- NIST AI Risk Management Framework for governance, mapping, measurement, and management.
-- MITRE ATLAS for adversarial ML tactics, techniques, and threat-model vocabulary.
+- [OWASP Top 10 for LLM Applications](https://genai.owasp.org/llm-top-10/) — application threat taxonomy and mitigations.
+- [MITRE ATLAS](https://atlas.mitre.org/) — adversarial ML tactics, techniques, case studies, and mitigations.
+- [NIST Adversarial Machine Learning Taxonomy](https://csrc.nist.gov/pubs/ai/100/2/e2023/final) — standardized attack and mitigation terminology.
+- [Indirect Prompt Injection](https://arxiv.org/abs/2302.12173) — early systematic treatment of attacks delivered through external data.

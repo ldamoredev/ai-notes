@@ -43,6 +43,6 @@ prosa.
 > Mismos pesos, distinto decoding = distinto comportamiento de producto. Setealo
 > deliberadamente por tarea; no dejes los defaults librados al azar.
 
-**Se conecta con:** [[ai/llms/the-decoder-transformer|logits → tokens]] ·
+**Conecta con:** [[ai/llms/the-decoder-transformer|logits → tokens]] ·
 [[ai/prompt-engineering/index|salida estructurada]] ·
 [[ai/llms/why-llms-hallucinate|alucinación]]

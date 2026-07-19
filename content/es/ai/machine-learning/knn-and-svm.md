@@ -22,7 +22,7 @@ los datos y computa distancias al momento de la consulta.
   [[ai/foundations/features-and-dimensionality|maldición de la dimensionalidad]]: las
   distancias pierden significado en dimensiones altas.
 - **Por qué importa hoy**: [[ai/rag-and-retrieval/index|RAG y búsqueda semántica]] son
-  kNN sobre [[ai/foundations/linear-algebra-for-ml|embeddings]], acelerados con índices
+  kNN sobre [[ai/mathematics-for-ai/vectors-matrices-and-tensors|embeddings]], acelerados con índices
   approximate nearest-neighbor (HNSW). La idea escaló; la fuerza bruta no.
 
 ## Support Vector Machines: la calle más ancha
@@ -47,6 +47,6 @@ En datos tabulares grandes, los [[ai/machine-learning/decision-trees-and-ensembl
 con gradient boosting]] suelen ganarles a ambos, pero las intuiciones de distancia/margen
 siguen siendo útiles.
 
-**Se conecta con:** [[ai/rag-and-retrieval/index|vector search]] ·
+**Conecta con:** [[ai/rag-and-retrieval/index|vector search]] ·
 [[ai/foundations/features-and-dimensionality|dimensiones altas]] ·
-[[ai/foundations/linear-algebra-for-ml|distancia y similitud]]
+[[ai/mathematics-for-ai/vectors-matrices-and-tensors|distancia y similitud]]

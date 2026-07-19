@@ -13,7 +13,11 @@ format, style, or task skill — not when you merely need fresher facts.
 > The adaptation ladder is **prompt → RAG → fine-tune → distill**. Climb only when
 > the cheaper rung cannot deliver the behavior you need.
 
-## Decision frame
+## Mental model
+
+Adaptation changes a model's behavior distribution using examples, preferences, or compressed teacher signals. The objective, reference model, parameter surface, dataset, and evaluation contract determine what changes and what may be forgotten; new factual context often belongs in retrieval instead.
+
+## Roadmap: decision frame and training methods
 
 - [[ai/fine-tuning-and-alignment/when-to-fine-tune|When to fine-tune vs prompt vs RAG]]
 - [[ai/fine-tuning-and-alignment/data-quality-for-finetuning|Data quality > quantity]]
@@ -34,11 +38,12 @@ format, style, or task skill — not when you merely need fresher facts.
 - [[ai/fine-tuning-and-alignment/distillation|Distillation]]
 - [[ai/fine-tuning-and-alignment/cost-and-hardware|Cost and hardware]]
 
+**Connects to:** [[ai/data-for-ai/index|Data for AI]] · [[ai/reinforcement-learning/index|Reinforcement Learning]] · [[ai/evaluation/index|Evaluation]]
+
 ## Core sources
 
-- Hugging Face — **PEFT** documentation for LoRA, QLoRA, adapters, and trainer patterns.
-- Unsloth docs — practical low-VRAM fine-tuning workflows and quantized training.
-- Hu et al. — *LoRA: Low-Rank Adaptation of Large Language Models*.
-- Dettmers et al. — *QLoRA: Efficient Finetuning of Quantized LLMs*.
-- Ouyang et al. — *Training language models to follow instructions with human feedback*; Rafailov et al. — *Direct Preference Optimization*.
-- Sebastian Raschka — fine-tuning articles, LoRA experiments, and *Build a Large Language Model (From Scratch)*.
+- [LoRA](https://arxiv.org/abs/2106.09685) — low-rank parameter-efficient adaptation.
+- [QLoRA](https://arxiv.org/abs/2305.14314) — quantized base weights with trainable adapters.
+- [InstructGPT](https://arxiv.org/abs/2203.02155) — supervised instruction tuning and RLHF pipeline with human evaluation.
+- [Direct Preference Optimization](https://arxiv.org/abs/2305.18290) — preference optimization without an explicit online RL loop.
+- [Hugging Face PEFT](https://huggingface.co/docs/peft/) — current implementation semantics for adapters and parameter-efficient methods.

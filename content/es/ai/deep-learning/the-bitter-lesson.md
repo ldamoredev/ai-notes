@@ -53,6 +53,6 @@ Dos errores opuestos: sobreingenierizar estructura ingeniosa que la escala va a 
 presupuesto, y un modelo más simple y rico en prior habría ganado. Sostené la lección
 como una *dirección*, no como una receta.
 
-**Se conecta con:** [[ai/deep-learning/scaling-laws|scaling laws]] ·
+**Conecta con:** [[ai/deep-learning/scaling-laws|scaling laws]] ·
 [[ai/foundations/inductive-bias-and-no-free-lunch|sesgo inductivo]] ·
 [[ai/llms/emergent-abilities-and-scale|emergence y escala]]

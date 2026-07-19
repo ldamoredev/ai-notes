@@ -51,6 +51,6 @@ classic, if debated, explanation). Residual connections + LayerNorm are what mak
 A network that won't learn (flat or NaN loss) is very often init/normalization or
 [[ai/deep-learning/optimizers|learning rate]] — check those before architecture.
 
-**Connects to:** [[ai/deep-learning/neural-networks-and-backprop|vanishing gradients]] ·
+**Connects to:** [[ai/computation-and-autodiff/backpropagation-from-first-principles|vanishing gradients]] ·
 [[ai/deep-learning/optimizers|optimizers]] ·
 [[ai/llms/index|LayerNorm in transformers]]

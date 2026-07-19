@@ -9,7 +9,7 @@ updated: 2026-06-07
 
 Antes de los transformers, las redes neuronales recurrentes eran la forma de modelar
 secuencias. En gran parte perdieron, pero entender *por qué* es la forma más limpia de
-entender por qué [[ai/deep-learning/attention-mechanism|attention]] y
+entender por qué [[ai/model-architectures/self-attention-from-first-principles|attention]] y
 [[ai/llms/index|transformers]] tomaron el control.
 
 ## Cómo funciona una RNN
@@ -22,7 +22,7 @@ hacia el presente.
 ## Límite 1: gradientes que se desvanecen en secuencias largas
 
 Backpropagar a través de muchos pasos temporales multiplica muchos números chicos, así
-que el gradiente [[ai/deep-learning/neural-networks-and-backprop|se desvanece]] y la red
+que el gradiente [[ai/computation-and-autodiff/backpropagation-from-first-principles|se desvanece]] y la red
 tiene problemas para conectar eventos distantes ("el tema mencionado hace 200 palabras").
 **LSTMs** y **GRUs** agregaron gates para llevar información más lejos, lo que ayudó
 mucho, pero las dependencias de largo alcance siguieron siendo difíciles.
@@ -31,12 +31,12 @@ mucho, pero las dependencias de largo alcance siguieron siendo difíciles.
 
 Este fue el fatal. Como el paso *t* necesita el estado del paso *t−1*, una RNN debe
 procesar una secuencia **secuencialmente**: no podés computar todas las posiciones a la
-vez. En GPUs modernas hechas para [[ai/foundations/linear-algebra-for-ml|matemática
+vez. En GPUs modernas hechas para [[ai/mathematics-for-ai/vectors-matrices-and-tensors|matemática
 matricial]] masivamente paralela, eso es una sentencia de muerte para escalar.
 
 ## Por qué ganó attention
 
-[[ai/deep-learning/attention-mechanism|Attention]] arregla ambos problemas a la vez:
+[[ai/model-architectures/self-attention-from-first-principles|Attention]] arregla ambos problemas a la vez:
 
 - Cualquier posición puede mirar **directamente** a cualquier otra en un salto: no hay
   una cadena larga por la cual el gradiente se desvanezca, así que las dependencias de
@@ -51,6 +51,6 @@ Las RNNs todavía aparecen en settings diminutos, streaming o de baja latencia, 
 pregunta eficiencia-vs-attention sigue viva en modelos state-space más nuevos (por
 ejemplo Mamba).
 
-**Se conecta con:** [[ai/deep-learning/attention-mechanism|attention]] ·
-[[ai/deep-learning/neural-networks-and-backprop|gradientes que se desvanecen]] ·
+**Conecta con:** [[ai/model-architectures/self-attention-from-first-principles|attention]] ·
+[[ai/computation-and-autodiff/backpropagation-from-first-principles|gradientes que se desvanecen]] ·
 [[ai/llms/index|por qué transformers]]

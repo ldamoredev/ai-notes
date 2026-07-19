@@ -8,7 +8,7 @@ updated: 2026-06-07
 # Deep Learning
 
 Deep learning es lo que pasa cuando apilás muchas capas simples y diferenciables y
-dejás que [[ai/foundations/gradient-descent-intuition|gradient descent]] descubra las
+dejás que [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] descubra las
 features en vez de diseñarlas a mano. Ese único cambio — **representaciones aprendidas
 por encima de features artesanales** — es la razón por la que tomó visión, habla y
 lenguaje, y es el sustrato sobre el que se construye todo [[ai/llms/index|LLM]].
@@ -17,9 +17,13 @@ lenguaje, y es el sustrato sobre el que se construye todo [[ai/llms/index|LLM]].
 > lineales]] separados por no linealidades, entrenada end to end con backprop. Todo lo
 > demás es hacer que eso entrene establemente a escala.
 
-## Cómo aprende una red
+## Modelo mental
 
-- [[ai/deep-learning/neural-networks-and-backprop|Redes neuronales y backpropagation]]
+Deep learning compone transformaciones diferenciables para aprender representaciones junto con la tarea. La arquitectura define caminos de información; el objetivo aporta presión; backprop asigna crédito; optimización y sistemas numéricos permiten escalar.
+
+## Hoja de ruta: cómo aprende una red
+
+- [[ai/computation-and-autodiff/backpropagation-from-first-principles|Redes neuronales y backpropagation]]
 - [[ai/deep-learning/activation-functions|Funciones de activación y por qué importa la no linealidad]]
 - [[ai/deep-learning/loss-functions-in-dl|Funciones de pérdida en deep learning]]
 
@@ -34,7 +38,7 @@ lenguaje, y es el sustrato sobre el que se construye todo [[ai/llms/index|LLM]].
 
 - [[ai/deep-learning/cnns|CNNs: convolución y estructura espacial]]
 - [[ai/deep-learning/rnns-and-their-limits|RNNs y sus límites]]
-- [[ai/deep-learning/attention-mechanism|El mecanismo de attention]]
+- [[ai/model-architectures/self-attention-from-first-principles|El mecanismo de attention]]
 
 ## Representaciones y escala
 
@@ -43,8 +47,10 @@ lenguaje, y es el sustrato sobre el que se construye todo [[ai/llms/index|LLM]].
 
 ## Paradigmas y estrategia
 
-- [[ai/deep-learning/reinforcement-learning-essentials|Reinforcement learning, lo esencial]] cubre reward, policy y el paradigma detrás de RLHF y modelos de razonamiento.
+- [[ai/reinforcement-learning/reinforcement-learning-essentials|Reinforcement learning, lo esencial]] cubre reward, policy y el paradigma detrás de RLHF y modelos de razonamiento.
 - [[ai/deep-learning/the-bitter-lesson|The bitter lesson]] explica por qué los métodos generales y hambrientos de cómputo siguen venciendo a la estructura hecha a mano.
+
+**Conecta con:** [[ai/computation-and-autodiff/index|Cómputo y Autodiff]] · [[ai/model-architectures/index|Arquitecturas de Modelos]] · [[ai/llms/index|Modelos de Lenguaje]]
 
 ## Fuentes principales
 
@@ -53,3 +59,6 @@ lenguaje, y es el sustrato sobre el que se construye todo [[ai/llms/index|LLM]].
 - *Dive into Deep Learning* (d2l.ai) — ejecutable, amplio.
 - Goodfellow, Bengio, Courville — *Deep Learning* (texto de referencia).
 - Stanford CS231n; Distill.pub para explicaciones visuales.
+- [Deep Learning](https://www.deeplearningbook.org/) — referencia canónica.
+- [Dive into Deep Learning](https://d2l.ai/) — implementaciones ejecutables.
+- [Neural Networks: Zero to Hero](https://karpathy.ai/zero-to-hero.html) — de autodiff escalar a GPT.

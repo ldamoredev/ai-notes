@@ -43,6 +43,6 @@ for scale and flexible token-based architecture.
 Patch tokens are not words. Small objects, precise geometry, and dense spatial tasks
 can be hard if patching loses detail or if training data lacks the right supervision.
 
-**Connects to:** [[ai/deep-learning/attention-mechanism|attention]] ·
+**Connects to:** [[ai/model-architectures/self-attention-from-first-principles|attention]] ·
 [[ai/deep-learning/cnns|CNNs]] ·
 [[ai/llms/the-decoder-transformer|transformers]]

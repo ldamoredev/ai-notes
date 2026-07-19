@@ -9,7 +9,7 @@ updated: 2026-06-07
 
 Before transformers, recurrent neural networks were how you modeled sequences. They
 mostly lost — but understanding *why* is the cleanest way to understand why
-[[ai/deep-learning/attention-mechanism|attention]] and [[ai/llms/index|transformers]]
+[[ai/model-architectures/self-attention-from-first-principles|attention]] and [[ai/llms/index|transformers]]
 took over.
 
 ## How an RNN works
@@ -22,7 +22,7 @@ into the present.
 ## Limit 1: vanishing gradients over long sequences
 
 Backpropagating through many time steps multiplies many small numbers, so the
-gradient [[ai/deep-learning/neural-networks-and-backprop|vanishes]] and the network
+gradient [[ai/computation-and-autodiff/backpropagation-from-first-principles|vanishes]] and the network
 struggles to connect distant events ("the topic mentioned 200 words ago"). **LSTMs**
 and **GRUs** added gating to carry information further, which helped a lot — but
 long-range dependencies stayed hard.
@@ -31,12 +31,12 @@ long-range dependencies stayed hard.
 
 This was the fatal one. Because step *t* needs the state from step *t−1*, an RNN must
 process a sequence **sequentially** — you can't compute all positions at once. On
-modern GPUs built for massive parallel [[ai/foundations/linear-algebra-for-ml|matrix
+modern GPUs built for massive parallel [[ai/mathematics-for-ai/vectors-matrices-and-tensors|matrix
 math]], that's a death sentence for scale.
 
 ## Why attention won
 
-[[ai/deep-learning/attention-mechanism|Attention]] fixes both at once:
+[[ai/model-architectures/self-attention-from-first-principles|Attention]] fixes both at once:
 
 - Any position can look **directly** at any other in one step — no long chain to
   vanish through, so long-range dependencies are easy.
@@ -49,6 +49,6 @@ math]], that's a death sentence for scale.
 RNNs still appear in tiny, streaming, or low-latency settings, and the
 efficiency-vs-attention question lives on in newer state-space models (e.g. Mamba).
 
-**Connects to:** [[ai/deep-learning/attention-mechanism|attention]] ·
-[[ai/deep-learning/neural-networks-and-backprop|vanishing gradients]] ·
+**Connects to:** [[ai/model-architectures/self-attention-from-first-principles|attention]] ·
+[[ai/computation-and-autodiff/backpropagation-from-first-principles|vanishing gradients]] ·
 [[ai/llms/index|why transformers]]

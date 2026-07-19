@@ -23,7 +23,7 @@ práctica: clustering (agrupar puntos similares) y reducción de dimensionalidad
   formas arbitrarias).
 
 Usos: segmentación de clientes, deduplicación, análisis exploratorio, agrupar
-[[ai/foundations/linear-algebra-for-ml|embeddings]] para ver qué "piensa" un modelo que
+[[ai/mathematics-for-ai/vectors-matrices-and-tensors|embeddings]] para ver qué "piensa" un modelo que
 es similar.
 
 ## PCA: comprimir en las direcciones que importan
@@ -52,6 +52,6 @@ y reducís dimensiones preservando la mayor parte de la señal.
 Siempre escalá features antes de k-means y PCA: ambos se basan en distancia/varianza,
 así que una feature no escalada de rango grande domina todo.
 
-**Se conecta con:** [[ai/foundations/features-and-dimensionality|dimensionalidad]] ·
+**Conecta con:** [[ai/foundations/features-and-dimensionality|dimensionalidad]] ·
 [[ai/foundations/types-of-learning|aprendizaje no supervisado]] ·
 [[ai/deep-learning/index|representaciones aprendidas]]

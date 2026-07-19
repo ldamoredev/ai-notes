@@ -21,7 +21,7 @@ embedding model. Choosing it well matters more than most architecture tweaks.
 
 ## Why cross-entropy dominates classification
 
-Cross-entropy comes straight from [[ai/foundations/information-theory-basics|information
+Cross-entropy comes straight from [[ai/mathematics-for-ai/information-theory-entropy-and-divergence|information
 theory]]: it measures the gap between predicted and true distributions and punishes
 **confident wrong** answers hard. Paired with softmax, its gradient is clean and
 strong even when the model is badly wrong — which is exactly when you want a big
@@ -47,6 +47,6 @@ gap in mind: a falling loss is necessary, not sufficient — always check the re
 Mismatching loss and output layer (e.g., softmax + MSE) trains slowly or not at all.
 Match the loss to the task and the final activation.
 
-**Connects to:** [[ai/foundations/information-theory-basics|cross-entropy]] ·
+**Connects to:** [[ai/mathematics-for-ai/information-theory-entropy-and-divergence|cross-entropy]] ·
 [[ai/foundations/how-learning-works|objective vs metric]] ·
 [[ai/deep-learning/embeddings-and-latent-spaces|contrastive learning]]

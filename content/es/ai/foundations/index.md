@@ -16,7 +16,11 @@ Si solo internalizás una cosa acá: **machine learning es la disciplina de gene
 desde ejemplos finitos hacia casos no vistos; todo lo demás es detalle al servicio de
 eso.**
 
-## Conceptos centrales
+## Modelo mental
+
+Un sistema que aprende convierte observaciones finitas en comportamiento sobre inputs no vistos. Su contrato central no es ajustar training, sino generalizar bajo supuestos explícitos de datos, loss, inductive bias y distribución de despliegue.
+
+## Hoja de ruta: conceptos centrales
 
 - [[ai/foundations/how-learning-works|Cómo funciona el aprendizaje: loss, objetivo y ERM]]
 - [[ai/foundations/generalization-and-overfitting|Generalización, overfitting y el tradeoff sesgo-varianza]]
@@ -27,14 +31,14 @@ eso.**
 
 - [[ai/foundations/data-splits-and-leakage|Splits train/validación/test y data leakage]]
 - [[ai/foundations/distribution-shift|La distribución de datos y el distribution shift]]
-- [[ai/foundations/probability-and-uncertainty|Probabilidad e incertidumbre para ML]]
+- [[ai/mathematics-for-ai/probability-likelihood-and-uncertainty|Probabilidad e incertidumbre para ML]]
 - [[ai/foundations/features-and-dimensionality|Features, representaciones y la maldición de la dimensionalidad]]
 
 ## La matemática que realmente usás
 
-- [[ai/foundations/linear-algebra-for-ml|Intuición de álgebra lineal: el producto punto como similitud]]
-- [[ai/foundations/gradient-descent-intuition|Gradient descent: cómo aprenden realmente los modelos]]
-- [[ai/foundations/information-theory-basics|Teoría de la información: entropía, cross-entropy y KL]]
+- [[ai/mathematics-for-ai/vectors-matrices-and-tensors|Intuición de álgebra lineal: el producto punto como similitud]]
+- [[ai/mathematics-for-ai/gradient-descent-and-optimization|Gradient descent: cómo aprenden realmente los modelos]]
+- [[ai/mathematics-for-ai/information-theory-entropy-and-divergence|Teoría de la información: entropía, cross-entropy y KL]]
 
 ## Juzgar modelos
 
@@ -48,6 +52,8 @@ eso.**
 
 - [[ai/foundations/when-not-to-use-ai|Cuándo no usar AI]] reconoce dónde reglas, humanos o software más simple le ganan a un modelo.
 
+**Conecta con:** [[ai/mathematics-for-ai/index|Matemática para IA]] · [[ai/machine-learning/index|Machine Learning Estadístico]] · [[ai/evaluation/index|Evaluación]]
+
 ## Fuentes principales
 
 - 3Blue1Brown — *Essence of Linear Algebra* y *Neural Networks* (intuición visual).
@@ -55,3 +61,6 @@ eso.**
 - James, Witten, Hastie, Tibshirani — *An Introduction to Statistical Learning* (ISLP).
 - Aurélien Géron — *Hands-On Machine Learning* (3rd ed.).
 - Google — *Machine Learning Crash Course*.
+- [An Introduction to Statistical Learning](https://www.statlearning.com/) — teoría y labs accesibles.
+- [Understanding Machine Learning](https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/) — learnability y generalización.
+- [Google Rules of ML](https://developers.google.com/machine-learning/guides/rules-of-ml) — reglas para sistemas de producción.

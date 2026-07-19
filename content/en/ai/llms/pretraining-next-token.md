@@ -23,7 +23,7 @@ learn an enormous amount as a side effect:
 
 The objective is simple; the *only* way to get good at it is to build a rich internal
 model of language and the world. Training minimizes
-[[ai/foundations/information-theory-basics|cross-entropy]] (equivalently, perplexity)
+[[ai/mathematics-for-ai/information-theory-entropy-and-divergence|cross-entropy]] (equivalently, perplexity)
 over the corpus.
 
 ## The result is a "base model"

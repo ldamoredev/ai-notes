@@ -36,7 +36,7 @@ carry the most signal.
   **start or end**, not the middle.
 - **Compress** — summarize history and stale material; keep the window dense with
   signal ([[ai/prompt-engineering/index|context engineering]]).
-- **[[ai/rag-and-retrieval/index#reranking|Rerank]]** so the top, best chunks land in
+- **[[ai/rag-and-retrieval/reranking|Rerank]]** so the top, best chunks land in
   the high-attention positions.
 - **Don't pay for context you don't need** — more tokens = more
   [[ai/llms/context-window-and-kv-cache|cost and latency]] for often *worse* results.

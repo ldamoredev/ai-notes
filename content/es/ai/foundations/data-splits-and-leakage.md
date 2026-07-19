@@ -49,6 +49,6 @@ Leaks comunes:
 Un split realista que espeja cómo se va a usar realmente el modelo vale más que un
 split aleatorio limpio que filtra en silencio.
 
-**Se conecta con:** [[ai/foundations/generalization-and-overfitting|overfitting]] ·
+**Conecta con:** [[ai/foundations/generalization-and-overfitting|overfitting]] ·
 [[ai/foundations/distribution-shift|distribution shift]] ·
 [[ai/evaluation/index|evaluación]]

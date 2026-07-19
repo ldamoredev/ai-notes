@@ -14,7 +14,7 @@ network *is* one of them. Understand these and deep learning is less mysterious.
 ## Linear regression — predict a number
 
 Fit a weighted sum of features to predict a continuous value: `ŷ = w·x + b`. Train
-by minimizing squared error via [[ai/foundations/gradient-descent-intuition|gradient
+by minimizing squared error via [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient
 descent]] (or a closed-form solution). Each weight is readable: "holding others
 fixed, +1 here moves the prediction by wᵢ."
 
@@ -26,7 +26,7 @@ coefficients become unstable or misleading.
 
 For classification, wrap the same linear score in a **sigmoid** to squash it into
 [0, 1]: a calibrated-ish probability. Train with
-[[ai/foundations/information-theory-basics|cross-entropy]] loss. Despite the name,
+[[ai/mathematics-for-ai/information-theory-entropy-and-divergence|cross-entropy]] loss. Despite the name,
 it's a *classifier*. A threshold (default 0.5, but tune it — see
 [[ai/foundations/evaluation-metrics|metrics]]) turns the probability into a decision.
 
@@ -49,5 +49,5 @@ scale them, encode categoricals, and add interaction/nonlinear terms by hand, si
 the model can't discover them on its own (that's the [[ai/foundations/inductive-bias-and-no-free-lunch|linear inductive bias]]).
 
 **Connects to:** [[ai/machine-learning/regularization-l1-l2|regularization]] ·
-[[ai/foundations/gradient-descent-intuition|gradient descent]] ·
+[[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] ·
 [[ai/deep-learning/index|the neuron inside a net]]

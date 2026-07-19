@@ -46,6 +46,6 @@ empujado por el costo relativo de cada error: una decisión de producto, no un d
 Además mantené el **test set con la proporción del mundo real**: evaluar sobre datos
 artificialmente balanceados esconde cómo se comporta el modelo en producción.
 
-**Se conecta con:** [[ai/foundations/evaluation-metrics|precision/recall]] ·
+**Conecta con:** [[ai/foundations/evaluation-metrics|precision/recall]] ·
 [[ai/machine-learning/cross-validation|CV estratificada]] ·
 [[ai/machine-learning/ml-pipelines-and-leakage|resample in-fold]]

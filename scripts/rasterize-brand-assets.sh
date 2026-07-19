@@ -6,7 +6,7 @@
 #   rsvg-convert   (brew install librsvg)   — fastest, recommended
 #   magick         (brew install imagemagick)
 #   inkscape       (brew install --cask inkscape)
-#   qlmanage+sips  (macOS built-in fallback, no install required)
+#   qlmanage       (macOS fallback for square icons only)
 #
 # Outputs:
 #   static/apple-touch-icon.png   180x180   (iOS home screen)
@@ -24,7 +24,12 @@ for t in rsvg-convert magick inkscape qlmanage; do
   if command -v "$t" >/dev/null 2>&1; then raster_tool="$t"; break; fi
 done
 if [ -z "$raster_tool" ]; then
-  echo "No SVG rasterizer found. Install librsvg/imagemagick/inkscape, or run on macOS (qlmanage)." >&2
+  echo "No reliable SVG rasterizer found. Install librsvg, ImageMagick, or Inkscape." >&2
+  exit 1
+fi
+if [ "$raster_tool" = "qlmanage" ]; then
+  echo "qlmanage cannot rasterize the non-square social card without clipping it." >&2
+  echo "Install librsvg, ImageMagick, or Inkscape before regenerating brand assets." >&2
   exit 1
 fi
 echo "Using rasterizer: $raster_tool"
@@ -36,18 +41,7 @@ render() {
     rsvg-convert) rsvg-convert -w "$w" -h "$h" "$src" -o "$out" ;;
     magick)       magick -background none "$src" -resize "${w}x${h}" "$out" ;;
     inkscape)     inkscape "$src" -w "$w" -h "$h" -o "$out" >/dev/null 2>&1 ;;
-    qlmanage)
-      local tmp; tmp="$(mktemp -d)"
-      local box="$w"; [ "$h" -gt "$w" ] && box="$h"
-      qlmanage -t -s "$box" -o "$tmp" "$src" >/dev/null 2>&1
-      if [ "$w" -eq "$h" ]; then
-        mv "$tmp/$(basename "$src").png" "$out"
-      else
-        # qlmanage pads to a square box; crop the centered content to w x h.
-        sips -c "$h" "$w" "$tmp/$(basename "$src").png" --out "$out" >/dev/null
-      fi
-      rm -rf "$tmp"
-      ;;
+    qlmanage)     qlmanage -t -s "$w" -o "$(dirname "$out")" "$src" >/dev/null 2>&1 ;;
   esac
   echo "  wrote $out (${w}x${h})"
 }

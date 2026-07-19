@@ -1,184 +1,160 @@
 # AI Atlas
 
-Static personal knowledge atlas for Artificial Intelligence notes.
+AI Atlas is a framework-free, bilingual knowledge system for learning artificial intelligence from first principles to production systems. English is canonical; Spanish is a path-matched overlay with explicit English fallback when a translation is missing or stale.
 
-This project mirrors the architectural idea of the existing CyberSec Atlas: a
-small Python build script, local Markdown sources, bilingual output, sticky
-sidebar/topbar, client-side search, SEO metadata, sitemap, robots, and static
-assets. It uses a different visual identity: sober AI-console styling with
-cyan, indigo, violet, and neutral knowledge-tool surfaces.
+The Atlas is organized around one question: **what happens between input and output, how was it learned, what can fail, and what evidence supports the claim?** Its spine project, Glassbox AI Lab, turns that question into executable milestones from scalar math to a production AI system.
 
-## Structure
+Live site: [ldamoredev.github.io/ai-notes](https://ldamoredev.github.io/ai-notes/)
 
-```text
-build.py                       # Static site generator
-content/en/ai/                 # Canonical English Markdown notes
-content/es/ai/                 # Spanish overlays with matching paths
-static/favicon.svg             # Shared favicon (SVG source)
-static/apple-touch-icon.png    # iOS home-screen icon (generated)
-static/assets/atlas.css        # Design system and responsive layout
-static/assets/search.js        # Theme, drawer, language memory, client search
-static/assets/og-image.svg     # Social card source
-static/assets/og-image.png     # Social card raster (generated, 1200x630)
-static/assets/icon-192.png     # PWA icon (generated)
-static/assets/icon-512.png     # PWA icon (generated, also maskable)
-scripts/rasterize-brand-assets.sh   # SVG -> PNG generator
-.github/workflows/deploy.yml   # GitHub Pages CI (build + deploy)
-site/                          # Generated output
-```
+## What is included
 
-Generated pages are written to:
+- 24 knowledge branches grouped into 8 phases.
+- Canonical English notes plus Spanish overlays and honest fallback SEO.
+- Six mechanism-first flagship notes with numerical examples and runnable artifacts.
+- Glassbox labs for stable probability, reverse-mode autodiff, causal attention, and token generation traces.
+- Client-side search, dark/light themes, responsive navigation, JSON-LD, sitemap, Open Graph, and legacy redirects.
+- Source, content, localization, link, SEO, and generated-site validators.
+
+The current editorial debt is intentionally visible. Many inherited atomic notes remain concise pre-refoundation material; `AI-ATLAS-AUDIT.md` scores every canonical page and `CONTENT-PLAN.md` defines the rewrite queue.
+
+## Architecture
 
 ```text
-site/en/
-site/es/
+build.py                         # Standard-library static generator
+content/en/ai/                   # Canonical English source
+content/es/ai/                   # Spanish overlays at identical paths
+labs/glassbox/                   # Executable spine-project experiments
+scripts/audit_content.py         # Full inventory and 12-dimension scoring
+scripts/validate_content.py      # Taxonomy/editorial/migration contracts
+scripts/validate_site.py         # HTML/link/SEO/localization/asset checks
+static/assets/atlas.css          # Glassbox design system
+static/assets/search.js          # Search, theme, drawer, locale behavior
+site/                            # Generated output; never edit by hand
+AI-ATLAS-AUDIT.md                # Evidence-backed current-state audit
+MIGRATION-MAP.md                 # Old → new taxonomy and URL policy
+CONTENT-PLAN.md                  # Editorial roadmap and Glassbox v0→v10
+SOURCES.md                       # Full-URL primary-source registry
+GLOSSARY.md                      # ES conventions and Atlas terminology
 ```
 
-The root `site/index.html` is a small language chooser that redirects to the
-stored or browser-preferred locale.
+## Build and verify
 
-## Build
-
-No framework is required. The build works with the Python standard library.
-If the optional `markdown` package is installed, `build.py` will use it;
-otherwise it falls back to a compact Markdown renderer that supports the
-current atlas skeleton.
+The generator has no required third-party dependency. CI installs `markdown` and `pygments` for richer rendering; the built-in fallback remains the authoring compatibility target.
 
 ```bash
-cd /Users/nicolasbottarini/projects/ai-notes
+python3 -m py_compile build.py scripts/*.py
 python3 build.py
+python3 scripts/validate_content.py
+python3 scripts/validate_site.py
+python3 -m unittest labs.glassbox.test_glassbox -v
 ```
 
-The build refuses to clear `site/` if it loads zero notes.
+The build must finish with `unresolved links: 0`. `build.py` deletes and regenerates `site/`; source changes belong under `content/`, `static/`, or `labs/`.
 
-## Serve Locally
-
-Search uses `fetch`, so serve the generated folder for full functionality:
+Serve locally because search uses `fetch`:
 
 ```bash
-cd /Users/nicolasbottarini/projects/ai-notes
-python3 -m http.server 8001 --directory site
+python3 -m http.server 8011 --directory site
 ```
 
-Open:
+Open `http://127.0.0.1:8011/en/` or `http://127.0.0.1:8011/es/`.
 
-```text
-http://127.0.0.1:8001/en/
-http://127.0.0.1:8001/es/
+## Taxonomy
+
+| Phase | Branches |
+|---|---|
+| 00 Orientation | Start Here, Must Know, registry, learning paths |
+| 01 Foundations | Mathematics; Computation & Autodiff; Classical AI; Learning Foundations; Statistical ML; Data |
+| 02 Learning & Models | Deep Learning; Reinforcement Learning; Model Architectures; Language/Foundation Models; Multimodal AI |
+| 03 Training & Inference | Training & Adaptation; Inference Systems |
+| 04 Context & Agency | Context Engineering; Retrieval & Knowledge; Agents & Tools |
+| 05 Measurement & Trust | Evaluation; Interpretability; Safety & Security; Ethics & Governance |
+| 06 Product & Operations | AI Product Engineering; MLOps & Operations |
+| ★ Always active | Research & Experimentation; AI Playbooks |
+
+The source of truth for labels, groups, accents, icons, and editorial statuses is `BRANCHES` in `build.py`. `BRANCHES_ES` must contain exactly the same slugs.
+
+## Glassbox AI Lab
+
+Implemented artifacts:
+
+```bash
+python3 labs/glassbox/v0_math.py
+python3 labs/glassbox/v1_autodiff.py
+python3 labs/glassbox/v4_attention.py
+python3 -m labs.glassbox.v4_token_trace
 ```
 
-## Add a Note
+The roadmap runs from v0 math and probability through autodiff, neural networks, a tensor framework, a mini-transformer, training, inference, retrieval, agents, multimodality, and a production AI system. Every milestone must include deterministic fixtures, tests, expected output, failure injection, metrics, and a short postmortem.
 
-Create a Markdown file under `content/en/ai/<branch>/`.
+## Add or rewrite a note
+
+Create `content/en/ai/<branch>/<slug>.md`:
+
+```yaml
+---
+title: "Note title"
+description: One-line SEO and search description.
+tags: [topic-a, topic-b]
+order: 4
+updated: 2026-07-19
+kind: concept
+level: intermediate
+status: review-needed
+prerequisites: [ai/branch/prerequisite]
+last_verified: 2026-07-19
+# draft: true
+---
+```
+
+A canonical deep note contains:
+
+- A durable mental model before taxonomy.
+- Mechanism and notation with defined symbols and shapes.
+- A small numerical walkthrough.
+- An executable artifact and a verification command.
+- What frameworks or abstractions hide.
+- Failure modes, trade-offs, and a decision rule.
+- A production lens: latency, cost, memory, observability, and reliability where relevant.
+- Exercises, `**Connects to:**` wikilinks, and 3–8 primary sources with full URLs.
+
+Use path-form wikilinks:
 
 ```markdown
----
-title: My New Note
-description: Short SEO/search description.
-tags: [llms, evaluation]
-order: 2
-updated: 2026-06-07
-# featured: true   # optional — promotes this note to the home "Featured" card
-# draft: true      # optional — keeps the note out of the build until removed
----
-# My New Note
-
-Atomic note body.
+[[ai/model-architectures/self-attention-from-first-principles|Self-attention]]
 ```
 
-Frontmatter flags:
+Only link to existing canonical pages or indexes. Add the note to its branch index, rebuild, and run both validators.
 
-- `order` sorts notes inside a branch (lower first; index is always pinned on top).
-- `featured: true` selects the single note shown in the home "Featured note" card.
-  If none is set, the first concept/playbook note is used.
-- `draft: true` excludes the note from the build (and from search/sitemap), so you
-  can write in-tree without publishing. The build logs how many drafts it skipped.
+## Spanish overlays
 
-Use wikilinks for internal references:
-
-```markdown
-[[ai/llms/transformer-attention-map|Transformer Attention Map]]
-```
-
-Then rebuild:
-
-```bash
-python3 build.py
-```
-
-## Add a Branch
-
-1. Add the branch metadata in `BRANCHES` inside `build.py`.
-2. Add an optional Spanish label/summary in `BRANCHES_ES`.
-3. Create `content/en/ai/<branch>/index.md`.
-4. Create `content/es/ai/<branch>/index.md` if you want a translated overlay.
-5. Rebuild.
-
-The home branch cards, sidebar grouping, search metadata, and page URLs are
-derived from that structure.
-
-## Add a Translation
-
-Spanish is an overlay, not a separate source tree. Create the same path under
-`content/es/`:
+An overlay must use the same relative path:
 
 ```text
-content/en/ai/llms/example.md
-content/es/ai/llms/example.md
+content/en/ai/llms/tokenization.md
+content/es/ai/llms/tokenization.md
 ```
 
-If a translation is missing, the ES page still exists and shows the English
-source with a translation-pending banner.
+Spanish uses technical Rioplatense voseo and mirrors the English structure and evidence density. Missing, empty, draft, or `translation: stale` overlays render the English content under Spanish UI with a visible banner, `lang="en"`, English canonical URL, `noindex, follow`, and no false Spanish `hreflang` or sitemap entry.
 
-## SEO and Deployment
+## URL migrations
 
-The build emits:
+Do not silently move published slugs. Add old-to-new IDs to `LEGACY_REDIRECTS`, update wikilinks, and record the decision in `MIGRATION-MAP.md`. The build emits locale-prefixed and default-locale redirect pages. Validators assert every target exists.
 
-- Canonical URLs
-- `hreflang` alternates for EN/ES and `x-default`
-- OpenGraph and Twitter metadata with a **PNG** social image (1200x630)
-- `apple-touch-icon` + PWA icons (192/512, including a maskable variant)
-- JSON-LD breadcrumbs/articles
-- `site/sitemap.xml`
-- `site/robots.txt`
-- `.nojekyll` for GitHub Pages
+## Deployment
 
-Set `SITE_URL` and `GITHUB_URL` when building if the final repository URL
-differs from the defaults:
+GitHub Actions builds and validates on every push to `main`, then deploys `site/` through GitHub Pages. The generated directory does not need hand edits or source changes.
+
+For another host or fork:
 
 ```bash
-SITE_URL="https://example.com/ai-notes" \
-GITHUB_URL="https://github.com/your-user/ai-notes" \
-python3 build.py
+SITE_URL="https://example.com/ai-notes" GITHUB_URL="https://github.com/example/ai-notes" python3 build.py
 ```
 
-### Brand assets (SVG -> PNG)
-
-Social/share platforms do not render SVG, so the PNG icons and the OG image are
-committed to `static/`. Regenerate them after editing `static/favicon.svg` or
-`static/assets/og-image.svg`:
+Regenerate raster brand assets after editing their SVG sources:
 
 ```bash
 ./scripts/rasterize-brand-assets.sh
 ```
 
-The script uses `rsvg-convert`, `magick`, or `inkscape` if installed, and falls
-back to the macOS built-in `qlmanage`/`sips` (no install required).
-
-### Continuous deployment
-
-`.github/workflows/deploy.yml` builds the site and publishes it to GitHub Pages
-on every push to `main`. It runs `python build.py` with `SITE_URL` set to the
-Pages base URL, then uploads `site/` as the Pages artifact — the generated
-`site/` folder does not need to be committed once CI is enabled.
-
-## Content
-
-The knowledge taxonomy is **12 branches + playbooks**, grouped into phases
-(Foundations, Models, Engineering, Evaluation, Always-on). Each branch targets
-**10–15 rich, source-backed atomic notes**.
-
-See [CONTENT-PLAN.md](CONTENT-PLAN.md) for the full taxonomy, per-branch note
-outlines, curated sources, and progress checklist. Notes are written EN-first;
-Spanish overlays follow in a second pass (pages fall back to English with a banner
-until translated).
+Author and maintainer: **Lautaro Damore**.

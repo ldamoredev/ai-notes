@@ -51,6 +51,6 @@ FLOPs. Las perillas que moldean latencia y costo:
 - La calidad después de quantization es empírica: benchmarkeá en *tu* tarea antes de
   confiar ([[ai/evaluation/index|eval]]).
 
-**Se conecta con:** [[ai/llms/context-window-and-kv-cache|KV cache]] ·
+**Conecta con:** [[ai/llms/context-window-and-kv-cache|KV cache]] ·
 [[ai/mlops/index|serving]] ·
 [[ai/ai-product-engineering/index|latencia y costo]]

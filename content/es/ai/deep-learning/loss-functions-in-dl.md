@@ -21,7 +21,7 @@ de embeddings. Elegirlo bien importa más que la mayoría de los cambios de arqu
 
 ## Por qué cross-entropy domina clasificación
 
-Cross-entropy viene directo de la [[ai/foundations/information-theory-basics|teoría de la
+Cross-entropy viene directo de la [[ai/mathematics-for-ai/information-theory-entropy-and-divergence|teoría de la
 información]]: mide la brecha entre distribuciones predichas y verdaderas y castiga
 fuerte respuestas **confiadas y equivocadas**. Emparejada con softmax, su gradiente es
 limpio y fuerte incluso cuando el modelo está muy equivocado, justo cuando querés una
@@ -47,6 +47,6 @@ también la [[ai/foundations/evaluation-metrics|métrica]] real.
 Desalinear loss y capa de salida (por ejemplo, softmax + MSE) entrena lento o no
 entrena. Matcheá el loss con la tarea y la activación final.
 
-**Se conecta con:** [[ai/foundations/information-theory-basics|cross-entropy]] ·
+**Conecta con:** [[ai/mathematics-for-ai/information-theory-entropy-and-divergence|cross-entropy]] ·
 [[ai/foundations/how-learning-works|objetivo vs métrica]] ·
 [[ai/deep-learning/embeddings-and-latent-spaces|contrastive learning]]

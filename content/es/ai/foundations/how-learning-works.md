@@ -20,7 +20,7 @@ parámetros que hagan chica la pérdida promedio.
    cuando la predicción es mala. Ejemplos: error cuadrático para regresión,
    cross-entropy para clasificación.
 3. **Un optimizador** — un procedimiento que empuja `θ` para reducir el loss, casi
-   siempre una variante de [[ai/foundations/gradient-descent-intuition|gradient descent]].
+   siempre una variante de [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]].
 
 ## Minimización empírica del riesgo (ERM)
 
@@ -51,6 +51,6 @@ custom). Un modelo optimiza exactamente lo que medís, no lo que quisiste decir.
 Optimizar el objetivo equivocado es el bug más caro en ML, y es silencioso: la curva de
 loss se ve genial mientras el modelo mejora en lo incorrecto.
 
-**Se conecta con:** [[ai/foundations/gradient-descent-intuition|gradient descent]] ·
+**Conecta con:** [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] ·
 [[ai/foundations/evaluation-metrics|métricas vs loss]] ·
-[[ai/foundations/information-theory-basics|por qué cross-entropy]]
+[[ai/mathematics-for-ai/information-theory-entropy-and-divergence|por qué cross-entropy]]

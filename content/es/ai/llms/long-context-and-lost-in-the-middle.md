@@ -39,7 +39,7 @@ llevan más señal.
   **inicio o final**, no en el medio.
 - **Comprimí**: resumí historial y material vencido; mantené la ventana densa en señal
   ([[ai/prompt-engineering/index|context engineering]]).
-- **[[ai/rag-and-retrieval/index#reranking|Rerankeá]]** para que los mejores chunks
+- **[[ai/rag-and-retrieval/reranking|Rerankeá]]** para que los mejores chunks
   queden en las posiciones de alta attention.
 - **No pagues por contexto que no necesitás**: más tokens = más
   [[ai/llms/context-window-and-kv-cache|costo y latencia]] para resultados a menudo
@@ -48,6 +48,6 @@ llevan más señal.
 > Tratá la ventana de contexto como espacio caro y sesgado por attention, no como un
 > balde. Curación le gana a capacidad.
 
-**Se conecta con:** [[ai/llms/context-window-and-kv-cache|ventana de contexto]] ·
+**Conecta con:** [[ai/llms/context-window-and-kv-cache|ventana de contexto]] ·
 [[ai/rag-and-retrieval/index|retrieval y reranking]] ·
 [[ai/prompt-engineering/index|context engineering]]

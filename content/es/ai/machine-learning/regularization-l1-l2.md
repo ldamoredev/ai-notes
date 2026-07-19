@@ -49,6 +49,6 @@ Escalá tus features antes de L1/L2: la penalización trata todos los pesos por 
 que una feature no escalada de rango grande queda injustamente penalizada (o perdonada).
 Y λ demasiado fuerte hace underfitting: el síntoma es error alto en train y validación.
 
-**Se conecta con:** [[ai/foundations/generalization-and-overfitting|sesgo-varianza]] ·
+**Conecta con:** [[ai/foundations/generalization-and-overfitting|sesgo-varianza]] ·
 [[ai/machine-learning/hyperparameter-tuning|tunear λ]] ·
 [[ai/machine-learning/feature-engineering|selección de features]]

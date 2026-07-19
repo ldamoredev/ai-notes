@@ -51,9 +51,9 @@ type — a product/ethics decision, not a math one. This is why a model ships wi
 
 Optimizing a single offline metric can quietly degrade the thing you actually care
 about (Goodhart's law: a metric that becomes a target stops being a good metric).
-Always pair the headline number with [[ai/foundations/probability-and-uncertainty|calibration]]
+Always pair the headline number with [[ai/mathematics-for-ai/probability-likelihood-and-uncertainty|calibration]]
 and error analysis.
 
 **Connects to:** [[ai/foundations/how-learning-works|loss vs metric]] ·
 [[ai/evaluation/index|evaluating AI systems]] ·
-[[ai/foundations/probability-and-uncertainty|calibration]]
+[[ai/mathematics-for-ai/probability-likelihood-and-uncertainty|calibration]]

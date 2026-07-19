@@ -48,6 +48,6 @@ Un sesgo equivocado pero confiado generaliza mal de una forma que ninguna afinac
 arregla, por ejemplo forzar un modelo lineal sobre una relación fundamentalmente no
 lineal.
 
-**Se conecta con:** [[ai/foundations/generalization-and-overfitting|sesgo-varianza]] ·
+**Conecta con:** [[ai/foundations/generalization-and-overfitting|sesgo-varianza]] ·
 [[ai/foundations/features-and-dimensionality|features y representaciones]] ·
 [[ai/deep-learning/index|deep learning]]

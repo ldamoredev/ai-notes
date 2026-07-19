@@ -45,6 +45,6 @@ especialmente peligroso: computar medias por categoría sobre todas las filas fi
 > Más features no es mejor. Features relevantes, sin leakage y disponibles en serving sí.
 > Podá agresivamente; cada feature débil agrega varianza.
 
-**Se conecta con:** [[ai/machine-learning/ml-pipelines-and-leakage|pipelines y leakage]] ·
+**Conecta con:** [[ai/machine-learning/ml-pipelines-and-leakage|pipelines y leakage]] ·
 [[ai/foundations/features-and-dimensionality|representaciones]] ·
 [[ai/machine-learning/regularization-l1-l2|regularización para selección]]

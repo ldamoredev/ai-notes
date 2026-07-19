@@ -47,6 +47,6 @@ calibrado, pero no descartes que la escala compra comportamiento nuevo.
   [[ai/deep-learning/scaling-laws|loss]] sea predecible; entonces **evaluá**, no
   asumas ([[ai/evaluation/index|eval]]).
 
-**Se conecta con:** [[ai/deep-learning/scaling-laws|scaling laws]] ·
+**Conecta con:** [[ai/deep-learning/scaling-laws|scaling laws]] ·
 [[ai/prompt-engineering/index|prompting few-shot]] ·
 [[ai/llms/reasoning-and-test-time-compute|reasoning]]

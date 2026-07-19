@@ -46,6 +46,6 @@ Los límites de tokens son invisibles pero tienen consecuencias. Cuando un promp
 comporta raro con números, código o texto no inglés, sospechá de tokenization antes
 que de la "inteligencia" del modelo.
 
-**Se conecta con:** [[ai/llms/the-decoder-transformer|la arquitectura]] ·
+**Conecta con:** [[ai/llms/the-decoder-transformer|la arquitectura]] ·
 [[ai/llms/context-window-and-kv-cache|presupuesto de contexto]] ·
 [[ai/ai-product-engineering/index|costo por token]]

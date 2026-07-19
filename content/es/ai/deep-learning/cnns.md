@@ -42,7 +42,7 @@ Las CNNs todavía impulsan mucha visión en producción (clasificación, detecci
 segmentación) y son baratas y rápidas. Vision Transformers (ViT) ahora las igualan o
 superan a gran escala, pero los ViTs necesitan más datos justamente porque *carecen* del
 sesgo convolucional y deben aprender localidad desde cero. El tradeoff es el mismo de
-siempre: prior más fuerte vs más datos (y la historia de [[ai/deep-learning/attention-mechanism|attention]]
+siempre: prior más fuerte vs más datos (y la historia de [[ai/model-architectures/self-attention-from-first-principles|attention]]
 sigue directo hacia [[ai/llms/index|LLMs]]).
 
 ## Trampa
@@ -51,6 +51,6 @@ Las CNNs asumen datos con estructura de grilla y correlación local. Forzarlas s
 tabulares (sin estructura espacial) desperdicia su sesgo:
 [[ai/machine-learning/decision-trees-and-ensembles|los árboles]] suelen ganar ahí.
 
-**Se conecta con:** [[ai/foundations/inductive-bias-and-no-free-lunch|sesgo inductivo]] ·
-[[ai/deep-learning/attention-mechanism|attention vs convolución]] ·
+**Conecta con:** [[ai/foundations/inductive-bias-and-no-free-lunch|sesgo inductivo]] ·
+[[ai/model-architectures/self-attention-from-first-principles|attention vs convolución]] ·
 [[ai/foundations/features-and-dimensionality|jerarquía de features]]

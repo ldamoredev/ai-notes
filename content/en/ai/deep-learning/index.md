@@ -8,7 +8,7 @@ updated: 2026-06-07
 # Deep Learning
 
 Deep learning is what happens when you stack many simple, differentiable layers and
-let [[ai/foundations/gradient-descent-intuition|gradient descent]] discover the
+let [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] discover the
 features instead of hand-engineering them. That single shift — **learned
 representations over crafted features** — is why it took over vision, speech, and
 language, and it's the substrate every [[ai/llms/index|LLM]] is built on.
@@ -17,9 +17,13 @@ language, and it's the substrate every [[ai/llms/index|LLM]] is built on.
 > models]] separated by nonlinearities, trained end to end by backprop. Everything
 > else is making that train stably at scale.
 
-## How a network learns
+## Mental model
 
-- [[ai/deep-learning/neural-networks-and-backprop|Neural networks & backpropagation]]
+Deep learning composes differentiable transformations so useful representations can be learned with the task. Architecture determines information paths; the objective supplies pressure; backpropagation assigns local credit; optimization and numerical systems make the process viable at scale.
+
+## Roadmap: how a network learns
+
+- [[ai/computation-and-autodiff/backpropagation-from-first-principles|Neural networks & backpropagation]]
 - [[ai/deep-learning/activation-functions|Activation functions & why nonlinearity matters]]
 - [[ai/deep-learning/loss-functions-in-dl|Loss functions in deep learning]]
 
@@ -34,7 +38,7 @@ language, and it's the substrate every [[ai/llms/index|LLM]] is built on.
 
 - [[ai/deep-learning/cnns|CNNs: convolution & spatial structure]]
 - [[ai/deep-learning/rnns-and-their-limits|RNNs & their limits]]
-- [[ai/deep-learning/attention-mechanism|The attention mechanism]]
+- [[ai/model-architectures/self-attention-from-first-principles|The attention mechanism]]
 
 ## Representations & scale
 
@@ -43,13 +47,14 @@ language, and it's the substrate every [[ai/llms/index|LLM]] is built on.
 
 ## Paradigms & strategy
 
-- [[ai/deep-learning/reinforcement-learning-essentials|Reinforcement learning, the essentials]] covers reward, policy, and the paradigm behind RLHF and reasoning models.
+- [[ai/reinforcement-learning/reinforcement-learning-essentials|Reinforcement learning, the essentials]] covers reward, policy, and the paradigm behind RLHF and reasoning models.
 - [[ai/deep-learning/the-bitter-lesson|The bitter lesson]] explains why general, compute-hungry methods keep beating hand-crafted structure.
+
+**Connects to:** [[ai/computation-and-autodiff/index|Computation and Autodiff]] · [[ai/model-architectures/index|Model Architectures]] · [[ai/llms/index|Language and Foundation Models]]
 
 ## Core sources
 
-- Andrej Karpathy — *Neural Networks: Zero to Hero* (micrograd → makemore → GPT).
-- 3Blue1Brown — *Neural Networks* series (visual intuition for backprop).
-- *Dive into Deep Learning* (d2l.ai) — runnable, comprehensive.
-- Goodfellow, Bengio, Courville — *Deep Learning* (the reference text).
-- Stanford CS231n; Distill.pub for visual explanations.
+- [Deep Learning](https://www.deeplearningbook.org/) — canonical reference for feed-forward networks, optimization, and regularization.
+- [Dive into Deep Learning](https://d2l.ai/) — executable implementations with equations and tensor shapes.
+- [Neural Networks: Zero to Hero](https://karpathy.ai/zero-to-hero.html) — mechanism-first implementations from scalar autodiff to GPT.
+- [Stanford CS231n](https://cs231n.github.io/) — convolutional networks, optimization, and practical training diagnostics.

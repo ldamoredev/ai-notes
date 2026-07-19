@@ -50,6 +50,6 @@ El validation set es un presupuesto que gastás al mirarlo. Ajustá contra él s
 veces y empezás a hacer overfitting *al validation set*, que es justamente por lo que
 existe un [[ai/foundations/data-splits-and-leakage|test set]] final e intacto.
 
-**Se conecta con:** [[ai/foundations/data-splits-and-leakage|splits y leakage]] ·
+**Conecta con:** [[ai/foundations/data-splits-and-leakage|splits y leakage]] ·
 [[ai/foundations/inductive-bias-and-no-free-lunch|sesgo inductivo]] ·
 [[ai/foundations/distribution-shift|distribution shift]]

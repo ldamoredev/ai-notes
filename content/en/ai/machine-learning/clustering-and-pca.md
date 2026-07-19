@@ -21,7 +21,7 @@ points) and dimensionality reduction (compress and visualize).
   label sparse points as noise (DBSCAN finds `k` itself and arbitrary shapes).
 
 Uses: customer segmentation, deduplication, exploratory analysis, grouping
-[[ai/foundations/linear-algebra-for-ml|embeddings]] to see what a model "thinks" is
+[[ai/mathematics-for-ai/vectors-matrices-and-tensors|embeddings]] to see what a model "thinks" is
 similar.
 
 ## PCA — compress along the directions that matter

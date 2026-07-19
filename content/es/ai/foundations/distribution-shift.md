@@ -44,6 +44,6 @@ El **knowledge cutoff** de un modelo es un distribution shift incorporado el dí
 lanza: el mundo sigue moviéndose, los pesos no. Ese es el argumento central para usar
 retrieval sobre fine-tuning cuando los hechos cambian.
 
-**Se conecta con:** [[ai/foundations/data-splits-and-leakage|splits realistas]] ·
+**Conecta con:** [[ai/foundations/data-splits-and-leakage|splits realistas]] ·
 [[ai/mlops/index|monitoreo y drift]] ·
 [[ai/rag-and-retrieval/index|RAG para hechos frescos]]

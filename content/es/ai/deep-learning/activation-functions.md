@@ -31,7 +31,7 @@ compra algo *porque* existen activaciones.
 ## Por qué ReLU cambió deep learning
 
 Las sigmoids saturan: su gradiente va a ~0 para inputs de gran magnitud, así que stacks
-profundos sufren [[ai/deep-learning/neural-networks-and-backprop|gradientes que se
+profundos sufren [[ai/computation-and-autodiff/backpropagation-from-first-principles|gradientes que se
 desvanecen]] y casi no entrenan. ReLU mantiene un gradiente de 1 para inputs positivos,
 así que la señal fluye por redes profundas: una gran razón por la que entrenar deep nets
 se volvió práctico.
@@ -47,6 +47,6 @@ Variantes leaky o init cuidadosa lo previenen.
 > softmax (clasificación) o nada (regresión), matcheada con el
 > [[ai/deep-learning/loss-functions-in-dl|loss]].
 
-**Se conecta con:** [[ai/deep-learning/neural-networks-and-backprop|backprop]] ·
+**Conecta con:** [[ai/computation-and-autodiff/backpropagation-from-first-principles|backprop]] ·
 [[ai/deep-learning/initialization-and-normalization|init y norm]] ·
 [[ai/llms/index|GELU en transformers]]

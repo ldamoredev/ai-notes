@@ -27,10 +27,18 @@ jobs:
       - run: pip install markdown pygments
       - id: pages
         uses: actions/configure-pages@v5
+      - name: Validate canonical content
+        run: python scripts/validate_content.py
+      - name: Run Glassbox tests
+        run: python -m unittest labs.glassbox.test_glassbox -v
       - name: Build site
         env:
           SITE_URL: ${{ steps.pages.outputs.base_url }}
         run: python build.py
+      - name: Validate generated site
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
+        run: python scripts/validate_site.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

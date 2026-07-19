@@ -12,7 +12,11 @@ updated: 2026-06-07
 **data** is where projects are won or lost. This branch is the data-centric view:
 treating the dataset, not the model, as the primary thing you iterate on.
 
-## Data quality and design
+## Mental model
+
+Data is a sampled, transformed, and governed measurement of the world—not the world itself. Dataset quality is therefore coverage plus provenance: what was observed, what was omitted, how labels were produced, which transformations ran, and whether deployment inputs still match those assumptions.
+
+## Roadmap: data quality and design
 
 - [[ai/data-for-ai/data-centric-ai|Data-centric AI]] explains why improving data often beats changing the model.
 - [[ai/data-for-ai/data-quality-dimensions|Data quality dimensions]] defines accuracy, completeness, consistency, freshness, coverage, and validity.
@@ -40,10 +44,12 @@ treating the dataset, not the model, as the primary thing you iterate on.
 
 - [[ai/data-for-ai/the-data-flywheel|The data flywheel]] turns usage into a compounding loop of better data and a better product.
 
+**Connects to:** [[ai/foundations/data-splits-and-leakage|Data Splits and Leakage]] · [[ai/machine-learning/index|Statistical Machine Learning]] · [[ai/ai-ethics-and-governance/index|AI Ethics and Governance]]
+
 ## Core sources
 
-- Andrew Ng / DeepLearning.AI, **Data-Centric AI**.
-- Chip Huyen, **Designing Machine Learning Systems**, especially the data engineering and data distribution chapters.
-- Gebru et al., **Datasheets for Datasets**, plus Google's **Data Cards** work.
-- Hugging Face **Datasets** docs, Great Expectations, Snorkel, and Label Studio documentation.
-- Shumailov et al., **The Curse of Recursion**, on synthetic-data feedback loops and model collapse.
+- [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) — provenance and lifecycle documentation for datasets.
+- [Data Cards](https://research.google/pubs/data-cards-purposeful-and-transparent-dataset-documentation-for-responsible-ai/) — structured communication of dataset context and limitations.
+- [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems) — data dependencies and feedback loops as systems debt.
+- [The Curse of Recursion](https://arxiv.org/abs/2305.17493) — synthetic-data feedback and model-collapse analysis.
+- [Hugging Face Datasets](https://huggingface.co/docs/datasets/) — reproducible loading, processing, streaming, and dataset metadata.

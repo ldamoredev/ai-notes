@@ -20,7 +20,7 @@ average loss small.
    when the prediction is bad. Examples: squared error for regression,
    cross-entropy for classification.
 3. **An optimizer** — a procedure that nudges `θ` to reduce loss, almost always a
-   variant of [[ai/foundations/gradient-descent-intuition|gradient descent]].
+   variant of [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]].
 
 ## Empirical risk minimization (ERM)
 
@@ -51,6 +51,6 @@ model optimizes exactly what you measure — not what you meant.
 Optimizing the wrong objective is the most expensive bug in ML, and it is silent:
 the loss curve looks great while the model gets better at the wrong thing.
 
-**Connects to:** [[ai/foundations/gradient-descent-intuition|gradient descent]] ·
+**Connects to:** [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] ·
 [[ai/foundations/evaluation-metrics|metrics vs loss]] ·
-[[ai/foundations/information-theory-basics|why cross-entropy]]
+[[ai/mathematics-for-ai/information-theory-entropy-and-divergence|why cross-entropy]]

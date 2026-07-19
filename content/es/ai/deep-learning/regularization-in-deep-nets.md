@@ -43,6 +43,6 @@ Dejar dropout prendido en inferencia, u olvidarte de `model.eval()` en PyTorch, 
 predicciones silenciosamente. Y demasiado dropout + weight decay juntos puede hacer
 underfitting: el síntoma es un training loss que no baja.
 
-**Se conecta con:** [[ai/foundations/generalization-and-overfitting|overfitting]] ·
+**Conecta con:** [[ai/foundations/generalization-and-overfitting|overfitting]] ·
 [[ai/machine-learning/regularization-l1-l2|L1/L2]] ·
 [[ai/deep-learning/training-dynamics|dinámicas de entrenamiento]]

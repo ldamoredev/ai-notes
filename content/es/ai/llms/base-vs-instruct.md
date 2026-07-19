@@ -45,6 +45,6 @@ aporta los modales.
 - **Alignment es impuesto y regalo**: agrega seguridad y usabilidad, pero puede causar
   rechazos excesivos y un pequeño "alignment tax" de capacidad.
 
-**Se conecta con:** [[ai/llms/pretraining-next-token|pretraining]] ·
+**Conecta con:** [[ai/llms/pretraining-next-token|pretraining]] ·
 [[ai/fine-tuning-and-alignment/index|SFT, RLHF y DPO]] ·
 [[ai/prompt-engineering/index|prompting base vs chat]]

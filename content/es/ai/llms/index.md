@@ -7,7 +7,7 @@ updated: 2026-06-07
 ---
 # LLMs
 
-Un large language model es un [[ai/deep-learning/attention-mechanism|transformer]]
+Un large language model es un [[ai/model-architectures/self-attention-from-first-principles|transformer]]
 entrenado con un objetivo engañosamente simple: **predecir el próximo token**, a una
 escala enorme. Todo lo que resulta mágico o irritante de los LLMs (in-context
 learning, alucinación, sensibilidad al wording) sale de ese objetivo y de la
@@ -17,7 +17,13 @@ afuera.
 > Un LLM es un predictor del próximo token. Es asombrosamente capaz *y* no tiene una
 > noción incorporada de verdad: ambas cosas vienen del mismo objetivo de entrenamiento.
 
-## La arquitectura
+## Modelo mental
+
+Un modelo de lenguaje factoriza la probabilidad de una secuencia en predicciones repetidas del próximo token. El transformer produce logits, decoding compromete un token y ese prefijo vuelve a ser el próximo input.
+
+## Hoja de ruta: arquitectura a comportamiento
+
+- [[ai/llms/from-prompt-to-generated-token|Del prompt al token generado]]
 
 - [[ai/llms/the-decoder-transformer|El decoder transformer]]
 - [[ai/llms/transformer-attention-map|Mapa de attention del transformer]]
@@ -42,6 +48,8 @@ afuera.
 - [[ai/llms/why-llms-hallucinate|Por qué alucinan los LLMs]]
 - [[ai/llms/quantization-and-inference|Quantization e inferencia]]
 
+**Conecta con:** [[ai/model-architectures/index|Arquitecturas]] · [[ai/fine-tuning-and-alignment/index|Entrenamiento y Adaptación]] · [[ai/inference-and-optimization/index|Sistemas de Inferencia]]
+
 ## Fuentes principales
 
 - Andrej Karpathy — *Let's build GPT*, *Intro to LLMs*, *Deep Dive into LLMs*.
@@ -49,3 +57,6 @@ afuera.
 - Jay Alammar — *The Illustrated Transformer* / *Illustrated GPT-2*.
 - Hugging Face — *LLM Course*; Jurafsky & Martin — *Speech and Language Processing* (SLP3).
 - Lilian Weng — blog (attention, hallucination, agents).
+- [Attention Is All You Need](https://arxiv.org/abs/1706.03762) — arquitectura transformer.
+- [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/) — referencia actual de NLP y LLMs.
+- [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/) — material ejecutable.

@@ -8,7 +8,7 @@ updated: 2026-06-10
 # Embeddings & embedding models
 
 **Mental model:** an embedding model maps text into a vector space where semantic
-similarity becomes [[ai/foundations/linear-algebra-for-ml|geometric closeness]];
+similarity becomes [[ai/mathematics-for-ai/vectors-matrices-and-tensors|geometric closeness]];
 retrieval is "find the chunk vectors nearest the query vector." The space is defined
 by one specific model — vectors from different models are mutually meaningless, which
 drives every operational rule below.

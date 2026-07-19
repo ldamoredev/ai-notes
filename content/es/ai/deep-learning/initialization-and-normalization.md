@@ -52,6 +52,6 @@ que hace entrenables a transformers de 100+ capas.
 Una red que no aprende (loss plano o NaN) muchas veces es init/normalización o
 [[ai/deep-learning/optimizers|learning rate]]: chequeá eso antes que la arquitectura.
 
-**Se conecta con:** [[ai/deep-learning/neural-networks-and-backprop|gradientes que se desvanecen]] ·
+**Conecta con:** [[ai/computation-and-autodiff/backpropagation-from-first-principles|gradientes que se desvanecen]] ·
 [[ai/deep-learning/optimizers|optimizadores]] ·
 [[ai/llms/index|LayerNorm en transformers]]

@@ -39,6 +39,6 @@ GPUs, moving bytes is often the bottleneck, not the arithmetic itself.
 Efficient kernels are workload- and hardware-dependent. Benchmark the actual sequence
 lengths, batch sizes, model architecture, and serving engine you plan to run.
 
-**Connects to:** [[ai/deep-learning/attention-mechanism|attention]] ·
+**Connects to:** [[ai/model-architectures/self-attention-from-first-principles|attention]] ·
 [[ai/llms/transformer-attention-map|attention maps]] ·
 [[ai/inference-and-optimization/gpu-and-hardware-basics|hardware basics]]

@@ -11,7 +11,11 @@ Evaluation is the control system for AI work. It turns product behavior, model
 quality, safety, cost, latency, and user trust into things that can be measured,
 compared, and improved without tuning by vibes.
 
-## Evaluation foundations
+## Mental model
+
+An evaluation is an instrument tied to a decision. It samples cases, applies measurements or judgments, aggregates uncertainty, and determines whether a candidate system clears a product, safety, or operational threshold. A benchmark score without that decision context is incomplete evidence.
+
+## Roadmap: evaluation foundations
 
 - [[ai/evaluation/model-vs-product-evals|Model vs product evals]] separates benchmark quality from the product contract users experience.
 - [[ai/evaluation/designing-eval-sets|Designing eval sets]] explains golden datasets, slices, and leakage control.
@@ -41,10 +45,12 @@ compared, and improved without tuning by vibes.
 - [[ai/evaluation/eval-driven-development|Eval-driven development]] makes the eval set the spec you build against, like unit tests for AI.
 - [[ai/evaluation/nondeterminism-and-reproducibility|Nondeterminism & reproducibility]] explains why the same input varies and how to test for distributions.
 
+**Connects to:** [[ai/research-and-experimentation/index|Research and Experimentation]] · [[ai/ai-product-engineering/evals-inside-the-product|Evals Inside the Product]] · [[ai/interpretability/index|Interpretability]]
+
 ## Core sources
 
-- Hamel Husain, **Your AI Product Needs Evals** and **LLM-as-a-Judge**.
-- Eugene Yan, **Evaluating the Effectiveness of LLM-Evaluators** and AlignEval writing.
-- Shreya Shankar and Hamel Husain, **AI Evals for Engineers & PMs**.
-- RAGAS documentation for RAG faithfulness, relevance, and retrieval metrics.
-- HELM, LMSYS Chatbot Arena, MMLU, and Chip Huyen's AI Engineering writing on evaluation practice.
+- [HELM](https://crfm.stanford.edu/helm/) — transparent multi-scenario evaluation with explicit metrics and limitations.
+- [Judging LLM-as-a-Judge](https://arxiv.org/abs/2306.05685) — empirical analysis of model judges and their biases.
+- [RAGAS](https://docs.ragas.io/) — component metrics for retrieval-augmented systems.
+- [The ML Test Score](https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/) — connects offline evidence to production readiness.
+- [Statistical Comparisons of Classifiers over Multiple Data Sets](https://jmlr.org/papers/v7/demsar06a.html) — practical statistical guidance for comparing models.

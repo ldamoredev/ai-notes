@@ -8,7 +8,7 @@ updated: 2026-06-07
 # Optimizadores: de SGD a AdamW
 
 El optimizador convierte gradientes en actualizaciones de pesos. Todos se apoyan en
-[[ai/foundations/gradient-descent-intuition|gradient descent]]; las diferencias están en
+[[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]]; las diferencias están en
 cómo usan la *historia* de gradientes para dar pasos más inteligentes.
 
 ## La progresión
@@ -35,7 +35,7 @@ un poco mejor, pero necesita más cuidado.
 
 ## La perilla que todavía importa más
 
-Ningún optimizador te salva de un mal [[ai/foundations/gradient-descent-intuition|learning
+Ningún optimizador te salva de un mal [[ai/mathematics-for-ai/gradient-descent-and-optimization|learning
 rate]]. Adam reduce la sensibilidad pero no la elimina: combinalo con un
 [[ai/deep-learning/training-dynamics|schedule de warmup + decay]]. Demasiado alto → el
 loss diverge (NaNs); demasiado bajo → avanza a paso de tortuga.
@@ -43,6 +43,6 @@ loss diverge (NaNs); demasiado bajo → avanza a paso de tortuga.
 > Default razonable: **AdamW + warmup + cosine decay.** Usá SGD+momentum puro cuando
 > estés exprimiendo el último poco de generalización de un modelo de visión.
 
-**Se conecta con:** [[ai/foundations/gradient-descent-intuition|gradient descent]] ·
+**Conecta con:** [[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] ·
 [[ai/deep-learning/training-dynamics|schedules de LR]] ·
 [[ai/deep-learning/regularization-in-deep-nets|weight decay]]

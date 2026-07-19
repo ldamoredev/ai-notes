@@ -24,7 +24,7 @@ forzado a aprender una cantidad enorme como efecto secundario:
 
 El objetivo es simple; la *única* manera de volverse bueno en eso es construir un
 modelo interno rico del lenguaje y del mundo. El entrenamiento minimiza
-[[ai/foundations/information-theory-basics|cross-entropy]] (equivalentemente,
+[[ai/mathematics-for-ai/information-theory-entropy-and-divergence|cross-entropy]] (equivalentemente,
 perplejidad) sobre el corpus.
 
 ## El resultado es un "modelo base"
@@ -44,6 +44,6 @@ Convertirlo en un asistente usable es trabajo del [[ai/llms/base-vs-instruct|pos
 - **La calidad de datos lo es todo**: basura y duplicación entran, basura sale;
   curación y dedup ahora son centrales ([[ai/deep-learning/scaling-laws|Chinchilla]]).
 
-**Se conecta con:** [[ai/foundations/types-of-learning|aprendizaje self-supervised]] ·
+**Conecta con:** [[ai/foundations/types-of-learning|aprendizaje self-supervised]] ·
 [[ai/llms/base-vs-instruct|post-training]] ·
 [[ai/llms/why-llms-hallucinate|alucinación]]

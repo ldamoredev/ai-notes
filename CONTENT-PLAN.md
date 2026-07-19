@@ -1,167 +1,177 @@
-# AI Atlas — Content Plan
+# AI Atlas — content plan
 
-Living plan for filling the atlas with rich, source-backed notes (target **10–15
-per branch**, atomic and dense, no marketing fluff). Written EN-first; ES overlays
-are a second pass (the build falls back to EN with a banner meanwhile).
+This is the editorial source of truth after the July 2026 refoundation. Counts and translation coverage shown on the site are generated from source; this file tracks intent, depth, and completion criteria.
 
-## Taxonomy (phase → branch)
+## North star
 
-- **00 Orientation** — entry notes only (start-here, must-know)
-- **01 Foundations** — `foundations` · `machine-learning` · `data-for-ai`
-- **02 Models** — `deep-learning` · `llms` · `multimodal-and-generative`
-- **03 Engineering** — `prompt-engineering` (Prompting & Context Engineering) · `rag-and-retrieval` · `agents-and-tools` · `fine-tuning-and-alignment` · `mlops` · `ai-product-engineering` · `inference-and-optimization`
-- **04 Evaluation** — `evaluation` · `ai-safety-and-security` · `ai-ethics-and-governance`
-- **★ Always-on** — `ai-playbooks`
+AI Atlas explains artificial intelligence from first principles to production systems. A reader should be able to move through:
 
-Taxonomy decisions: removed `research-notes` (a log, not a knowledge domain); promoted
-`fine-tuning-and-alignment` out of LLMs; reframed `prompt-engineering` → Prompting &
-Context Engineering. **Expansion (2026-06): added 4 branches** to reach 17 (parity with
-cibersecurity-notes) — `data-for-ai`, `multimodal-and-generative`,
-`inference-and-optimization`, `ai-ethics-and-governance`. All four have a written
-`index.md` (taxonomy wired in `build.py`); their notes still need to be written.
+```text
+representation → objective → computation → learning → model → inference
+→ context/tools → evaluation/trust → product/operations
+```
 
-## Progress
+without a framework or vendor hiding the mechanism. Every mature topic connects theory to an inspectable artifact, failure behavior, and operational evidence.
 
-- [x] **foundations** — 13 notes (flagship; quality bar)
-- [x] **machine-learning** — 12 notes
-- [x] **deep-learning** — 12 notes
-- [x] **llms** — 13 notes
-- [x] **prompt-engineering** — 12 notes
-- [x] **rag-and-retrieval** — 12 notes
-- [x] **agents-and-tools** — 12 notes
-- [x] **fine-tuning-and-alignment** — 12 notes
-- [x] **mlops** — 12 notes
-- [x] **ai-product-engineering** — 12 notes
-- [x] evaluation — 12 notes
-- [x] ai-safety-and-security — 12 notes
-- [x] ai-playbooks — 12 procedural playbooks
-- [x] **data-for-ai** — 12 notes
-- [x] **multimodal-and-generative** — 12 notes
-- [x] **inference-and-optimization** — 12 notes
-- [x] **ai-ethics-and-governance** — 12 notes
-- [ ] **ES overlay pass** (after EN notes land)
+## Editorial states
 
-## Per-branch note outlines + core sources
+- `PLANNED` — branch/index exists; atomic coverage is not yet sufficient.
+- `EXPERIMENTAL` — useful artifacts exist, but APIs or conclusions remain intentionally unstable.
+- `REVIEW NEEDED` — inherited content exists and needs source/mechanism/reproducibility work.
+- `CURRENT` — flagship or branch material meets the current editorial contract.
+- `STALE` — factual or translation review is overdue; the build must not advertise it as current localized content.
 
-### machine-learning
-*Sources: ISLP, Géron "Hands-On ML", Andrew Ng ML, scikit-learn docs*
-Supervised workflow end-to-end · Linear & logistic regression · Trees & ensembles
-(RF, gradient boosting) · kNN & SVM · Regularization (L1/L2) · Feature engineering ·
-Cross-validation & splits · Class imbalance · Hyperparameter tuning · Clustering &
-PCA · Error analysis · Pipelines & preprocessing leakage
+Status is not a quality score. `AI-ATLAS-AUDIT.md` records the static evidence signals per page.
 
-### deep-learning
-*Sources: Karpathy Zero-to-Hero, d2l.ai, Goodfellow DL book, CS231n, Distill.pub*
-Backprop as a compute graph · MLPs & nonlinearities · Init & normalization · Optimizers
-(SGD→Adam) · Regularization (dropout, weight decay) · CNNs · RNNs & their limits ·
-Attention · Embeddings & latent spaces · Loss functions · Training dynamics (LR
-schedules, grad clipping) · Scaling laws
+## Taxonomy and branch roadmap
 
-### llms
-*Sources: Karpathy "Let's build GPT", Raschka "Build an LLM from Scratch", Alammar Illustrated Transformer, HF LLM course, Jurafsky & Martin SLP3*
-The decoder transformer · Tokenization (BPE) · Pretraining (next-token) · Self-attention
-& multi-head · Positional encodings (RoPE) · Context window & KV cache · Decoding/sampling ·
-Emergent abilities & scale · Instruction-tuned vs base · Quantization (what's lost) ·
-Why LLMs hallucinate · Long context & lost-in-the-middle
+### Phase 00 — Orientation
 
-### prompt-engineering (Prompting & Context Engineering)
-*Sources: Anthropic (prompt + context engineering), DAIR.ai Prompt Guide, OpenAI Cookbook, Lilian Weng*
-Prompt → context engineering · Anatomy of a good prompt · Zero/few-shot · Chain-of-thought
-& when not · Structured outputs (JSON/schema) · System prompts & roles · Task decomposition ·
-Self-consistency · Managing the context window · Memory & history · Ordering/formatting
-context · Evaluating & iterating prompts
+- [x] EN/ES `Start Here` rebuilt around learning paths, depth, evidence, and navigation.
+- [x] EN/ES `Must Know` rebuilt as 12 durable rules.
+- [x] Phase and root maps describe the complete 8-phase curriculum.
+- [ ] Add a one-command learner environment check and source-verification walkthrough.
 
-### rag-and-retrieval
-*Sources: Anthropic Contextual Retrieval, Pinecone/Weaviate guides, LlamaIndex Advanced RAG, RAGAS*
-Why RAG (vs fine-tune) · Chunking that respects structure · Embeddings & embedding models ·
-Vector DBs & indexes (HNSW) · Hybrid search (BM25 + dense) · Reranking (cross-encoder) ·
-Query rewriting/expansion · HyDE & multi-query · Grounding & citations · Evaluating
-retriever vs generator · RAG failure modes · Contextual/Graph RAG
+### Phase 01 — Foundations
 
-### agents-and-tools
-*Sources: Anthropic "Building Effective Agents" + tools + multi-agent, MCP, OpenAI agents guide, Lilian Weng agents*
-Workflow vs agent (when each) · Tool/function calling · Agent-computer interface design ·
-ReAct · Planning & decomposition · Agent memory · Multi-agent & handoffs · MCP · Guardrails
-& human approval · Failure modes (loops, bad tools) · Evaluating agents · Autonomy limits
+| Branch | State | Current anchor | Next deep notes |
+|---|---|---|---|
+| Mathematics for AI | CURRENT | vectors/tensors; probability; optimization; information theory | calculus/chain rule; statistics; distributions; Bayesian inference; numerical stability |
+| Computation & Autodiff | CURRENT | backpropagation from first principles | arrays/strides; vectorization; forward-mode AD; floating point; GPU kernels |
+| Classical AI & Reasoning | PLANNED | branch map | search; A*; CSP; planning; logic; Bayesian networks; decision theory |
+| Learning Foundations | REVIEW NEEDED | generalization, splits, shift, metrics | source-backed rewrites; assumption ledger; decision-focused examples |
+| Statistical Machine Learning | REVIEW NEEDED | supervised workflow and classical algorithms | calibration; uncertainty; tree/kernel implementations; error-analysis labs |
+| Data for AI | REVIEW NEEDED | data-centric lifecycle | contamination; synthetic data; lineage; sampling; annotation agreement |
 
-### fine-tuning-and-alignment
-*Sources: HF PEFT, Unsloth docs, LoRA/QLoRA/DPO papers, Raschka*
-When FT vs RAG vs prompt · SFT (instruction tuning) · LoRA & why it works · QLoRA (4-bit) ·
-RLHF (PPO) concept · DPO (and why it replaced RLHF) · Data quality > quantity · Building the
-dataset · Catastrophic forgetting · Distillation · Evaluating a fine-tune · Cost & hardware
+### Phase 02 — Learning and Models
 
-### mlops
-*Sources: Chip Huyen "Designing ML Systems" + "AI Engineering", Made With ML, Google MLOps, MLflow/W&B*
-MLOps → LLMOps · Experiment tracking · Model/prompt registry & versioning · Reproducible
-pipelines · Monitoring & drift · Observability (tracing, the 5 pillars) · CI/CD for ML ·
-Feature stores · Serving & inference (latency/throughput) · Cost optimization · HITL in prod ·
-Feedback loops
+| Branch | State | Current anchor | Next deep notes |
+|---|---|---|---|
+| Deep Learning | REVIEW NEEDED | activations, training dynamics, scale | MLP from scratch; initialization lab; residual streams; training diagnostics |
+| Reinforcement Learning | PLANNED | RL essentials | MDPs; Bellman; TD; Q-learning; policy gradients; offline RL; reward failure |
+| Model Architectures | CURRENT | self-attention from first principles | transformer block; CNNs; RNNs; MoE; state-space models; diffusion architecture |
+| Language & Foundation Models | REVIEW NEEDED | prompt-to-token trace | pretraining objective; tokenizer lab; decoder block; long context; reasoning |
+| Vision, Audio & Multimodal AI | REVIEW NEEDED | existing multimodal map | ViT/CLIP lab; diffusion derivation; speech pipeline; provenance and evaluation |
 
-### ai-product-engineering
-*Sources: "The Shape of AI" UX patterns, Chip Huyen AI Engineering, Anthropic/OpenAI cookbooks, Jakob Nielsen AI UX*
-UX patterns for AI · Streaming & perceived latency · Latency vs cost vs quality · Fallbacks
-& graceful degradation · Semantic caching · Human-in-the-loop & trust · Handling errors/
-hallucination in UI · Product metrics · Product guardrails · Onboarding & expectations ·
-Pricing vs compute cost · Evals inside the product
+### Phase 03 — Training and Inference
 
-### evaluation
-*Sources: Hamel Husain (LLM-as-judge), Eugene Yan (evals), Shreya Shankar, RAGAS, Chip Huyen*
-Model vs product eval · Designing an eval set / golden dataset · LLM-as-judge (& its biases) ·
-Exact/semantic/groundedness metrics · Task-specific eval · Hallucination detection · Prompt
-regression testing · Human eval done right · Public benchmarks (& limits) · Systematic error
-analysis · Evaluating RAG · Evaluating agents
+| Branch | State | Current anchor | Next deep notes |
+|---|---|---|---|
+| Training & Adaptation | REVIEW NEEDED | SFT, LoRA/QLoRA, RLHF, DPO | dataset contract; distributed training; checkpoint/recovery; adaptation evaluation |
+| Inference Systems | REVIEW NEEDED | KV cache, batching, quantization, engines | measured serving lab; scheduler; paged cache; profiling; capacity planning |
 
-### ai-safety-and-security
-*Sources: OWASP Top 10 for LLM Apps (2025), OWASP Agentic Top 10, Simon Willison (injection), Lilian Weng adversarial*
-OWASP LLM Top 10 overview · Direct prompt injection · Indirect injection (data) · Jailbreaks ·
-Data/PII leakage · Excessive agency (agents) · Insecure output handling · Threat modeling LLM
-apps · Guardrails (input/output) · Red teaming · Defense-in-depth & least privilege · Privacy
-& data governance
+### Phase 04 — Context and Agency
 
-### ai-playbooks (procedural)
-Evaluate RAG answer quality · Build an eval set from scratch · Debug an agent stuck in a loop ·
-Audit an app for prompt injection · Decide prompt vs RAG vs fine-tune · Measure & cut inference
-cost · Ship a prompt change safely · Stand up LLM observability
+| Branch | State | Current anchor | Next deep notes |
+|---|---|---|---|
+| Context Engineering | REVIEW NEEDED | prompts, assembly, memory | authority/provenance model; compaction; grammar constraints; context evals |
+| Retrieval & Knowledge | REVIEW NEEDED | mature RAG set | dependency-free retrieval lab; hybrid/reranking measurements; corpus lifecycle |
+| Agents & Tools | REVIEW NEEDED | workflow/agent, tools, MCP, controls | state machine lab; durable execution; permissions; trajectory evaluation |
 
-### data-for-ai  *(NEW — phase 01 Foundations)*
-*Sources: Andrew Ng Data-Centric AI, Chip Huyen "Designing ML Systems", Datasheets for Datasets (Gebru et al.), HF Datasets, Great Expectations*
-Data-centric AI: why data beats model tweaks · Data quality dimensions · Labeling &
-annotation (IAA, weak supervision) · Dataset design & sampling · Data cleaning &
-deduplication · Synthetic data (uses, risks, model collapse) · Data contamination &
-benchmark leakage · Data for LLMs (pretraining corpora, dedup at scale) · Data pipelines,
-versioning & lineage · Privacy & PII in datasets · Datasheets & documentation · Feedback
-data & active learning
+### Phase 05 — Measurement and Trust
 
-### multimodal-and-generative  *(NEW — phase 02 Models)*
-*Sources: Lilian Weng "Diffusion Models", Jay Alammar "Illustrated Stable Diffusion", papers DDPM/Latent Diffusion/CLIP/ViT, HF Diffusers, fast.ai Part 2*
-Beyond text: the multimodal landscape · Diffusion models intuitively · Latent diffusion &
-Stable Diffusion · Text-to-image: conditioning & CFG · CLIP & shared embedding spaces ·
-Vision Transformers (ViT) · Vision-language models & multimodal LLMs · Controlling image
-generation (ControlNet, inpainting) · Audio & speech (TTS, ASR, music) · Video generation ·
-Evaluating generative media (FID, CLIPScore) · Risks: deepfakes, provenance, C2PA &
-watermarking
+| Branch | State | Current anchor | Next deep notes |
+|---|---|---|---|
+| Evaluation & Measurement | REVIEW NEEDED | eval sets, judges, RAG/agent evals | uncertainty intervals; calibration; decision thresholds; contamination tests |
+| Interpretability | PLANNED | branch map | attribution; probes; causal intervention; circuits; sparse autoencoders; faithfulness |
+| AI Safety & Security | REVIEW NEEDED | OWASP-oriented application security | executable threat model; injection fixtures; tool sandboxing; incident response |
+| AI Ethics & Governance | REVIEW NEEDED | fairness, documentation, governance | claim-control-evidence mappings; monitoring; appeal; current legal verification |
 
-### inference-and-optimization  *(NEW — phase 03 Engineering)*
-*Sources: Lilian Weng "Inference Optimization", vLLM/TGI docs, papers FlashAttention/Speculative Decoding/GPTQ/AWQ, NVIDIA TensorRT-LLM, Chip Huyen AI Engineering*
-Why inference is the real cost · Latency vs throughput (TTFT, prefill vs decode) · KV cache
-& memory (PagedAttention) · Quantization for inference (int8/4-bit, GPTQ/AWQ) · Batching
-(static vs continuous) · Speculative decoding · FlashAttention & efficient attention ·
-Serving engines (vLLM, TGI, TensorRT-LLM) · GPU & hardware basics · Caching (prefix &
-semantic) · Cost modeling · Right-sizing: size vs distillation vs routing
+### Phase 06 — Product and Operations
 
-### ai-ethics-and-governance  *(NEW — phase 04 Evaluation)*
-*Sources: EU AI Act, NIST AI RMF, Model Cards (Mitchell et al.), Fairness and Machine Learning (fairmlbook.org), OECD AI Principles, provider policies*
-Responsible AI landscape · Bias & fairness: sources and types · Fairness metrics &
-impossibility tradeoffs · Measuring & mitigating bias · Transparency & explainability
-(SHAP/LIME, limits) · Model cards & documentation · Privacy, consent & data rights · The
-EU AI Act & risk tiers · Governance frameworks (NIST AI RMF, ISO/IEC 42001) ·
-Accountability & human oversight · Societal & labor impact · Environmental cost of AI
+| Branch | State | Current anchor | Next deep notes |
+|---|---|---|---|
+| AI Product Engineering | REVIEW NEEDED | UX, trade-offs, guardrails, product evals | non-AI baseline; rollout lab; trust/recovery UX; unit economics |
+| MLOps & Operations | REVIEW NEEDED | registry, tracing, CI/CD, monitoring | end-to-end OTel lab; data/model lineage; rollback drill; SLOs and incidents |
 
-## Conventions
+### Always active
 
-- Atomic notes: H1 + short framing + 2–4 sections (bullets/tables) + a **Pitfall**/**In
-  practice** angle + a **Connects to** line of `[[wikilinks]]`.
-- Cite real, authoritative, current sources; put them in the branch index "Core sources"
-  (and/or a per-branch reference registry). No marketing summaries.
-- `featured: true` on one standout note; `draft: true` to stage WIP.
-- Internal links use `[[ai/<branch>/<slug>|Label]]`; never leave unresolved links.
+| Branch | State | Current anchor | Next deep notes |
+|---|---|---|---|
+| Research & Experimentation | EXPERIMENTAL | Glassbox artifacts and research protocol | paper-reading; evidence matrix; reproduction report; benchmark-gaming checks |
+| AI Playbooks | REVIEW NEEDED | 12 operating procedures | add prerequisites, fixtures, expected artifacts, rollback, and validation commands |
+
+## Flagship set
+
+The first six notes define the new content bar:
+
+- [x] `mathematics-for-ai/vectors-matrices-and-tensors`
+- [x] `mathematics-for-ai/probability-likelihood-and-uncertainty`
+- [x] `mathematics-for-ai/gradient-descent-and-optimization`
+- [x] `computation-and-autodiff/backpropagation-from-first-principles`
+- [x] `model-architectures/self-attention-from-first-principles`
+- [x] `llms/from-prompt-to-generated-token`
+
+Each must retain expanded frontmatter, defined notation and shapes, a numerical example, executable verification, framework-hidden details, failure modes, production implications, exercises, graph links, and primary sources.
+
+## Glassbox AI Lab v0→v10
+
+| Milestone | Deliverable | State |
+|---|---|---|
+| v0 | scalar/vector operations, stable softmax, cross-entropy, seeded sampling | CURRENT |
+| v1 | scalar reverse-mode autodiff, topology, accumulation, gradient checking | CURRENT |
+| v2 | neural network and optimizer from scratch | PLANNED |
+| v3 | minimal tensor framework and image model | PLANNED |
+| v4 | tokenizer, causal attention, mini-transformer, token trace | EXPERIMENTAL |
+| v5 | training and parameter-efficient adaptation | PLANNED |
+| v6 | inference runtime, batching, KV cache, profiling | PLANNED |
+| v7 | retrieval system with component evals | PLANNED |
+| v8 | tool-using agent with explicit state and authority | PLANNED |
+| v9 | multimodal pipeline and provenance checks | PLANNED |
+| v10 | production system with tracing, SLOs, release, rollback, and postmortem | PLANNED |
+
+Milestone definition of done:
+
+- Dependency and environment contract.
+- Seeded fixture or versioned dataset.
+- Unit tests plus one failure-injection test.
+- Expected output and a verification command.
+- Metrics appropriate to the mechanism.
+- Known limits, operational cost, and short postmortem.
+- Links from the associated branch and note.
+
+## Migration program
+
+- [x] Expand taxonomy from 17 to 24 branches without gratuitous branch-slug churn.
+- [x] Move seven high-confidence foundational notes and generate ten redirect families including phases.
+- [x] Update all source wikilinks to canonical targets.
+- [x] Rebuild all EN/ES phase pages and branch indexes with mental models, roadmaps, connections, primary sources, and internal links.
+- [x] Make Spanish fallback explicit in HTML language, canonical, robots, hreflang, sitemap, and search metadata.
+- [ ] Rewrite remaining inherited atomic notes by audit priority.
+- [ ] Translate current flagships after their EN interfaces stabilize.
+
+See `MIGRATION-MAP.md` for exact routes and `AI-ATLAS-AUDIT.md` for page-level decisions.
+
+## Atomic rewrite order
+
+1. Notes with no Sources section and no executable/example artifact.
+2. High-traffic dependency notes referenced by three or more branches.
+3. Mechanism notes that currently explain only vocabulary.
+4. Fast-moving operational notes whose `last_verified` is missing.
+5. Playbooks without fixtures, output contracts, or rollback.
+6. ES translation only after the canonical English note is current.
+
+## Per-note acceptance contract
+
+- Core frontmatter plus `kind`, `level`, `status`, prerequisites, and `last_verified` where useful.
+- Mental model survives independently of the rest of the note.
+- Mechanism defines symbols, shapes, data flow, and assumptions.
+- At least one numerical, traced, or executable artifact.
+- Verification command and expected behavior.
+- Named failure modes and a decision rule.
+- Production lens where the topic reaches a running system.
+- 3–8 primary sources with full URLs and reading value.
+- Existing `[[wikilinks]]`; zero unresolved links after build.
+- ES overlay marked `translation: stale` when an EN rewrite invalidates it.
+
+## Required verification
+
+```bash
+python3 -m py_compile build.py scripts/*.py
+python3 build.py
+python3 scripts/validate_content.py
+python3 scripts/validate_site.py
+python3 -m unittest labs.glassbox.test_glassbox -v
+```
+
+The build and validators are release gates, not suggestions.

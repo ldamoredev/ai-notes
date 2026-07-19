@@ -42,7 +42,7 @@ CNNs still power most production vision (classification, detection, segmentation
 are cheap and fast. Vision Transformers (ViT) now match or beat them at large scale —
 but ViTs need more data precisely because they *lack* the convolutional bias and must
 learn locality from scratch. The trade is the same one everywhere: stronger prior vs
-more data (and the [[ai/deep-learning/attention-mechanism|attention]] story carries
+more data (and the [[ai/model-architectures/self-attention-from-first-principles|attention]] story carries
 straight into [[ai/llms/index|LLMs]]).
 
 ## Pitfall
@@ -52,5 +52,5 @@ CNNs assume grid-structured, locally-correlated data. Forcing them onto tabular 
 usually win there.
 
 **Connects to:** [[ai/foundations/inductive-bias-and-no-free-lunch|inductive bias]] ·
-[[ai/deep-learning/attention-mechanism|attention vs convolution]] ·
+[[ai/model-architectures/self-attention-from-first-principles|attention vs convolution]] ·
 [[ai/foundations/features-and-dimensionality|feature hierarchy]]

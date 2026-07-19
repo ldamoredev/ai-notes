@@ -48,6 +48,6 @@ Un [[ai/deep-learning/optimizers|learning rate]] fijo rara vez es lo mejor. Rece
 > Si un modelo no aprende, sospechá del data pipeline y del learning rate mucho antes
 > que de la arquitectura.
 
-**Se conecta con:** [[ai/deep-learning/optimizers|optimizadores]] ·
+**Conecta con:** [[ai/deep-learning/optimizers|optimizadores]] ·
 [[ai/deep-learning/initialization-and-normalization|init y norm]] ·
 [[ai/machine-learning/error-analysis|learning curves]]

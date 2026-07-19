@@ -41,7 +41,7 @@ This is why long contexts are expensive in both latency and money.
 - **More context ≠ better** — beyond cost, quality degrades
   ([[ai/llms/long-context-and-lost-in-the-middle|lost in the middle]]). Curate, don't
   dump.
-- The quadratic cost of [[ai/deep-learning/attention-mechanism|attention]] is the
+- The quadratic cost of [[ai/model-architectures/self-attention-from-first-principles|attention]] is the
   reason all of this matters.
 
 **Connects to:** [[ai/llms/tokenization|token budget]] ·

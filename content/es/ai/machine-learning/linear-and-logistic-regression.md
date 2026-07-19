@@ -15,7 +15,7 @@ una red neuronal *es* uno de ellos. Entendé estos y deep learning se vuelve men
 
 Ajustá una suma ponderada de features para predecir un valor continuo:
 `ŷ = w·x + b`. Entrená minimizando error cuadrático mediante
-[[ai/foundations/gradient-descent-intuition|gradient descent]] (o una solución cerrada).
+[[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] (o una solución cerrada).
 Cada peso es legible: "manteniendo lo demás fijo, +1 acá mueve la predicción en wᵢ".
 
 Supuestos que conviene conocer: relación más o menos lineal, errores no brutalmente
@@ -26,7 +26,7 @@ coeficientes se vuelven inestables o engañosos.
 
 Para clasificación, envolvé el mismo score lineal en una **sigmoid** para comprimirlo
 a [0, 1]: una probabilidad más o menos calibrada. Entrená con loss de
-[[ai/foundations/information-theory-basics|cross-entropy]]. A pesar del nombre, es un
+[[ai/mathematics-for-ai/information-theory-entropy-and-divergence|cross-entropy]]. A pesar del nombre, es un
 *clasificador*. Un threshold (default 0.5, pero tunealo; ver
 [[ai/foundations/evaluation-metrics|métricas]]) convierte la probabilidad en una decisión.
 
@@ -48,6 +48,6 @@ razonables: escalalas, codificá categóricas y agregá términos de interacció
 a mano, porque el modelo no puede descubrirlos por sí solo (ese es el
 [[ai/foundations/inductive-bias-and-no-free-lunch|sesgo inductivo lineal]]).
 
-**Se conecta con:** [[ai/machine-learning/regularization-l1-l2|regularización]] ·
-[[ai/foundations/gradient-descent-intuition|gradient descent]] ·
+**Conecta con:** [[ai/machine-learning/regularization-l1-l2|regularización]] ·
+[[ai/mathematics-for-ai/gradient-descent-and-optimization|gradient descent]] ·
 [[ai/deep-learning/index|la neurona dentro de una red]]

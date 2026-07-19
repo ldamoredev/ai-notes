@@ -51,9 +51,9 @@ con un *threshold elegido*, no solo con una probabilidad.
 
 Optimizar una sola métrica offline puede degradar silenciosamente lo que realmente te
 importa (ley de Goodhart: una métrica que se vuelve objetivo deja de ser buena métrica).
-Siempre acompañá el número principal con [[ai/foundations/probability-and-uncertainty|calibración]]
+Siempre acompañá el número principal con [[ai/mathematics-for-ai/probability-likelihood-and-uncertainty|calibración]]
 y análisis de errores.
 
-**Se conecta con:** [[ai/foundations/how-learning-works|loss vs métrica]] ·
+**Conecta con:** [[ai/foundations/how-learning-works|loss vs métrica]] ·
 [[ai/evaluation/index|evaluar sistemas de AI]] ·
-[[ai/foundations/probability-and-uncertainty|calibración]]
+[[ai/mathematics-for-ai/probability-likelihood-and-uncertainty|calibración]]

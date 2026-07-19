@@ -11,7 +11,11 @@ updated: 2026-06-07
 attacked or misused. This branch asks the broader questions: is it fair, transparent,
 lawful, accountable, and appropriate to deploy at all?
 
-## Responsible AI foundations
+## Mental model
+
+Governance turns social and legal obligations into accountable decisions, evidence, controls, and review throughout an AI system's lifecycle. Ethics asks what ought to be done; governance defines who decides, under which criteria, and how the decision can be audited or challenged.
+
+## Roadmap: responsible AI foundations
 
 - [[ai/ai-ethics-and-governance/responsible-ai-landscape|Responsible AI landscape]] maps fairness, privacy, transparency, safety, accountability, and social impact.
 - [[ai/ai-ethics-and-governance/bias-and-fairness-sources-and-types|Bias and fairness: sources and types]] explains where unfairness enters the pipeline.
@@ -35,10 +39,12 @@ lawful, accountable, and appropriate to deploy at all?
 - [[ai/ai-ethics-and-governance/societal-and-labor-impact|Societal and labor impact]] covers deployment effects beyond model metrics.
 - [[ai/ai-ethics-and-governance/environmental-cost-of-ai|Environmental cost of AI]] covers energy, water, hardware, and carbon-aware decisions.
 
+**Connects to:** [[ai/interpretability/index|Interpretability]] · [[ai/ai-safety-and-security/index|AI Safety and Security]] · [[ai/data-for-ai/privacy-and-pii-in-datasets|Privacy and PII in Datasets]]
+
 ## Core sources
 
-- European Commission and EU resources on the **AI Act**; official GPAI obligations and risk-based framework guidance.
-- NIST **AI Risk Management Framework 1.0** and NIST Generative AI Profile.
-- ISO/IEC **42001:2023** for AI management systems.
-- Mitchell et al., **Model Cards for Model Reporting**; Gebru et al., **Datasheets for Datasets**.
-- Barocas, Hardt, and Narayanan, **Fairness and Machine Learning**; OECD AI Principles and provider policy frameworks.
+- [EU AI Act text](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — authoritative legal text for the European risk-based framework.
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) — govern, map, measure, and manage functions with supporting profiles.
+- [Model Cards for Model Reporting](https://arxiv.org/abs/1810.03993) — structured disclosure of intended use, evaluation, and limits.
+- [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) — documentation questions covering dataset motivation, composition, collection, and maintenance.
+- [Fairness and Machine Learning](https://fairmlbook.org/) — technical definitions, trade-offs, and limits of fairness interventions.

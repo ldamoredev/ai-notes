@@ -16,7 +16,11 @@ más fácil de debuggear que una red neuronal.
 > Regla práctica: probá un árbol con gradient boosting antes que una red neuronal sobre
 > datos tabulares. Empezá simple; ganate la complejidad.
 
-## El workflow
+## Modelo mental
+
+Machine learning estadístico selecciona una hipótesis desde datos bajo un loss, regularización y protocolo de validación. Representación, leakage, calibración y análisis de errores deciden si el resultado sobrevive al despliegue.
+
+## Hoja de ruta: workflow y algoritmos
 
 - [[ai/machine-learning/supervised-learning-workflow|El workflow de aprendizaje supervisado, de punta a punta]]
 - [[ai/machine-learning/error-analysis|Análisis de errores: leer los errores de tu modelo]]
@@ -37,6 +41,8 @@ más fácil de debuggear que una red neuronal.
 - [[ai/machine-learning/class-imbalance|Manejar class imbalance]]
 - [[ai/machine-learning/hyperparameter-tuning|Tuning de hiperparámetros]]
 
+**Conecta con:** [[ai/foundations/index|Fundamentos del Aprendizaje]] · [[ai/data-for-ai/index|Datos para IA]] · [[ai/evaluation/index|Evaluación]]
+
 ## Fuentes principales
 
 - James, Witten, Hastie, Tibshirani — *An Introduction to Statistical Learning* (ISLP).
@@ -44,3 +50,6 @@ más fácil de debuggear que una red neuronal.
 - Andrew Ng — *Machine Learning Specialization* (Coursera).
 - scikit-learn — *User Guide* (la referencia práctica canónica).
 - StatQuest — intuición de árboles, boosting y ROC/PR.
+- [An Introduction to Statistical Learning](https://www.statlearning.com/) — teoría y labs reproducibles.
+- [The Elements of Statistical Learning](https://hastie.su.domains/ElemStatLearn/) — tratamiento avanzado.
+- [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) — semántica de implementación.

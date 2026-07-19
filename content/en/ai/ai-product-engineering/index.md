@@ -14,7 +14,11 @@ its cost.
 > A model demo shows possibility. A product has to manage latency, errors, trust,
 > cost, safety, and user expectations every day.
 
-## Product surface
+## Mental model
+
+An AI product is a probabilistic system wrapped in a deterministic product contract. The interface must expose uncertainty, preserve user control, recover from model failure, and make latency, quality, safety, and unit cost measurable together.
+
+## Roadmap: product surface to control loop
 
 - [[ai/ai-product-engineering/ux-patterns-for-ai|UX patterns for AI]]
 - [[ai/ai-product-engineering/onboarding-and-expectations|Onboarding and expectations]]
@@ -40,10 +44,11 @@ its cost.
 - [[ai/ai-product-engineering/the-ai-application-stack|The AI application stack]] maps how model, context, retrieval, tools, guardrails, and evals fit together.
 - [[ai/ai-product-engineering/choosing-a-model|Choosing a model]] picks the cheapest model that clears a task's quality bar.
 
+**Connects to:** [[ai/evaluation/index|Evaluation]] · [[ai/inference-and-optimization/index|Inference Systems]] · [[ai/mlops/index|MLOps and Operations]]
+
 ## Core sources
 
-- The Shape of AI — UX patterns for AI product interfaces.
-- Chip Huyen — *AI Engineering* and production AI writing.
-- Anthropic and OpenAI cookbooks/docs — streaming, tool use, latency, caching, and production patterns.
-- Jakob Nielsen / Nielsen Norman Group — AI UX guidance, trust, expectations, and usability.
-- LangChain and a16z engineering posts on LLM app architecture and product patterns.
+- [The Shape of AI](https://www.shapeof.ai/) — a catalog of interaction patterns for probabilistic product behavior.
+- [People + AI Guidebook](https://pair.withgoogle.com/guidebook/) — human-centered guidance for expectation setting, feedback, and control.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk management across design, deployment, and operation.
+- [Google Rules of ML](https://developers.google.com/machine-learning/guides/rules-of-ml) — production sequencing, measurement, and technical-debt rules.

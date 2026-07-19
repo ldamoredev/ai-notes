@@ -60,6 +60,6 @@ causa principal de modelos que testean bien y fallan en vivo.
 Llamar `scaler.fit_transform(X)` sobre todo el dataset en un notebook es el leak
 canónico. Si el preprocesamiento pasa fuera del loop de cross-validation, asumí leakage.
 
-**Se conecta con:** [[ai/foundations/data-splits-and-leakage|leakage]] ·
+**Conecta con:** [[ai/foundations/data-splits-and-leakage|leakage]] ·
 [[ai/machine-learning/cross-validation|cross-validation]] ·
 [[ai/mlops/index|paridad train/serve]]

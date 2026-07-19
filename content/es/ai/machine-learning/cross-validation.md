@@ -43,6 +43,6 @@ Todo preprocesamiento debe pasar **dentro** del loop de CV (mediante un
 resampling antes de dividir y cada fold queda contaminado: la forma más común en que CV
 te miente.
 
-**Se conecta con:** [[ai/foundations/data-splits-and-leakage|splits y leakage]] ·
+**Conecta con:** [[ai/foundations/data-splits-and-leakage|splits y leakage]] ·
 [[ai/machine-learning/hyperparameter-tuning|tuning]] ·
 [[ai/machine-learning/ml-pipelines-and-leakage|pipelines]]

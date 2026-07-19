@@ -22,7 +22,7 @@ and computes distances at query time.
   [[ai/foundations/features-and-dimensionality|curse of dimensionality]] — distances
   lose meaning in high dimensions.
 - **Why it matters today**: [[ai/rag-and-retrieval/index|RAG and semantic search]]
-  are kNN over [[ai/foundations/linear-algebra-for-ml|embeddings]], made fast with
+  are kNN over [[ai/mathematics-for-ai/vectors-matrices-and-tensors|embeddings]], made fast with
   approximate nearest-neighbor indexes (HNSW). The idea scaled; the brute force
   didn't.
 
@@ -49,4 +49,4 @@ trees]] usually beat both — but the distance/margin intuitions stay useful.
 
 **Connects to:** [[ai/rag-and-retrieval/index|vector search]] ·
 [[ai/foundations/features-and-dimensionality|high dimensions]] ·
-[[ai/foundations/linear-algebra-for-ml|distance & similarity]]
+[[ai/mathematics-for-ai/vectors-matrices-and-tensors|distance & similarity]]

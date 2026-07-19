@@ -46,6 +46,6 @@ Un modelo de frontera es un *stack* de estos, no uno solo. Mirá
 [[ai/fine-tuning-and-alignment/index|fine-tuning y alignment]] para ver cómo funcionan
 las etapas posteriores.
 
-**Se conecta con:** [[ai/llms/index|LLMs]] ·
+**Conecta con:** [[ai/llms/index|LLMs]] ·
 [[ai/foundations/how-learning-works|cómo funciona el aprendizaje]] ·
 [[ai/fine-tuning-and-alignment/index|fine-tuning y alignment]]

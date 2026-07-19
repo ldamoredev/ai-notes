@@ -52,6 +52,6 @@ Un baseline es el seguro más barato en ML:
 Saltar a un modelo complejo antes de un baseline significa que no podés saber si tus
 mejoras vienen del modelo, de un leak o de ruido.
 
-**Se conecta con:** [[ai/machine-learning/error-analysis|análisis de errores]] ·
+**Conecta con:** [[ai/machine-learning/error-analysis|análisis de errores]] ·
 [[ai/foundations/how-learning-works|cómo funciona el aprendizaje]] ·
 [[ai/machine-learning/ml-pipelines-and-leakage|pipelines]]

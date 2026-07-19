@@ -7,7 +7,7 @@ updated: 2026-06-07
 ---
 # LLMs
 
-A large language model is a [[ai/deep-learning/attention-mechanism|transformer]]
+A large language model is a [[ai/model-architectures/self-attention-from-first-principles|transformer]]
 trained on one deceptively simple objective — **predict the next token** — at
 enormous scale. Everything people find magical or maddening about LLMs (in-context
 learning, hallucination, sensitivity to phrasing) falls out of that objective and
@@ -16,8 +16,13 @@ the architecture around it. This branch builds the mental model from the inside 
 > An LLM is a next-token predictor. It is astonishingly capable *and* it has no
 > built-in notion of truth — both facts come from the same training objective.
 
-## The architecture
+## Mental model
 
+A language model factorizes sequence probability into repeated next-token predictions. A decoder transformer converts the current prefix into logits; decoding commits one token; the new prefix becomes the next input. Training, post-training, context construction, and serving each change a different part of that system.
+
+## Roadmap: architecture to behavior
+
+- [[ai/llms/from-prompt-to-generated-token|From prompt to generated token]]
 - [[ai/llms/the-decoder-transformer|The decoder transformer]]
 - [[ai/llms/transformer-attention-map|Transformer attention map]]
 - [[ai/llms/tokenization|Tokenization: why models see tokens, not words]]
@@ -41,10 +46,11 @@ the architecture around it. This branch builds the mental model from the inside 
 - [[ai/llms/why-llms-hallucinate|Why LLMs hallucinate]]
 - [[ai/llms/quantization-and-inference|Quantization & inference]]
 
+**Connects to:** [[ai/model-architectures/index|Model Architectures]] · [[ai/fine-tuning-and-alignment/index|Training and Adaptation]] · [[ai/inference-and-optimization/index|Inference Systems]]
+
 ## Core sources
 
-- Andrej Karpathy — *Let's build GPT*, *Intro to LLMs*, *Deep Dive into LLMs*.
-- Sebastian Raschka — *Build a Large Language Model (From Scratch)*.
-- Jay Alammar — *The Illustrated Transformer* / *Illustrated GPT-2*.
-- Hugging Face — *LLM Course*; Jurafsky & Martin — *Speech and Language Processing* (SLP3).
-- Lilian Weng — blog (attention, hallucination, agents).
+- [Attention Is All You Need](https://arxiv.org/abs/1706.03762) — the original transformer architecture.
+- [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165) — autoregressive scaling and in-context learning evidence.
+- [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/) — current reference for tokenization, language modeling, and transformers.
+- [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/) — executable tokenizer, transformer, fine-tuning, and inference material.

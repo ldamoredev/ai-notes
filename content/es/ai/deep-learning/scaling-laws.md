@@ -54,6 +54,6 @@ dramáticos de "emergence" con sano escepticismo. (Más en [[ai/llms/index|LLMs]
 > Scaling laws explican la estrategia; no prometen que sea gratis ni para siempre. Datos
 > y costo de serving son los techos del mundo real.
 
-**Se conecta con:** [[ai/llms/index|pretraining de LLMs]] ·
+**Conecta con:** [[ai/llms/index|pretraining de LLMs]] ·
 [[ai/deep-learning/training-dynamics|entrenamiento a escala]] ·
 [[ai/foundations/how-learning-works|loss como objetivo]]

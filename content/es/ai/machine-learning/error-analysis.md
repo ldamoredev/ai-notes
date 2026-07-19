@@ -47,6 +47,6 @@ Tunear contra un solo número invita a la [[ai/foundations/evaluation-metrics|le
 Goodhart]]. Acompañá el score con slices y una matriz de confusión, o vas a optimizar
 la métrica mientras el producto empeora.
 
-**Se conecta con:** [[ai/machine-learning/supervised-learning-workflow|el workflow]] ·
+**Conecta con:** [[ai/machine-learning/supervised-learning-workflow|el workflow]] ·
 [[ai/foundations/evaluation-metrics|métricas]] ·
 [[ai/evaluation/index|evaluar sistemas]]

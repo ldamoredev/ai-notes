@@ -1,7 +1,8 @@
 (function () {
   const root = document.body.dataset.root || ".";
   const localeRoot = document.body.dataset.localeRoot || ".";
-  const lang = document.documentElement.lang || "en";
+  // UI locale and content locale intentionally differ on translated-route fallbacks.
+  const lang = document.body.dataset.locale || document.documentElement.lang || "en";
   const strings = {
     en: { noMatches: "No matches for", result: "result", results: "results", hint: "↑↓ navigate · Enter open" },
     es: { noMatches: "Sin coincidencias para", result: "resultado", results: "resultados", hint: "↑↓ navegar · Enter abrir" },
@@ -35,6 +36,7 @@
   if (sidebarToggle) {
     sidebarToggle.addEventListener("click", () => {
       document.body.classList.toggle("nav-open");
+      sidebarToggle.setAttribute("aria-expanded", document.body.classList.contains("nav-open") ? "true" : "false");
     });
   }
 
@@ -42,6 +44,7 @@
     link.addEventListener("click", () => {
       if (window.matchMedia("(max-width: 780px)").matches) {
         document.body.classList.remove("nav-open");
+        if (sidebarToggle) sidebarToggle.setAttribute("aria-expanded", "false");
       }
     });
   });
@@ -103,6 +106,7 @@
       results.innerHTML = "";
       currentHits = [];
       activeIndex = -1;
+      input.setAttribute("aria-expanded", "false");
       return;
     }
     const terms = query.split(/\s+/).filter(Boolean);
@@ -128,6 +132,7 @@
         }).join("");
     }
     results.hidden = false;
+    input.setAttribute("aria-expanded", "true");
   }
 
   function updateActive() {
@@ -179,6 +184,8 @@
       results.hidden = true;
       input.blur();
       document.body.classList.remove("nav-open");
+      if (sidebarToggle) sidebarToggle.setAttribute("aria-expanded", "false");
+      input.setAttribute("aria-expanded", "false");
     }
   });
 
@@ -187,8 +194,10 @@
     const sidebarHit = sidebar && sidebar.contains(event.target);
     if (document.body.classList.contains("nav-open") && !toggleHit && !sidebarHit) {
       document.body.classList.remove("nav-open");
+      sidebarToggle.setAttribute("aria-expanded", "false");
     }
     if (event.target === input || results.contains(event.target) || toggleHit) return;
     results.hidden = true;
+    input.setAttribute("aria-expanded", "false");
   });
 })();

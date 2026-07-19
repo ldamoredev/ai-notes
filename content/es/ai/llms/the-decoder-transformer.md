@@ -18,7 +18,7 @@ token. Entender ese pipeline desmitifica a toda la familia.
    [[ai/llms/positional-encodings|positional encoding]] para representar el orden.
 3. **N bloques transformer**, cada uno haciendo dos cosas:
    - **Masked self-attention**: cada token mezcla información de tokens anteriores
-     (ver [[ai/deep-learning/attention-mechanism|attention]]).
+     (ver [[ai/model-architectures/self-attention-from-first-principles|attention]]).
    - **Feed-forward network (FFN/MLP)**: una transformación no lineal por token donde
      se almacena buena parte del "conocimiento" del modelo.
    Ambos están envueltos en **conexiones residuales** + **[[ai/deep-learning/initialization-and-normalization|LayerNorm]]**,
@@ -50,6 +50,6 @@ La arquitectura es pequeña y repetitiva: unos pocos cientos de líneas de códi
 capacidad viene de **escala y datos**, no de una genialidad arquitectónica. No busques
 la magia en el diagrama; está en los billones de tokens de entrenamiento.
 
-**Se conecta con:** [[ai/deep-learning/attention-mechanism|attention]] ·
+**Conecta con:** [[ai/model-architectures/self-attention-from-first-principles|attention]] ·
 [[ai/llms/pretraining-next-token|pretraining]] ·
 [[ai/llms/tokenization|tokenization]]

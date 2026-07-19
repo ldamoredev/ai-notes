@@ -47,6 +47,6 @@ cadena confiada e incorrecta sigue siendo incorrecta.
 > accuracy. Gastalo donde el problema sea genuinamente difícil; usá modelos rápidos
 > por default en el resto.
 
-**Se conecta con:** [[ai/llms/emergent-abilities-and-scale|in-context learning]] ·
+**Conecta con:** [[ai/llms/emergent-abilities-and-scale|in-context learning]] ·
 [[ai/prompt-engineering/index|prompting chain-of-thought]] ·
 [[ai/ai-product-engineering/index|latencia vs calidad]]

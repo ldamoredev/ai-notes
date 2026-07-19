@@ -50,6 +50,6 @@ para el resto.
 heredar alucinaciones, costo y latencia para resolver un problema que el código
 determinístico ya resolvía. Empezá por el problema, no por la tecnología.
 
-**Se conecta con:** [[ai/foundations/mental-models-for-ai|modelos mentales para sistemas de AI]] ·
+**Conecta con:** [[ai/foundations/mental-models-for-ai|modelos mentales para sistemas de AI]] ·
 [[ai/machine-learning/supervised-learning-workflow|encuadrar el problema]] ·
 [[ai/ai-product-engineering/the-ai-application-stack|el stack más chico que funciona]]

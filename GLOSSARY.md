@@ -5,6 +5,22 @@ esto antes de traducir y respetalo en **todas** las notas para mantener consiste
 El objetivo: que un overlay ES se lea como notas de estudio de un ingeniero de IA
 rioplatense — técnico, denso, directo — no como una traducción literal.
 
+## Contrato editorial 2026
+
+Una traducción vigente espeja la **interfaz intelectual** de la nota EN: modelo mental, mecanismo, símbolos y shapes, ejemplo numérico, artefacto ejecutable, fallas, lente de producción, ejercicios, conexiones y fuentes. No alcanza con traducir el resumen o conservar una versión anterior del concepto.
+
+Metadata compartida:
+
+| Campo | Uso | Regla ES |
+|---|---|---|
+| `kind` | `concept`, `derivation`, `implementation`, `system-walkthrough`, `playbook`, `overview` | no traducir el valor |
+| `level` | profundidad previa esperada: `beginner`, `foundational`, `intermediate`, `advanced` | no traducir el valor |
+| `status` | `current`, `review-needed`, `experimental`, `planned`, `stale` | no traducir el valor |
+| `prerequisites` | IDs canónicos requeridos | conservar slugs EN |
+| `last_verified` | última revisión factual/operativa | copiar la fecha sólo si la traducción se revisó contra esa versión EN |
+
+`translation: stale` significa que el overlay existe pero ya no representa la nota canónica. El build lo trata como fallback EN visible: no lo publica como traducción indexable ni emite `hreflang="es"`.
+
 ## Arquitectura de la traducción (importante)
 
 Este proyecto **no** usa vault externo ni script de extracción. Cada nota canónica
@@ -60,7 +76,12 @@ Flujo por rama:
   | What this branch covers | Qué cubre esta rama |
   | Planned notes | Notas planificadas |
   | Core sources | Fuentes principales |
-  | Connects to: | Se conecta con: |
+  | Mental model | Modelo mental |
+  | Roadmap | Hoja de ruta |
+  | Production lens | Lente de producción |
+  | Failure modes and limits | Modos de falla y límites |
+  | Exercises | Ejercicios |
+  | Connects to: | Conecta con: |
 
 - **Wikilinks**: el **target queda en inglés**, se traduce solo el **label**:
   `[[ai/llms/why-llms-hallucinate|Por qué alucinan los LLMs]]`. **Nunca** cambies la
@@ -99,6 +120,11 @@ Elegí uno por nota y sé consistente.
 Nombres propios que **no** se traducen: `Transformer`, `ReAct`, `LoRA`, `QLoRA`,
 `DPO`, `RLHF`, `PPO`, `CLIP`, `ViT`, `MCP`, `vLLM`, `HNSW`, `BM25`, `FlashAttention`,
 `PagedAttention`, `OWASP`, `EU AI Act`, `NIST`, siglas y títulos de papers/fuentes.
+
+Términos nuevos del spine project que se conservan: `Glassbox AI Lab`, `forward pass`,
+`backward pass`, `autodiff`, `compute graph`, `gradient check`, `fixture`, `expected
+output`, `failure injection`, `postmortem`, `prefill`, `decode`, `KV cache`, `VJP`,
+`JVP`, `log-sum-exp`, `dtype`, `device`, `stride`, `kernel`, `tensor core`.
 
 ## Se TRADUCE (forma canónica)
 

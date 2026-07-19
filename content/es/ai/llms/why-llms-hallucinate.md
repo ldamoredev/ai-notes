@@ -48,6 +48,6 @@ Factores que empeoran:
 > factual como *no verificada* hasta que esté grounded o chequeada. Diseñá el sistema
 > alrededor de eso, en vez de esperar un modelo que "deje de inventar cosas".
 
-**Se conecta con:** [[ai/llms/pretraining-next-token|objetivo next-token]] ·
+**Conecta con:** [[ai/llms/pretraining-next-token|objetivo next-token]] ·
 [[ai/rag-and-retrieval/index|grounding con RAG]] ·
 [[ai/evaluation/index|medición de groundedness]]

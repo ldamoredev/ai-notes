@@ -33,7 +33,7 @@ mejor que una grilla rígida.
   cuantos más trials, más riesgo de overfittear *al validation set*. Usá **nested CV**
   o un test set held-out para el número final honesto.
 - Poné esfuerzo donde rinde: para gradient boosting, learning rate + cantidad de árboles
-  + profundidad dominan; para redes neuronales, el [[ai/foundations/gradient-descent-intuition|learning
+  + profundidad dominan; para redes neuronales, el [[ai/mathematics-for-ai/gradient-descent-and-optimization|learning
   rate]] es rey.
 
 ## Orden práctico de operaciones
@@ -49,6 +49,6 @@ Perseguir una mejora de 0.2% en CV a través de cientos de trials suele ser mine
 ruido, no mejora, y además infla tu estimación. Mejores features o más datos le ganan
 casi siempre a la obsesión por hiperparámetros.
 
-**Se conecta con:** [[ai/machine-learning/cross-validation|cross-validation]] ·
+**Conecta con:** [[ai/machine-learning/cross-validation|cross-validation]] ·
 [[ai/machine-learning/regularization-l1-l2|regularización]] ·
 [[ai/machine-learning/decision-trees-and-ensembles|tunear boosting]]

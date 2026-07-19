@@ -10,7 +10,11 @@ updated: 2026-06-07
 Playbooks turn the atlas into operating practice. Use them when you need a repeatable
 procedure with inputs, steps, outputs, and a definition of done.
 
-## Evaluation and quality
+## Mental model
+
+A playbook is an operational interface between evidence and action. It names prerequisites, inputs, ordered checks, decision gates, artifacts, rollback conditions, and a verifiable definition of done so the result does not depend on who remembers the process.
+
+## Roadmap: evaluation and quality
 
 - [[ai/ai-playbooks/evaluate-rag-answer-quality|Evaluate RAG answer quality]]
 - [[ai/ai-playbooks/build-eval-set-from-scratch|Build an eval set from scratch]]
@@ -31,7 +35,11 @@ procedure with inputs, steps, outputs, and a definition of done.
 - [[ai/ai-playbooks/audit-prompt-injection|Audit an app for prompt injection]]
 - [[ai/ai-playbooks/run-ai-red-team-lite|Run an AI red team lite]]
 
+**Connects to:** [[ai/evaluation/index|Evaluation]] · [[ai/mlops/index|MLOps]] · [[ai/ai-safety-and-security/index|AI Safety and Security]]
+
 ## Core sources
 
-- Draw on the relevant branch sources for each procedure: RAGAS, Hamel Husain, Eugene Yan, Shreya Shankar, Chip Huyen, Anthropic/OpenAI cookbooks, OWASP LLM Top 10, and Simon Willison's prompt-injection writing.
-- Use [[ai/evaluation/index|Evaluation]], [[ai/rag-and-retrieval/index|RAG and retrieval]], [[ai/agents-and-tools/index|Agents and tools]], [[ai/mlops/index|MLOps]], [[ai/ai-product-engineering/index|AI Product Engineering]], and [[ai/ai-safety-and-security/index|AI Safety and Security]] as the conceptual backbone.
+- [NIST AI RMF Playbook](https://airc.nist.gov/airmf-resources/playbook/) — suggested actions that operationalize risk-management outcomes.
+- [OWASP GenAI Security Project](https://genai.owasp.org/) — testable application and agent security risks.
+- [RAGAS documentation](https://docs.ragas.io/) — concrete RAG evaluation metrics and workflows.
+- [Google Rules of ML](https://developers.google.com/machine-learning/guides/rules-of-ml) — concise production checks and sequencing principles.

@@ -11,7 +11,11 @@ You train a model once but **serve it forever**, so inference is where most of t
 and latency of an AI product live. This branch is the systems side of running models:
 how to make them fast, cheap, and scalable without retraining.
 
-## Measure the workload
+## Mental model
+
+Inference is a scheduled flow of tensor kernels and memory movement under a latency objective. Prompt processing and token-by-token decoding have different bottlenecks; batching, cache policy, precision, model shape, and hardware determine the feasible quality-cost envelope.
+
+## Roadmap: measure the workload
 
 - [[ai/inference-and-optimization/why-inference-is-the-real-cost|Why inference is the real cost]] explains train-once, serve-forever economics.
 - [[ai/inference-and-optimization/latency-vs-throughput|Latency vs throughput]] separates TTFT, prefill, decode, tokens/sec, and p95.
@@ -35,10 +39,12 @@ how to make them fast, cheap, and scalable without retraining.
 - [[ai/inference-and-optimization/serving-engines|Serving engines]] maps vLLM, TGI, TensorRT-LLM, and framework-level tradeoffs.
 - [[ai/inference-and-optimization/gpu-and-hardware-basics|GPU and hardware basics]] explains VRAM, bandwidth, compute, interconnects, and utilization.
 
+**Connects to:** [[ai/llms/from-prompt-to-generated-token|From Prompt to Generated Token]] · [[ai/mlops/index|MLOps]] · [[ai/ai-product-engineering/latency-cost-quality-triangle|Latency, Cost, and Quality]]
+
 ## Core sources
 
-- Lilian Weng, **Large Transformer Model Inference Optimization**.
-- vLLM documentation, especially PagedAttention; Hugging Face **Text Generation Inference** docs.
-- Dao et al., **FlashAttention**; Leviathan et al., **Speculative Decoding**; **GPTQ** and **AWQ** papers.
-- NVIDIA technical material on **TensorRT-LLM** and inference quantization.
-- Chip Huyen, **AI Engineering**, especially inference, latency, and cost chapters.
+- [vLLM paper](https://arxiv.org/abs/2309.06180) — PagedAttention and serving-throughput evaluation.
+- [FlashAttention](https://arxiv.org/abs/2205.14135) — IO-aware exact attention.
+- [Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17192) — exact speculative decoding and speed analysis.
+- [GPTQ](https://arxiv.org/abs/2210.17323) — post-training quantization for generative transformers.
+- [Hugging Face KV cache strategies](https://huggingface.co/docs/transformers/kv_cache) — current cache implementations and trade-offs.

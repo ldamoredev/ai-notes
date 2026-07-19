@@ -45,6 +45,6 @@ Los defaults de boosting pueden overfittear en silencio. Mirá la curva de valid
 limitá profundidad de árboles y usá early stopping. Y acordate de que feature importances
 puede engañar con features correlacionadas: corroborá con permutation importance o SHAP.
 
-**Se conecta con:** [[ai/machine-learning/hyperparameter-tuning|tuning]] ·
+**Conecta con:** [[ai/machine-learning/hyperparameter-tuning|tuning]] ·
 [[ai/foundations/generalization-and-overfitting|varianza y overfitting]] ·
 [[ai/machine-learning/feature-engineering|features]]

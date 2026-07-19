@@ -15,7 +15,11 @@ and risky — so the discipline here is as much about *control* as capability.
 > will do.** Start simple, add autonomy only when the steps genuinely can't be
 > predetermined, and keep the system transparent.
 
-## The basics
+## Mental model
+
+An agent is a model embedded in a control loop with observations, tools, state, budgets, and stop conditions. Capability comes from the loop; safety comes from treating model output as untrusted proposals and keeping authority in deterministic infrastructure.
+
+## Roadmap: interfaces to autonomy
 
 - [[ai/agents-and-tools/workflows-vs-agents|Workflows vs agents: when to use which]]
 - [[ai/agents-and-tools/tool-calling|Tool & function calling]]
@@ -35,6 +39,8 @@ and risky — so the discipline here is as much about *control* as capability.
 - [[ai/agents-and-tools/autonomy-and-control|Autonomy & least privilege]]
 - [[ai/agents-and-tools/agent-failure-modes|Agent failure modes]]
 - [[ai/agents-and-tools/evaluating-agents|Evaluating agents]]
+
+**Connects to:** [[ai/prompt-engineering/index|Context Engineering]] · [[ai/ai-safety-and-security/index|AI Safety and Security]] · [[ai/evaluation/evaluating-agent-systems|Evaluating Agent Systems]]
 
 ## Core sources
 

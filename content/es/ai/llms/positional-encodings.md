@@ -7,7 +7,7 @@ updated: 2026-06-07
 ---
 # Positional encodings y RoPE
 
-[[ai/deep-learning/attention-mechanism|Self-attention]] trata sus inputs como un
+[[ai/model-architectures/self-attention-from-first-principles|Self-attention]] trata sus inputs como un
 **conjunto**: no tiene una noción inherente de orden. Pero "perro muerde hombre" ≠
 "hombre muerde perro", así que la posición debe agregarse explícitamente. Cómo se
 hace eso determina en silencio hasta dónde puede extender su contexto un modelo.
@@ -44,6 +44,6 @@ reentrenamiento completo. Eso explica buena parte del salto de contextos de 2K a
 > posición *relativa* mediante rotación, por eso los modelos long-context actuales se
 > apoyan en él.
 
-**Se conecta con:** [[ai/deep-learning/attention-mechanism|attention no ve orden]] ·
+**Conecta con:** [[ai/model-architectures/self-attention-from-first-principles|attention no ve orden]] ·
 [[ai/llms/context-window-and-kv-cache|ventana de contexto]] ·
 [[ai/llms/long-context-and-lost-in-the-middle|long context]]

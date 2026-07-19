@@ -16,7 +16,11 @@ far easier to debug than a neural net.
 > Rule of thumb: reach for a gradient-boosted tree before a neural network on
 > tabular data. Start simple; earn complexity.
 
-## The workflow
+## Mental model
+
+Statistical machine learning selects a hypothesis from data under a loss, regularization, and validation protocol. The algorithm matters, but representation, leakage control, calibration, and error analysis usually determine whether measured performance survives deployment.
+
+## Roadmap: workflow and algorithms
 
 - [[ai/machine-learning/supervised-learning-workflow|The supervised learning workflow, end to end]]
 - [[ai/machine-learning/error-analysis|Error analysis: reading your model's mistakes]]
@@ -37,10 +41,12 @@ far easier to debug than a neural net.
 - [[ai/machine-learning/class-imbalance|Handling class imbalance]]
 - [[ai/machine-learning/hyperparameter-tuning|Hyperparameter tuning]]
 
+**Connects to:** [[ai/foundations/index|Learning Foundations]] · [[ai/data-for-ai/index|Data for AI]] · [[ai/evaluation/index|Evaluation and Measurement]]
+
 ## Core sources
 
-- James, Witten, Hastie, Tibshirani — *An Introduction to Statistical Learning* (ISLP).
-- Aurélien Géron — *Hands-On Machine Learning* (3rd ed.).
-- Andrew Ng — *Machine Learning Specialization* (Coursera).
-- scikit-learn — *User Guide* (the canonical practical reference).
+- [An Introduction to Statistical Learning](https://www.statlearning.com/) — theory, algorithms, and reproducible labs.
+- [The Elements of Statistical Learning](https://hastie.su.domains/ElemStatLearn/) — deeper treatment of supervised and unsupervised methods.
+- [scikit-learn User Guide](https://scikit-learn.org/stable/user_guide.html) — canonical implementation semantics and model-selection guidance.
+- [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/) — probabilistic framing of classical ML methods.
 - StatQuest — trees, boosting, and ROC/PR intuition.

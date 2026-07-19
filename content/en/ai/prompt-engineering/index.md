@@ -17,7 +17,11 @@ As systems moved from single chats to [[ai/rag-and-retrieval/index|RAG]] and
 [[ai/agents-and-tools/index|agents]], leverage shifted from clever wording to **what
 goes into the window and in what order.** This branch covers both.
 
-## The reframe & the basics
+## Mental model
+
+Context engineering constructs the model's temporary information environment. Instructions, examples, retrieved evidence, tool schemas, history, constraints, and output format compete within a finite window; their provenance and ordering shape behavior without changing weights.
+
+## Roadmap: reframe and basics
 
 - [[ai/prompt-engineering/prompt-to-context-engineering|From prompting to context engineering]]
 - [[ai/prompt-engineering/anatomy-of-a-prompt|Anatomy of a good prompt]]
@@ -41,9 +45,11 @@ goes into the window and in what order.** This branch covers both.
 
 - [[ai/prompt-engineering/evaluating-and-iterating-prompts|Evaluating & iterating prompts]]
 
+**Connects to:** [[ai/rag-and-retrieval/index|Retrieval and Knowledge]] · [[ai/agents-and-tools/index|Agents and Tools]] · [[ai/evaluation/prompt-regression-testing|Prompt Regression Testing]]
+
 ## Core sources
 
-- Anthropic — *Prompt engineering* docs and *Effective context engineering for AI agents*.
-- DAIR.ai — *Prompt Engineering Guide* (promptingguide.ai).
-- OpenAI — Cookbook + structured-output / prompting guides.
-- Lilian Weng — *Prompt Engineering* (blog).
+- [Anthropic prompt engineering overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview) — current instruction, examples, XML, and chaining guidance.
+- [Anthropic context engineering for agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — context selection and compaction for long-running systems.
+- [OpenAI Cookbook](https://cookbook.openai.com/) — executable structured-output, tool, and evaluation patterns.
+- [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) — the primary paper for reasoning demonstrations in prompts.

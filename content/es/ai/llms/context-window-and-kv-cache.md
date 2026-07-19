@@ -43,9 +43,9 @@ como en dinero.
 - **Más contexto ≠ mejor**: más allá del costo, la calidad se degrada
   ([[ai/llms/long-context-and-lost-in-the-middle|lost in the middle]]). Curá, no
   vuelques todo.
-- El costo cuadrático de [[ai/deep-learning/attention-mechanism|attention]] es la
+- El costo cuadrático de [[ai/model-architectures/self-attention-from-first-principles|attention]] es la
   razón por la que todo esto importa.
 
-**Se conecta con:** [[ai/llms/tokenization|presupuesto de tokens]] ·
+**Conecta con:** [[ai/llms/tokenization|presupuesto de tokens]] ·
 [[ai/llms/long-context-and-lost-in-the-middle|límites de long context]] ·
 [[ai/prompt-engineering/index|context engineering]]

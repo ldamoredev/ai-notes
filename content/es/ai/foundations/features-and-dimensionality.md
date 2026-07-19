@@ -49,6 +49,6 @@ manifold. La reducción de dimensionalidad (PCA, UMAP) explota el mismo hecho.
 - Cuando las distancias se comportan raro, sospechá de la dimensionalidad antes que del algoritmo.
 - Una buena representación vuelve fuerte a un modelo simple; una mala derrota a uno complejo.
 
-**Se conecta con:** [[ai/foundations/inductive-bias-and-no-free-lunch|sesgo inductivo]] ·
+**Conecta con:** [[ai/foundations/inductive-bias-and-no-free-lunch|sesgo inductivo]] ·
 [[ai/deep-learning/index|representation learning]] ·
 [[ai/rag-and-retrieval/index|embeddings y retrieval]]

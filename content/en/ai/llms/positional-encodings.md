@@ -7,7 +7,7 @@ updated: 2026-06-07
 ---
 # Positional encodings & RoPE
 
-[[ai/deep-learning/attention-mechanism|Self-attention]] treats its inputs as a
+[[ai/model-architectures/self-attention-from-first-principles|Self-attention]] treats its inputs as a
 **set** — it has no inherent notion of order. But "dog bites man" ≠ "man bites dog",
 so position must be added explicitly. How that's done quietly determines how far a
 model can extend its context.
@@ -43,6 +43,6 @@ It doesn't make long context *free*, though — see
 > *relative* position by rotation, which is why today's long-context models lean on
 > it.
 
-**Connects to:** [[ai/deep-learning/attention-mechanism|attention is order-blind]] ·
+**Connects to:** [[ai/model-architectures/self-attention-from-first-principles|attention is order-blind]] ·
 [[ai/llms/context-window-and-kv-cache|context window]] ·
 [[ai/llms/long-context-and-lost-in-the-middle|long context]]

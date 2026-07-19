@@ -33,7 +33,7 @@ thoroughly than a rigid grid.
   trustworthiness — the more trials, the more you risk overfitting *to the validation
   set*. Use **nested CV** or a held-out test set for the final, honest number.
 - Spend effort where it pays: for gradient boosting, learning rate + number of trees
-  + depth dominate; for neural nets, the [[ai/foundations/gradient-descent-intuition|learning
+  + depth dominate; for neural nets, the [[ai/mathematics-for-ai/gradient-descent-and-optimization|learning
   rate]] is king.
 
 ## Practical order of operations

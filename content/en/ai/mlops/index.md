@@ -14,7 +14,11 @@ to prompts, retrieval, tools, traces, and product feedback.
 > The model is only one artifact. Production quality comes from the system around it:
 > data, prompts, evals, releases, monitoring, rollback, and learning loops.
 
-## Operating model
+## Mental model
+
+MLOps makes every model-bearing change identifiable, reproducible, observable, reversible, and improvable. The deployed unit is a versioned system of code, data, model, prompts, retrieval, configuration, and policy—not a weights file in isolation.
+
+## Roadmap: operating model
 
 - [[ai/mlops/mlops-to-llmops|MLOps to LLMOps]]
 - [[ai/mlops/experiment-tracking|Experiment tracking]]
@@ -40,11 +44,12 @@ to prompts, retrieval, tools, traces, and product feedback.
 - [[ai/mlops/build-vs-buy-api-vs-self-hosting|Build vs buy: API vs self-hosting]] weighs hosted APIs against running your own models.
 - [[ai/mlops/model-deprecation-and-migration|Model deprecation and migration]] insulates production from retired or silently updated models.
 
+**Connects to:** [[ai/research-and-experimentation/index|Research and Experimentation]] · [[ai/evaluation/index|Evaluation]] · [[ai/inference-and-optimization/index|Inference Systems]]
+
 ## Core sources
 
-- Chip Huyen — *Designing Machine Learning Systems* and *AI Engineering*.
-- Made With ML by Goku Mohandas — practical production ML workflows.
-- Google Cloud — *MLOps: Continuous delivery and automation pipelines in machine learning*.
-- MLflow and Weights & Biases docs for experiment tracking and model registries.
-- LangSmith, Langfuse, and Arize Phoenix docs for LLM tracing and observability patterns.
-- Eugene Yan — production ML and LLM system writing.
+- [Continuous Delivery for Machine Learning](https://martinfowler.com/articles/cd4ml.html) — versioning, testing, deployment, and feedback as one delivery system.
+- [MLOps: Continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) — maturity levels and production pipeline architecture.
+- [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems) — system-level coupling and maintenance risks.
+- [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/) — vendor-neutral traces, metrics, and logs for model-serving systems.
+- [MLflow documentation](https://mlflow.org/docs/latest/) — experiment, model, and deployment lifecycle primitives.

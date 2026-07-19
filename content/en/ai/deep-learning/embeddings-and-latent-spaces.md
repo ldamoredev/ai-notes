@@ -15,7 +15,7 @@ meaning. Get a good space and a dozen downstream tasks become easy.
 
 An **embedding** is a dense vector that represents an item (word, sentence, image,
 user). The network learns to place related items close together and unrelated items
-far apart, so [[ai/foundations/linear-algebra-for-ml|distance and direction]] carry
+far apart, so [[ai/mathematics-for-ai/vectors-matrices-and-tensors|distance and direction]] carry
 semantics: similar things → small cosine distance; concept directions become
 arithmetic ("king − man + woman ≈ queen").
 
@@ -48,6 +48,6 @@ compare vectors from two different embedding models, and re-embed everything whe
 change models. Also: cosine similarity assumes normalized vectors; normalize before
 comparing.
 
-**Connects to:** [[ai/foundations/linear-algebra-for-ml|vectors & similarity]] ·
+**Connects to:** [[ai/mathematics-for-ai/vectors-matrices-and-tensors|vectors & similarity]] ·
 [[ai/rag-and-retrieval/index|retrieval]] ·
 [[ai/foundations/features-and-dimensionality|representations]]

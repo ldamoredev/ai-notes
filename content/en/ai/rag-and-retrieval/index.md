@@ -17,7 +17,11 @@ knowledge-grounded AI, because it fixes the model's two biggest weaknesses —
 > RAG is a **search problem wearing an LLM hat.** Most "RAG quality" issues are
 > retrieval issues. Fix retrieval first.
 
-## Foundations
+## Mental model
+
+RAG is an information-retrieval system whose selected evidence becomes model input. Query construction, indexing, candidate generation, reranking, context assembly, and answer attribution are separate stages with separate recall, precision, latency, and failure budgets.
+
+## Roadmap: foundations to advanced retrieval
 
 - [[ai/rag-and-retrieval/why-rag|Why RAG (and when not to)]]
 - [[ai/rag-and-retrieval/rag-first-pass-design|RAG first-pass design]]
@@ -41,6 +45,8 @@ knowledge-grounded AI, because it fixes the model's two biggest weaknesses —
 
 - [[ai/rag-and-retrieval/advanced-rag-patterns|Advanced patterns: contextual, graph & agentic RAG]]
 - [[ai/rag-and-retrieval/rag-vs-long-context|RAG vs long context]]
+
+**Connects to:** [[ai/data-for-ai/index|Data for AI]] · [[ai/prompt-engineering/index|Context Engineering]] · [[ai/evaluation/evaluating-rag-systems|Evaluating RAG Systems]]
 
 ## Core sources
 
