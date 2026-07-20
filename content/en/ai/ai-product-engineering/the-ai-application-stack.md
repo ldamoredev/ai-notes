@@ -3,9 +3,29 @@ title: "The AI application stack"
 description: How the pieces fit — model, prompt/context, retrieval, tools, guardrails, evaluation, and observability — into a production LLM application. A map of the whole atlas.
 tags: [architecture, llm-app, system-design, stack]
 order: 13
-updated: 2026-06-07
+updated: 2026-07-20
+kind: overview
+level: intermediate
+status: current
+prerequisites: [ai/start-here]
+last_verified: 2026-07-20
 ---
 # The AI application stack
+
+## Mechanism: request → context → model/tools → controlled outcome → evidence
+
+```python
+layers = ["identity", "context", "model", "tools", "policy", "trace"]
+assert layers[-1] == "trace"
+print("stack is observable")
+```
+
+Run with `python3`; expected output is `stack is observable`. Debug from outcome toward the earliest failed layer; add layers only when an eval identifies a missing capability or control.
+
+## Sources
+
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — lifecycle system controls.
+- [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/) — trace semantics across layers.
 
 Most of this atlas describes one layer at a time. This note assembles them. A
 production LLM app is not "call the API" — it's a **stack of layers**, each with its

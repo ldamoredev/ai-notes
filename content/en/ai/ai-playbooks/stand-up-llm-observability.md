@@ -3,9 +3,18 @@ title: "Stand up LLM observability"
 description: A startup procedure for logging traces, prompts, outputs, retrieval, tools, costs, latency, feedback, and eval replay in an LLM application.
 tags: [playbook, observability, mlops]
 order: 8
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/mlops/llm-observability-and-tracing]
+last_verified: 2026-07-20
 ---
 # Stand up LLM observability
+
+**Mental model:** a trace is the join key between user outcome, model behavior, tool actions, cost, and safety controls. If an incident cannot be replayed with protected evidence, it cannot be reliably debugged.
+
+## Mechanism: trace → protected evidence → alert → eval fixture
 
 Use this playbook before the first serious release of an LLM feature. If you cannot
 see prompts, context, outputs, tool calls, cost, latency, and feedback, you cannot
@@ -47,3 +56,18 @@ need, protect it, and set retention deliberately.
 **Connects to:** [[ai/mlops/llm-observability-and-tracing|LLM observability and tracing]] ·
 [[ai/mlops/feedback-loops|feedback loops]] ·
 [[ai/ai-safety-and-security/privacy-and-data-governance|privacy governance]]
+
+## Executable trace contract
+
+```python
+trace = {"id":"t1", "prompt":"p7", "model":"m2", "latency_ms":420, "cost":.003, "outcome":"pass"}
+assert all(trace[k] is not None for k in trace)
+print("trace is replayable")
+```
+
+Run with `python3`; expected output is `trace is replayable`. Redact before storage, enforce retention, and retain access audit logs.
+
+## Sources
+
+- [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/) — trace and span semantics.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — measurement and monitoring context.

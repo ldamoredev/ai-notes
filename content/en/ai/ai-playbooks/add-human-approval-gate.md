@@ -1,49 +1,64 @@
 ---
 title: "Add a human approval gate"
-description: A procedure for adding meaningful human approval to high-impact AI actions without turning oversight into rubber-stamping.
+description: Add a resumable, evidence-based approval boundary to consequential AI actions without creating rubber-stamp oversight.
 tags: [playbook, human-in-the-loop, agents, safety]
 order: 10
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/guardrails-and-human-in-the-loop]
+last_verified: 2026-07-20
 ---
 # Add a human approval gate
 
-Use this playbook when an AI system can take an action with external, irreversible,
-costly, sensitive, or regulated consequences.
+**Mental model:** the model proposes; infrastructure authorizes. A gate is a persisted state transition—proposed, approved, rejected, expired—not a modal dialog. Use it when an action is external, irreversible, financially consequential, permission-expanding, or regulated.
 
-## Inputs
-
-- List of actions the AI can propose or execute.
-- Risk tier for each action.
-- Required evidence, policy, and audit requirements.
-- UX surface where the human will review.
+## Mechanism: proposal → policy → revalidated action
 
 ## Procedure
 
-1. Classify actions by blast radius: draft, reversible, external, irreversible, financial, regulated.
-2. Decide which tiers require approval and which can auto-execute.
-3. Show the human the proposed action, target, evidence, confidence, and risk reason.
-4. Let the human approve, edit, reject, or escalate.
-5. Log the proposal, reviewer, decision, timestamp, evidence, and final action.
-6. Prevent the model from bypassing approval by calling lower-level tools directly.
-7. Sample approved actions for quality review and reviewer drift.
-8. Add failed or confusing approvals to evals and UX backlog.
+1. Inventory actions and classify blast radius, reversibility, target, and authority.
+2. Define auto-run, sampled-audit, and approval tiers with a policy owner.
+3. Persist the proposal before notification: tool, arguments, evidence, policy, version, expiry, and idempotency key.
+4. Show a reviewer intent, target, diff, evidence, risk, and undo/appeal path.
+5. On approval, revalidate state and execute once; on rejection, append the reason to the agent trace.
+6. Measure approval latency, overrides, stale decisions, incidents, and reviewer workload.
 
-## Review screen checklist
+```python
+proposal = {"status":"pending", "amount":84, "order_version":3}
+def approve(p, current_version):
+    if p["order_version"] != current_version: return "reject: stale proposal"
+    p["status"] = "approved"; return "execute once"
+print(approve(proposal, 4))
+```
 
-| Element | Purpose |
+Run with `python3`; expected output is `reject: stale proposal`. The executor, not the model, owns that check.
+
+## Definition of done
+
+| Requirement | Verification |
 |---|---|
-| Proposed action | what will happen |
-| Target | who or what is affected |
-| Evidence | why the model proposed it |
-| Risk label | why approval is required |
-| Diff or preview | what changes if approved |
-| Undo path | how recovery works |
+| No bypass path | all lower-level tools enforce the same policy |
+| Useful review | reviewer sees evidence and can reject with reason |
+| Safe resume | decision is idempotent and revalidates current state |
+| Recovery | expiry, kill switch, rollback, and audit record exist |
 
-## Pitfall
+Over-gating reversible actions creates fatigue; under-gating high-impact actions creates unbounded blast radius. Promote an action only after holdout evals and sampled audits demonstrate it clears safety and quality thresholds.
 
-Human-in-the-loop is not a checkbox. If the reviewer lacks context or the UI makes
-approval easier than understanding, the gate becomes rubber-stamping.
+## Failure modes
 
-**Connects to:** [[ai/agents-and-tools/guardrails-and-human-in-the-loop|guardrails and HITL]] ·
-[[ai/ai-safety-and-security/excessive-agency|excessive agency]] ·
-[[ai/ai-product-engineering/human-in-the-loop-and-trust|HITL and trust]]
+Reject stale proposals, duplicate execution, missing evidence, and any route that bypasses the same authorization policy. A reviewer without time, authority, or a rejection reason is not meaningful oversight.
+
+## Exercises
+
+1. Add expiry and a duplicate-execution test to the artifact.
+2. Classify five product tools and justify one sampled-audit tier.
+
+**Connects to:** [[ai/agents-and-tools/guardrails-and-human-in-the-loop|guardrails]] · [[ai/agents-and-tools/autonomy-and-control|least privilege]] · [[ai/ai-ethics-and-governance/accountability-and-human-oversight|oversight]]
+
+## Sources
+
+- [OWASP LLM06: Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) — action-authority risks.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — governance controls.
+- [OpenAI: A Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) — layered guardrails.

@@ -3,9 +3,18 @@ title: "Run an AI red team lite"
 description: A lightweight red-team procedure for small teams to test jailbreaks, prompt injection, data leakage, tool misuse, and guardrail failures.
 tags: [playbook, red-team, security]
 order: 12
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/ai-safety-and-security/red-teaming-ai-systems]
+last_verified: 2026-07-20
 ---
 # Run an AI red team lite
+
+**Mental model:** test attacker goals against the assembled system—data, retrieval, tools, identity, UI, and logging—not a prompt in isolation.
+
+## Mechanism: attacker goal → trace → exploitability → regression
 
 Use this playbook when a small team needs a focused adversarial pass before releasing
 or expanding an AI feature. It is not a full security assessment, but it catches many
@@ -47,3 +56,18 @@ tools, permissions, caches, logs, and UI decisions.
 **Connects to:** [[ai/ai-safety-and-security/red-teaming-ai-systems|red teaming AI systems]] ·
 [[ai/ai-safety-and-security/input-output-guardrails|input and output guardrails]] ·
 [[ai/evaluation/prompt-regression-testing|regression testing]]
+
+## Executable severity triage
+
+```python
+impact, exploitability = 4, 3
+print("priority", impact * exploitability)
+```
+
+Run with `python3`; expected output is `priority 12`. Confirmed failures need an owner, mitigation, retest, and regression fixture.
+
+## Sources
+
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — application-risk taxonomy.
+- [MITRE ATLAS](https://atlas.mitre.org/) — adversarial-ML techniques.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk-management process.

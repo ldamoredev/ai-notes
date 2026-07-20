@@ -3,9 +3,29 @@ title: "Data and PII leakage"
 description: Data leakage happens when sensitive information enters prompts, logs, retrieval, training, traces, or outputs without the right access and retention controls.
 tags: [ai-safety, privacy, pii, data-governance]
 order: 5
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/data-for-ai/privacy-and-pii-in-datasets]
+last_verified: 2026-07-20
 ---
 # Data and PII leakage
+
+## Mechanism: data class → scoped access → minimized context → retention/deletion proof
+
+```python
+request = {"tenant":"a", "doc_tenant":"b", "contains_pii":True}
+print("block" if request["tenant"] != request["doc_tenant"] else "consider_redaction")
+```
+
+Run with `python3`; expected output is `block`. Enforce authorization before retrieval, minimize before model calls, and verify deletion across indexes, caches, traces, exports, and vendors.
+
+## Sources
+
+- [EDPB: Artificial Intelligence](https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en) — data-protection guidance for AI.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — privacy-enhanced system controls.
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — sensitive-information disclosure risks.
 
 AI systems move data through prompts, retrieval contexts, traces, logs, caches, tools,
 fine-tuning datasets, and outputs. Leakage happens when sensitive data crosses one of

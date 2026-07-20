@@ -1,133 +1,90 @@
 ---
 title: "Guardrails & human-in-the-loop"
-description: An agent that can act can act wrongly. Input/output guardrails, approval gates for high-impact actions, and designing the human checkpoint.
+description: Guardrails enforce deterministic boundaries around an agent; human review is meaningful only when it has authority, evidence, and a resumable decision.
 tags: [agents, guardrails, human-in-the-loop, safety]
 order: 9
-updated: 2026-06-10
+updated: 2026-07-20
+kind: implementation
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/autonomy-and-control, ai/ai-safety-and-security/input-output-guardrails]
+last_verified: 2026-07-20
 ---
 # Guardrails & human-in-the-loop
 
-**Mental model:** guardrails are checks that run **outside the model** — code that
-inspects what goes in, what comes out, and what's about to execute. The model's own
-judgment is a quality feature; guardrails are the safety system, and the two must not
-be confused: anything enforced only in the prompt is enforced only against polite
-inputs. Match the strength of the checkpoint to the **blast radius** of the action.
+**Mental model:** the model proposes; deterministic infrastructure decides what may
+execute. A guardrail is a check outside the model at an input, output, or—most
+importantly—action boundary. Human-in-the-loop (HITL) is not a popup: it is a durable
+state transition from *proposed* to *approved*, *rejected*, or *expired*.
 
-## The three guardrail surfaces
+## Mechanism: enforce before side effect
 
-- **Input** — before text reaches the agent: tenant/permission resolution, off-policy
-  request filtering, flagging untrusted content sources
-  ([[ai/ai-safety-and-security/input-output-guardrails|input/output guardrails]]).
-  Note what input filters *can't* do: reliably catch
-  [[ai/ai-safety-and-security/indirect-prompt-injection|indirect injection]] in
-  fetched content — that's why action-layer gates exist.
-- **Output** — before a response ships: schema validation
-  ([[ai/prompt-engineering/structured-outputs|structured outputs]] make this
-  mechanical), PII redaction, policy/brand filters, citation checks
-  ([[ai/rag-and-retrieval/grounding-and-citations|grounding]]).
-- **Action** — before a tool call executes: the layer unique to agents, and the one
-  that matters most. Allowlists, argument validation, and approval gates by
-  reversibility tier ([[ai/agents-and-tools/autonomy-and-control|least privilege]]).
+The executor classifies a proposed action, validates its current state and authority,
+persists a decision record when required, and only then performs the side effect. The
+model receives the approved or rejected result; it never decides the boundary itself.
 
-## An approval gate, concretely
+## Classify the action, not the sentence
 
-The pattern: classify tools by impact; high-impact calls get persisted as *pending
-actions* and the loop pauses until a human decides. This is interruption-and-resume,
-not a yes/no popup bolted on:
+| Tier | Example | Control |
+|---|---|---|
+| 0: read-only | list an order | tenant authorization, log |
+| 1: reversible | create draft | schema/semantic validation, audit log |
+| 2: consequential | send external email | explicit approval or narrowly tested policy |
+| 3: irreversible/high-impact | refund, delete, disclose data | human approval, dual control where warranted, kill switch |
 
-```typescript
-const GATED = new Set(["send_email", "issue_refund", "delete_record"]);
+Prompt instructions can improve behavior but cannot enforce this table. Validate
+identity, scope, arguments, policy, and current state in the executor. Tool results
+and retrieved text are untrusted data, so they cannot upgrade an action's authority.
 
-async function executeGated(
-  block: Anthropic.ToolUseBlock,
-  taskId: string,
-): Promise<Anthropic.ToolResultBlockParam> {
-  if (!GATED.has(block.name)) {
-    return executeDirect(block); // reversible tier: run + log
-  }
-  // persist the proposal; the agent loop suspends here
-  const approval = await db.insert(pendingActions).values({
-    taskId,
-    tool: block.name,
-    args: block.input,
-    toolUseId: block.id,
-    proposedAt: new Date(),
-    // what the reviewer needs to decide FAST:
-    summary: await summarizeIntent(block),     // "Refund $84 to cust_9 for order o_122 (damaged)"
-    evidence: lastNObservations(taskId, 3),     // why the agent thinks so
-  }).returning();
-  notifyReviewer(approval[0]);
-  throw new AwaitingApproval(taskId);           // resume the loop on decision webhook
-}
-// On approve: execute, append the tool_result, continue the loop.
-// On reject: append tool_result { is_error: true, content: reviewer's reason } —
-// the agent sees WHY and can propose an alternative instead of dying.
+## A resumable approval artifact
+
+```python
+from dataclasses import dataclass
+@dataclass
+class Proposal:
+    tool: str; args: dict; evidence: list[str]; status: str = "pending"
+
+def decide(p: Proposal, approved: bool, reason: str):
+    p.status = "approved" if approved else "rejected"
+    return {"status": p.status, "reason": reason, "resume_with": p.status == "approved"}
+
+p = Proposal("issue_refund", {"order": "o_12", "amount": 84}, ["delivered-damaged"])
+print(decide(p, False, "photo evidence is missing"))
 ```
 
-Two design points carry the value: the loop **resumes with the decision in context**
-(a rejection with a reason is an observation the agent learns from this task), and
-the reviewer sees a **summary + evidence**, not a raw trace.
+Run with `python3`; **expected output** has status `rejected`. Persist the proposal before
+notifying a reviewer. On rejection, append the reason as a tool result so the agent
+can propose an alternative; never silently execute or discard the decision.
 
-## Escalation patterns beyond the binary gate
+## Design the reviewer’s evidence
 
-- **Confidence routing** — auto-handle routine cases; route low-confidence or
-  high-value ones to humans. Thresholds come from
-  [[ai/agents-and-tools/evaluating-agents|eval data]], not intuition.
-- **Propose-then-batch** — the agent drafts N actions (replies, fixes); a human
-  reviews the batch. Often 10× reviewer throughput vs gating one action at a time.
-- **Post-hoc sampling** — for auto-run tiers, humans audit a sample of completed
-  actions; the rate adapts to the observed error rate. This is HITL for actions too
-  cheap to gate.
-- **Kill switch + budgets** — a global pause and per-task spend caps are guardrails
-  of last resort; they turn incidents into log lines
-  ([[ai/agents-and-tools/agent-failure-modes|runaway loops]]).
+Show intent, affected object, policy basis, relevant evidence, proposed diff, and
+reversibility. Measure decision time, rejection/override rate, stale-approval rate,
+approval latency, and incidents per thousand autonomous actions. Near-zero rejections with two-second
+approvals may mean a safe auto-run tier—or reviewer fatigue. Sampled post-hoc audit is
+appropriate only after eval evidence supports it.
 
-## Design the human moment (or it's theater)
+## Failure modes and decision rule
 
-The failure mode of HITL is **rubber-stamping**: a reviewer facing 80 opaque
-approvals/day approves them all in batch mode. Measured countermeasures:
+- Input/output filters alone miss harmful but valid-looking actions.
+- A reviewer without power, time, or context is a rubber stamp, not oversight.
+- A gate that kills the task loses repair context; use suspend-and-resume.
+- Over-gating cheap reversible actions delays users and trains blanket approval.
 
-- Show **intent + evidence + diff**, not transcripts. "Refund $84 — order marked
-  delivered-damaged, photo attached, within policy" is decidable in 5 seconds.
-- **Track decision time and override rate.** Median approval in <3s with a ~0% reject
-  rate means the gate is theater — either the agent is genuinely reliable (promote
-  the tool to auto-run + sampling) or reviewers are saturated (lower the gate rate).
-- **Make rejection cheap and informative** — one click + a reason field that flows
-  back into the agent's context and into your
-  [[ai/evaluation/designing-eval-sets|eval set]] as a labeled failure.
+Gate any external, irreversible, high-value, or permission-expanding action until a
+measured policy permits otherwise. When approval latency conflicts with product UX,
+make the task asynchronous rather than weakening the control.
 
-Approval data is a free labeled dataset: every approve/reject is a ground-truth
-judgment on agent behavior. Feed it back into evals and autonomy-promotion decisions
-([[ai/mlops/feedback-loops|feedback loops]]).
+## Exercises
 
-## Production lens
+1. Add expiry and a version check to the artifact; reject a decision after the order changes.
+2. Classify five tools in your product and justify one promotion from approval to sampled audit with eval metrics.
 
-Gates add latency by design — minutes-to-hours, not ms — so the *product* must
-absorb it: async task UX ("I'll notify you when sent") rather than a spinner.
-Instrument the pipeline: gate hit rate, approval latency, override rate, and
-incidents-per-1000-auto-runs are the four numbers that tell you whether to widen or
-tighten autonomy. Expect the steady state to be **mostly auto-run with sampled
-audit** — gates concentrated on the irreversible 5%.
-
-## Failure modes
-
-- **Prompt-only guardrails** — "never delete without asking" is bypassed by the first
-  good injection; enforcement lives in code/permissions.
-- **Gate fatigue** — over-gating reversible actions trains reviewers to approve
-  blindly, which then defeats the gates on irreversible ones.
-- **Approval without context** — a bare "agent wants to run issue_refund" forces the
-  reviewer to either dig (slow) or guess (unsafe).
-- **No resume path** — gates that kill the task instead of suspending it make HITL so
-  painful that teams turn it off.
-
-**Connects to:** [[ai/agents-and-tools/autonomy-and-control|least privilege]] ·
-[[ai/ai-safety-and-security/excessive-agency|excessive agency]] ·
-[[ai/ai-product-engineering/human-in-the-loop-and-trust|HITL UX]] ·
-[[ai/mlops/human-in-the-loop-production|HITL in production]]
+**Connects to:** [[ai/agents-and-tools/autonomy-and-control|least privilege]] · [[ai/agents-and-tools/evaluating-agents|evaluation]] · [[ai/agents-and-tools/agent-failure-modes|failure containment]] · [[ai/ai-safety-and-security/indirect-prompt-injection|prompt injection]]
 
 ## Sources
 
-- [OWASP — LLM06:2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) — names human approval for high-impact actions as a primary mitigation.
-- [Anthropic — Building Effective Agents (Dec 2024)](https://www.anthropic.com/engineering/building-effective-agents) — checkpoints and human feedback loops as core agent architecture, not afterthoughts.
-- [Anthropic docs — Mitigate prompt injection](https://platform.claude.com/docs/en/about-claude/use-case-guides/mitigate-prompt-injections) — why action-layer gates are the injection defense that actually holds.
-- [OpenAI — A Practical Guide to Building Agents (2025)](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) — converging vendor guidance on guardrail layering and escalation design.
+- [OWASP LLM06: Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) — action authority and excessive-permission risks.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — governance and risk-management controls across the lifecycle.
+- [OpenAI: A Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) — layered guardrails and escalation patterns.
+- [Anthropic: Mitigate prompt injection](https://platform.claude.com/docs/en/about-claude/use-case-guides/mitigate-prompt-injections) — why enforcement belongs at the action layer.

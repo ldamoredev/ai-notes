@@ -3,9 +3,38 @@ title: "Handling errors and hallucinations in UI"
 description: AI UI should make errors recoverable: cite evidence, invite correction, separate draft from final, and route unsupported claims safely.
 tags: [ai-product, hallucination, error-handling, ux]
 order: 7
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-playbooks/debug-hallucination]
+last_verified: 2026-07-20
 ---
 # Handling errors and hallucinations in UI
+
+**Mental model:** the UI is a safety boundary: it should expose uncertainty, preserve the user’s agency, and make correction cheaper than overreliance.
+
+## Mechanism: confidence/evidence state → user affordance → feedback signal
+
+```python
+state = {"evidence": False, "action": "ask_clarifying_question"}
+assert not state["evidence"]
+print(state["action"])
+```
+
+Run with `python3`; expected output is `ask_clarifying_question`. Do not hide errors behind confident prose; offer sources, edit/undo, report, and escalation paths.
+
+## Production lens and exercises
+
+Track correction rate, report rate, unsupported-claim rate, time to recovery, and the outcome after escalation. Test the UI with absent evidence, contradictory sources, a tool failure, and an unsafe request; a fallback must preserve the user's next safe action.
+
+1. Design a source card that exposes provenance and lets a user report a mismatch.
+2. Add a regression fixture where the correct product behavior is an explicit “I don't know.”
+
+## Sources
+
+- [People + AI Guidebook](https://pair.withgoogle.com/guidebook/) — human-centered AI interaction patterns.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — transparency and accountability context.
 
 LLMs can produce plausible unsupported claims. Product design cannot eliminate that
 alone, but it can make errors visible, recoverable, and less damaging.

@@ -3,9 +3,35 @@ title: "Human-in-the-loop and trust"
 description: HITL product design gives people enough context and authority to approve, edit, reject, or escalate AI outputs.
 tags: [ai-product, hitl, trust, review]
 order: 6
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/guardrails-and-human-in-the-loop]
+last_verified: 2026-07-20
 ---
 # Human-in-the-loop and trust
+
+## Mechanism: evidence → human decision → resumable system state
+
+```python
+review = {"evidence": "source + diff", "decision": "reject", "reason": "missing proof"}
+print(review["decision"])
+```
+
+Run with `python3`; expected output is `reject`. Product trust requires meaningful authority, clear consequences, low-friction correction, and a record that feeds evaluation.
+
+## Production lens and exercises
+
+Measure approval latency, override rate, appeal outcome, reviewer workload, and incidents after auto-run. A near-zero rejection rate can mean either reliable automation or rubber-stamping; sample completed actions and inspect the evidence.
+
+1. Design a rejection reason that the agent can use to repair its proposal.
+2. Decide which action tier can move from approval to sampled audit and name the required evidence.
+
+## Sources
+
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — accountable human oversight.
+- [People + AI Guidebook](https://pair.withgoogle.com/guidebook/) — user-control patterns.
 
 Human-in-the-loop (HITL) is a trust mechanism only when the human has context,
 authority, and usable controls. Otherwise it becomes a rubber stamp attached to a

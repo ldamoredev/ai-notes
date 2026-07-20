@@ -1,45 +1,53 @@
 ---
 title: "Transparency and explainability"
-description: Transparency tells people how AI is used; explainability tries to make model behavior understandable, but explanations have limits.
+description: Disclose an AI system's role and limits, then test whether explanations are faithful, useful, and connected to a decision or recourse path.
 tags: [transparency, explainability, interpretability]
 order: 5
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/interpretability/index, ai/ai-ethics-and-governance/accountability-and-human-oversight]
+last_verified: 2026-07-20
 ---
 # Transparency and explainability
 
-Transparency and explainability are related but different. Transparency tells people
-when and how AI is involved; explainability tries to make a model's behavior
-understandable enough for debugging, contesting, or oversight.
+**Mental model:** transparency answers what system is involved, for what purpose, and with what limits. Explainability answers how an output was produced or what it means in context. Neither proves correctness, fairness, or accountability; their value is enabling calibration, debugging, review, and recourse.
 
-## Types of transparency
+## Mechanism: audience → question → evidence → action
 
-| Type | Example |
-|---|---|
-| User transparency | disclose chatbot or AI-generated content |
-| System transparency | document model, data, metrics, and limits |
-| Decision transparency | explain important factors in an output |
-| Process transparency | record review, approval, and appeal paths |
-| Provenance transparency | label generated media and source data |
+Choose the audience—user, operator, auditor, or affected person—their decision, and the evidence needed to act. Link an explanation to attribution, example, counterfactual, retrieval citation, model card, or audit log. Test its fidelity and usefulness rather than judging fluent prose.
 
-## Explainability tools
+```python
+explanation = {"audience":"reviewer", "claim":"income changed score", "evidence":"attribution:v7", "action":"request review"}
+assert all(explanation.values())
+print("explanation has a recourse path")
+```
 
-- Feature attribution methods such as SHAP or LIME.
-- Example-based explanations and nearest neighbors.
-- Counterfactual explanations.
-- Attention or saliency visualizations.
-- Model cards, data cards, and evaluation reports.
+Run with `python3`; expected output is `explanation has a recourse path`.
 
-## Limits
+| Surface | Example | Test |
+|---|---|---|
+| User | AI interaction or generated-media disclosure | comprehension and opt-out |
+| Operator | retrieval sources and tool state | correct intervention |
+| Auditor | versions, evals, approvals | reproducible trace |
+| Affected person | decision factors and appeal | meaningful correction |
 
-Post-hoc explanations can be unstable, incomplete, or misleading. For LLMs and
-generative models, fluent rationales can be plausible stories rather than faithful
-accounts of the internal process.
+Post-hoc attribution, attention, saliency, and model-generated rationales can be unstable or non-faithful. Prefer inherently interpretable methods where appropriate; otherwise state limits and test whether an explanation changes when its claimed cause changes.
 
-## Pitfall
+## Failure modes and decision rule
 
-An explanation is not accountability. Users need meaningful recourse, human review, and
-clear ownership when an AI-assisted decision affects them.
+Do not expose confidential prompts as “transparency,” or give a plausible story that cannot be checked. Provide the least information that lets the audience make its legitimate decision, with human escalation for high-impact outcomes.
 
-**Connects to:** [[ai/evaluation/human-evaluation|human evaluation]] ·
-[[ai/multimodal-and-generative/deepfakes-provenance-and-watermarking|provenance]] ·
-[[ai/ai-ethics-and-governance/accountability-and-human-oversight|accountability]]
+## Exercises
+
+1. Add a fidelity test that fails when the cited feature changes but the score does not.
+2. Write separate transparency text for a user and an on-call operator.
+
+**Connects to:** [[ai/interpretability/index|interpretability]] · [[ai/ai-ethics-and-governance/model-cards-and-documentation|documentation]] · [[ai/ai-ethics-and-governance/accountability-and-human-oversight|recourse]]
+
+## Sources
+
+- [NISTIR 8312](https://doi.org/10.6028/NIST.IR.8312) — principles for explainable AI.
+- [NIST AI RMF Measure guidance](https://airc.nist.gov/airmf-resources/playbook/measure/) — explanation evaluation with relevant actors.
+- [Model Cards](https://arxiv.org/abs/1810.03993) — system and model transparency evidence.

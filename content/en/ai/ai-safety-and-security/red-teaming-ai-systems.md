@@ -3,9 +3,29 @@ title: "Red teaming AI systems"
 description: Red teaming exercises AI systems against prompt injection, jailbreaks, data leakage, tool misuse, RAG poisoning, and policy bypasses.
 tags: [ai-safety, red-teaming, evaluation]
 order: 10
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/ai-playbooks/run-ai-red-team-lite]
+last_verified: 2026-07-20
 ---
 # Red teaming AI systems
+
+## Mechanism: attacker goal → reproducible trace → severity → regression
+
+```python
+impact, exploitability = 4, 3
+print("priority", impact * exploitability)
+```
+
+Run with `python3`; expected output is `priority 12`. Test the assembled system—identity, data, retrieval, tools, UI, and operations—record state changes, fix the earliest control gap, then retain the attack as a regression fixture.
+
+## Sources
+
+- [MITRE ATLAS](https://atlas.mitre.org/) — adversarial-ML tactics and techniques.
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — application threat taxonomy.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk and testing framework.
 
 Red teaming is adversarial evaluation. The goal is not to prove the system is safe; it
 is to find plausible ways it fails before users or attackers do.

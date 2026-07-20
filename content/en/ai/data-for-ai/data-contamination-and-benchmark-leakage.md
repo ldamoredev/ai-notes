@@ -3,9 +3,28 @@ title: "Data contamination and benchmark leakage"
 description: Contamination happens when training, prompting, or tuning data overlaps with evaluation data, making scores look better than real generalization.
 tags: [data-for-ai, contamination, benchmarks, leakage]
 order: 7
-updated: 2026-06-07
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/evaluation/designing-eval-sets]
+last_verified: 2026-07-20
+updated: 2026-07-20
 ---
 # Data contamination and benchmark leakage
+
+## Mechanism: source overlap → invalid score → quarantined evaluation
+
+```python
+train, test = {"x1", "x2"}, {"x2", "x3"}
+print("leak" if train & test else "clean")
+```
+
+Run with `python3`; expected output is `leak`. Track provenance, hashes, temporal boundaries, prompts, and access; contamination invalidates the inference from benchmark score to generalization.
+
+## Sources
+
+- [Data Contamination: Benchmark Leakage](https://arxiv.org/abs/2405.14150) — contamination measurement.
+- [HELM](https://crfm.stanford.edu/helm/) — transparent evaluation practice.
 
 Data contamination happens when evaluation examples or their answers appear in training,
 fine-tuning, prompts, retrieval corpora, or manual tuning workflows. The result is a

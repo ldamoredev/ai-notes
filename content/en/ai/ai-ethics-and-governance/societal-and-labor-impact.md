@@ -1,45 +1,49 @@
 ---
 title: "Societal and labor impact"
-description: AI deployment changes work, access, trust, incentives, and power, so product evaluation should include stakeholders beyond direct users.
+description: Evaluate how AI redistributes tasks, discretion, error burden, access, and power across workers and affected people—not just productivity.
 tags: [societal-impact, labor, responsible-ai]
 order: 11
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-product-engineering/product-metrics-for-ai, ai/ai-ethics-and-governance/accountability-and-human-oversight]
+last_verified: 2026-07-20
 ---
 # Societal and labor impact
 
-AI systems can reshape work, access to services, information ecosystems, and bargaining
-power. Those effects may not appear in model accuracy, latency, or cost metrics.
+**Mental model:** automation reallocates work and authority. Measure who saves time, who does hidden review, who bears wrong-output cost, and who can challenge a decision. A throughput gain can transfer risk to workers, customers, or contractors.
 
-## Impact dimensions
+## Mechanism: task change → stakeholder harm → control
 
-| Dimension | Questions |
+Decompose the workflow, identify affected stakeholders and changed decision rights, then compare outcomes before and after deployment. Include users, workers, decision subjects, support teams, and data contributors. Consultation and appeal data belong in the evaluation fixture.
+
+```python
+before = {"agent_minutes": 12, "review_minutes": 0, "appeals": 3}
+after = {"agent_minutes": 4, "review_minutes": 10, "appeals": 9}
+print("changed review burden", after["review_minutes"] - before["review_minutes"])
+```
+
+Run with `python3`; expected output is `changed review burden 10`. Keep time, errors, and appeals separate rather than claiming one productivity number explains all effects.
+
+| Question | Evidence |
 |---|---|
-| Labor | does the system augment workers, deskill them, or displace tasks? |
-| Access | who gains or loses access to services or information? |
-| Power | who can challenge decisions and who cannot? |
-| Quality | does automation improve outcomes or just speed up bad processes? |
-| Incentives | does the product encourage surveillance, overwork, or overreliance? |
-| Trust | does generated content erode trust in authentic media or expertise? |
+| Is work augmented or intensified? | task study and worker feedback |
+| Who bears error cost? | incidents and appeal slices |
+| Can people contest decisions? | accessible recourse and overturn rate |
+| Does surveillance or power change? | data and access-policy review |
 
-## Stakeholder analysis
+The ILO's 2025 update treats occupational exposure as distinct from job loss; task and context matter. Require stakeholder review and an appeal path when deployment changes work allocation or access to material services. Pause when measured harm exceeds its accepted benefit.
 
-Look beyond the buyer and direct user. Include affected workers, customers, subjects of
-decisions, data contributors, auditors, support teams, and people exposed to generated
-content.
+## Exercises
 
-## Practical controls
+1. Add an error-burden metric for one workflow.
+2. Design feedback collection independent of the AI system being judged.
 
-- Impact assessment before high-stakes deployment.
-- Worker and affected-user feedback channels.
-- Clear escalation and appeal processes.
-- Monitoring for automation bias and overreliance.
-- Governance review when deployment changes job roles or access.
+**Connects to:** [[ai/ai-product-engineering/product-metrics-for-ai|product metrics]] · [[ai/evaluation/human-evaluation|human evaluation]] · [[ai/ai-ethics-and-governance/accountability-and-human-oversight|accountability]]
 
-## Pitfall
+## Sources
 
-"Human productivity" can hide where costs are shifted. Measure who saves time, who
-absorbs review work, who loses agency, and who carries error risk.
-
-**Connects to:** [[ai/ai-product-engineering/product-metrics-for-ai|product metrics]] ·
-[[ai/evaluation/human-evaluation|human evaluation]] ·
-[[ai/ai-ethics-and-governance/accountability-and-human-oversight|accountability]]
+- [ILO: Generative AI and jobs, 2025 update](https://www.ilo.org/publications/generative-ai-and-jobs-2025-update) — task-level exposure evidence and limits.
+- [OECD AI Principles](https://oecd.ai/en/ai-principles) — inclusive growth and human-centered values.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — socio-technical risk framing.

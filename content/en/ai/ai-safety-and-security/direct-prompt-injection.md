@@ -3,9 +3,28 @@ title: "Direct prompt injection"
 description: Direct prompt injection happens when a user sends instructions that try to override the system prompt, policy, tools, or data boundaries.
 tags: [ai-safety, prompt-injection, security]
 order: 2
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/autonomy-and-control]
+last_verified: 2026-07-20
 ---
 # Direct prompt injection
+
+## Mechanism: untrusted request → model proposal → deterministic policy
+
+```python
+user_intent, proposed = {"search"}, "send_email"
+print("block" if proposed not in user_intent else "allow")
+```
+
+Run with `python3`; expected output is `block`. Treat user text as data, minimize secrets in context, and authorize every tool action outside the model.
+
+## Sources
+
+- [OWASP Prompt Injection Prevention](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html) — current mitigation guidance.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk controls.
 
 Direct prompt injection is an attacker-controlled input that tries to make the model
 ignore higher-priority instructions, reveal hidden context, bypass policy, or misuse

@@ -3,9 +3,28 @@ title: "Latency vs cost vs quality"
 description: AI product work is a three-way tradeoff: better models and richer context improve quality but usually increase latency and cost.
 tags: [ai-product, latency, cost, quality]
 order: 3
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/inference-and-optimization/index]
+last_verified: 2026-07-20
 ---
 # Latency vs cost vs quality
+
+## Mechanism: workload → measured frontier → product constraint
+
+```python
+options = [(0.90, 1.8, .04), (.86, .7, .01)] # quality, seconds, dollars
+print([x for x in options if x[0] >= .89 and x[1] <= 2])
+```
+
+Run with `python3`; expected output retains only the configuration meeting its quality/latency gate. Optimize only within explicit safety and product constraints.
+
+## Sources
+
+- [vLLM](https://arxiv.org/abs/2309.06180) — serving throughput tradeoffs.
+- [FlashAttention](https://arxiv.org/abs/2205.14135) — IO-aware efficiency.
 
 AI product decisions usually move along a triangle: latency, cost, and quality. Larger
 models, longer context, tool calls, and reranking can improve quality, but they often

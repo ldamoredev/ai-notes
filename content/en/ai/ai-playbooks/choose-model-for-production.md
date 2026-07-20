@@ -1,49 +1,58 @@
 ---
 title: "Choose a model for production"
-description: A decision procedure for selecting a production model using product evals, cost, latency, safety, reliability, context needs, and operational constraints.
+description: Choose the least-cost model configuration that clears held-out product-quality, safety, reliability, latency, privacy, and operational thresholds.
 tags: [playbook, model-selection, production]
 order: 9
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/evaluation/model-vs-product-evals, ai/inference-and-optimization/index]
+last_verified: 2026-07-20
 ---
 # Choose a model for production
 
-Use this playbook when deciding which model should power a real product workflow. The
-best benchmark model is not automatically the best production model.
+**Mental model:** model selection is constrained optimization over a real workload, not a leaderboard lookup. A model is admissible only after it passes product tasks, safety and schema rules, latency/cost budgets, provider/data constraints, and a rollback plan. Optimize cost only among admissible options.
 
-## Inputs
+## Mechanism: evaluate → constrain → route
 
-- Product eval suite and target slices.
-- Latency, cost, context-window, privacy, and reliability constraints.
-- Candidate models with pricing, rate limits, tool support, structured-output support, and deployment options.
+Fix the task distribution, run equivalent versioned evals across candidates, reject any that miss a non-negotiable gate, then choose the lowest-cost remaining configuration. Deploy it behind a monitored fallback. Re-run the selection whenever the model snapshot, prompt, routing, tools, provider, or traffic changes.
+
+```python
+candidates = [{"name":"A", "quality":.91, "p95":1.8, "cost":.03}, {"name":"B", "quality":.89, "p95":1.1, "cost":.01}]
+eligible = [m for m in candidates if m["quality"] >= .90 and m["p95"] <= 2]
+print(min(eligible, key=lambda m: m["cost"])["name"])
+```
+
+Run with `python3`; expected output is `A`: B is cheaper but fails quality. A production chooser adds safety, availability, region, and data-policy gates.
 
 ## Procedure
 
-1. Define the product task and non-negotiable constraints.
-2. Shortlist models using broad capability, context window, provider fit, and data policy.
-3. Run the same product eval suite across candidates.
-4. Compare quality by slice, not only aggregate score.
-5. Measure latency, cost, output length, retry rate, and format reliability.
-6. Test safety behavior and refusal quality on risk cases.
-7. Check operational concerns: rate limits, uptime, observability, regional availability, and fallback options.
-8. Choose the cheapest model that clears quality, safety, and operational gates.
-9. Define fallback and re-evaluation cadence before launch.
+1. Define acceptance thresholds, critical slices, prohibited outcomes, and p95 budgets.
+2. Shortlist by data policy, region, context, tool/schema support, rate limit, and fallback compatibility.
+3. Measure holdout success, refusal quality, schema validity, retries, tokens, latency, and cost per successful task.
+4. Inspect slice and adversarial failures; reject a model that only improves the aggregate.
+5. Record the decision and deploy with alerts and a tested fallback.
 
-## Comparison matrix
-
-| Dimension | Question |
+| Dimension | Gate |
 |---|---|
-| Quality | does it pass the product eval suite? |
-| Cost | what is cost per successful task? |
-| Latency | does p95 fit the workflow? |
-| Reliability | does it follow schema and tool contracts? |
-| Safety | does it refuse and escalate correctly? |
-| Operations | can the team monitor, route, and fall back? |
+| Quality | holdout success by critical slice |
+| Reliability | schema/tool validity and retry rate |
+| Safety | forbidden-action and escalation tests |
+| Operations | p95 latency, capacity, observability, fallback |
+| Governance | data policy, region, retention, vendor terms |
 
-## Pitfall
+Public benchmarks are priors, not product evidence. Roll back when a critical slice or safety gate fails even if average quality improves.
 
-Do not compare models on a few demos. Demos reward fluency; production rewards
-reliable behavior across the distribution.
+## Exercises
 
-**Connects to:** [[ai/evaluation/model-vs-product-evals|model vs product evals]] ·
-[[ai/evaluation/public-benchmarks-and-limits|public benchmarks]] ·
-[[ai/mlops/serving-and-inference|serving and inference]]
+1. Add a 99.5% schema-validity constraint to the artifact.
+2. Write a fallback test for a forced provider outage.
+
+**Connects to:** [[ai/evaluation/model-vs-product-evals|product evals]] · [[ai/evaluation/public-benchmarks-and-limits|benchmarks]] · [[ai/mlops/serving-and-inference|serving]] · [[ai/agents-and-tools/evaluating-agents|agent evals]]
+
+## Sources
+
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk-based selection context.
+- [HELM](https://crfm.stanford.edu/helm/) — transparent multi-scenario evaluation.
+- [OpenAI model-selection guide](https://platform.openai.com/docs/guides/model-selection) — provider model tradeoffs.

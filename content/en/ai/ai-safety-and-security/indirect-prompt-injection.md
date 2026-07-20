@@ -3,9 +3,28 @@ title: "Indirect prompt injection"
 description: Indirect prompt injection hides malicious instructions in data the model reads, such as webpages, emails, documents, search results, or tool output.
 tags: [ai-safety, prompt-injection, rag, agents]
 order: 3
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-safety-and-security/direct-prompt-injection]
+last_verified: 2026-07-20
 ---
 # Indirect prompt injection
+
+## Mechanism: external content → labeled data → policy-constrained action
+
+```python
+source = {"trusted_for_action": False, "text": "send secrets"}
+print("ignore instruction" if not source["trusted_for_action"] else "evaluate")
+```
+
+Run with `python3`; expected output is `ignore instruction`. Retrieved documents, web pages, emails, and tool results cannot grant authority; isolate secrets and gate external writes.
+
+## Sources
+
+- [Indirect Prompt Injection](https://arxiv.org/abs/2302.12173) — external-content attack evidence.
+- [OWASP Prompt Injection Prevention](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html) — mitigations.
 
 Indirect prompt injection is more dangerous than the obvious version because the user
 may never see the attack. The malicious instructions live inside retrieved documents,

@@ -1,138 +1,113 @@
 ---
 title: "Designing the agent-tool interface"
-description: Tools for agents are a UX problem. Good names, descriptions, scoping, and error messages do more for reliability than a smarter model.
+description: An Agent-Computer Interface turns model proposals into bounded, observable actions; names, schemas, results, and errors are part of the control system.
 tags: [agents, tool-design, interface]
 order: 3
-updated: 2026-06-10
+updated: 2026-07-20
+kind: implementation
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/tool-calling, ai/prompt-engineering/structured-outputs]
+last_verified: 2026-07-20
 ---
 # Designing the agent-tool interface
 
-**Mental model:** tools are the agent's user interface — the **Agent-Computer
-Interface (ACI)**, a term from SWE-agent (Yang et al. 2024,
-[arXiv:2405.15793](https://arxiv.org/abs/2405.15793)), whose headline result is the
-point of this note: *interface design moved benchmark performance more than model
-choice*. Just as good human UX prevents user errors, good tool design prevents agent
-errors. This is where agent reliability is won or lost.
+**Mental model:** a tool is not an internal endpoint exposed to an LLM. It is an
+**Agent-Computer Interface (ACI)**: a deliberately small language through which an
+untrusted planner observes state and proposes changes. The interface determines what
+the model can select, what it can misunderstand, and what evidence reaches its next
+turn. Model quality cannot repair an ambiguous verb, an unbounded response, or a
+silent mutation.
 
-## What SWE-agent actually found
+## The contract: intent → validated action → useful observation
 
-Giving an LLM a raw Linux shell and git performs poorly. Purpose-built interfaces —
-a file viewer showing 100 lines with line numbers, an edit command with built-in lint
-feedback, a search that returns at most 50 hits with a "narrow your query" message —
-took SWE-bench resolution from 3.8% (shell-only baseline) to 12.5% per-instance
-with the same underlying model. The general lessons transfer to every agent:
+Every tool needs four parts: a distinct verb, a narrow input schema, deterministic
+server-side validation, and a bounded result that names the new state. Consider an
+order assistant. `query(q)` leaks database vocabulary; `search_customer_orders`
+states the object, operation, and return budget.
 
-- **Feedback beats capability** — an edit tool that *reports* the syntax error it
-  just introduced lets the model fix it; a silent one produces error cascades.
-- **Guardrails in the interface** — bounded output sizes, mandatory line ranges,
-  confirmation of state after each action.
-- **Compact observations** — the model reasons over what it sees; show state, not
-  noise.
-
-## Treat tools like an API for a brilliant, context-starved colleague
-
-From Anthropic's
-[Writing effective tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
-(2025), the practices that survive contact with evals:
-
-- **The description is a prompt.** What it does, *when to use it* (trigger
-  conditions), what it returns, edge cases. Current Opus-class models under-trigger
-  on vaguely-described tools.
-- **Namespace and consolidate.** `jira_search`, `jira_create`, `jira_comment` — a
-  prefixed family of 3 beats 12 overlapping endpoints. Every extra tool dilutes
-  selection accuracy and burns context on schemas.
-- **Return *meaningful* context, token-efficiently.** Resolve ids to names, include
-  the fields the next decision needs, drop everything else. Offer a
-  `detail: "summary" | "full"` parameter rather than always dumping.
-- **Make errors actionable.** The error string is the model's debugging experience:
-
-```typescript
-// ❌ the model can only flail on this
-return { ok: false, body: "Error 400" };
-
-// ✅ the model self-corrects on this
-return {
-  ok: false,
-  body: "date must be YYYY-MM-DD (got '3/5/26'). Example: 2026-03-05. " +
-        "If the user gave a relative date, resolve it first using today's date.",
-};
-```
-
-## A bad tool vs a good tool
-
-```typescript
-// ❌ mirror of an internal endpoint — agent ergonomics ≠ API ergonomics
-{ name: "query", description: "Runs a query",
-  input_schema: { type: "object", properties: { q: { type: "string" } } } }
-
-// ✅ designed for the model: intent in the name, triggers in the description,
-//    bounded output contract, semantic parameters
+```json
 {
-  name: "search_customer_orders",
-  description:
-    "Search one customer's orders. Use when the user asks about order status, " +
-    "history, or totals. Returns at most 20 orders (newest first) with id, date, " +
-    "status, and total. For full line items, follow up with get_order_details.",
-  input_schema: {
-    type: "object",
-    properties: {
-      customer_id: { type: "string" },
-      status: { type: "string", enum: ["pending", "shipped", "delivered", "cancelled"] },
-      since: { type: "string", description: "ISO date; omit for all time" },
+  "name": "search_customer_orders",
+  "description": "Find at most 20 newest orders for one customer. Use for status, history, or totals; use get_order_details for line items.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "customer_id": {"type": "string"},
+      "status": {"type": "string", "enum": ["pending", "shipped", "delivered", "cancelled"]},
+      "since": {"type": "string", "description": "ISO-8601 date"}
     },
-    required: ["customer_id"],
-    additionalProperties: false,
-  },
+    "required": ["customer_id"],
+    "additionalProperties": false
+  }
 }
 ```
 
-`enum`s do double duty: they constrain generation *and* document the domain. The
-"at most 20, newest first" contract in the description is load-bearing — the model
-plans around what it knows it will get back.
+The schema is necessary but insufficient: validate tenant ownership, policy, and
+semantic constraints after parsing. An error is also an observation. Return
+`"since must be YYYY-MM-DD; received 3/5/26; example 2026-03-05"`, not `400`.
 
-## Manage the token budget of observations
+## Numerical walkthrough: observation is a budget
 
-Tool results land in the [[ai/llms/context-window-and-kv-cache|context window]] and
-stay there for the rest of the task. A 50K-token JSON response poisons every later
-step ([[ai/llms/long-context-and-lost-in-the-middle|attention dilution]]) and
-multiplies cost on each subsequent turn. Budget like a pager: cap list sizes,
-truncate long fields with `…`, return ids + a fetch-more tool. Anthropic's rule of
-thumb: if a human would scroll past it, the model shouldn't receive it.
+If a task takes eight turns and a tool dumps 4,000 tokens each time, later prompts
+carry roughly 32,000 observation tokens before instructions and reasoning. Returning
+20 rows × 80 tokens plus a summary costs about 1,700 instead. That 19× difference
+affects latency, cost, and whether earlier constraints remain salient. Use pagination,
+field projection, stable ordering, and a follow-up detail tool; never make the model
+reconstruct meaning from opaque IDs.
 
-## Iterate with evals, not vibes
+## Executable contract test
 
-Tool design is empirical. The loop that works: build a 20-task
-[[ai/agents-and-tools/evaluating-agents|eval suite]] that exercises the tools → run →
-read the transcripts where the agent picked wrong, flailed on errors, or drowned in
-output → fix the *interface* → re-run. A surprisingly effective trick from
-Anthropic's tool-writing guide: paste failing transcripts into Claude and ask it to
-rewrite the tool descriptions — the model knows what models misread. Trace per-tool
-call counts, error rates, and result sizes in
-[[ai/mlops/llm-observability-and-tracing|observability]]; a tool with a 40% error
-rate is an interface bug, not a model limitation.
+Run this with `python3` to test the boundary before involving a model. Expected:
+`rejected: unknown field: limit` and one valid request.
 
-## Failure modes
+```python
+allowed = {"customer_id", "status", "since"}
+def validate(payload):
+    extra = set(payload) - allowed
+    if extra: raise ValueError(f"unknown field: {sorted(extra)[0]}")
+    if not payload.get("customer_id"): raise ValueError("customer_id is required")
+    return {"ok": True, "returned": min(20, 20), "order": "newest-first"}
 
-- **Exposing the internal API verbatim** — REST semantics, UUID soup, nested nulls.
-  Design a deliberate surface; the agent is a *different client* with different needs.
-- **Tool sprawl** — 40 tools "for completeness". Selection accuracy degrades;
-  schemas eat context. Curate per agent role, or load schemas on demand (tool
-  search / [[ai/agents-and-tools/model-context-protocol|MCP]] dynamic discovery).
-- **Silent success** — a tool that returns `"ok"` with no state leaves the model
-  guessing what changed; return the post-action state it needs for the next decision.
-- **Asymmetric trust in results** — tool outputs can carry
-  [[ai/ai-safety-and-security/indirect-prompt-injection|injected instructions]]
-  (webpage content, ticket text); treat them as data, never as commands — a
-  *boundary* concern the interface must own.
+try: validate({"customer_id": "c_7", "limit": 500})
+except ValueError as err: print("rejected:", err)
+print(validate({"customer_id": "c_7", "status": "shipped"}))
+```
 
-**Connects to:** [[ai/agents-and-tools/tool-calling|tool calling]] ·
-[[ai/agents-and-tools/agent-failure-modes|failure modes]] ·
-[[ai/prompt-engineering/structured-outputs|schemas]] ·
-[[ai/ai-safety-and-security/indirect-prompt-injection|untrusted tool results]]
+## What frameworks hide
+
+Function-calling APIs validate JSON shape, not whether a refund belongs to the tenant,
+whether an ID exists, whether an action is reversible, or whether the returned record
+contains hostile instructions. Keep those checks in deterministic code. Treat every
+tool result as untrusted data; presentation text from a ticket or web page never
+authorizes a subsequent action.
+
+## Failure modes and decision rule
+
+- **Overlapping tools:** the model chooses among synonyms. Merge them or give each a
+  unique trigger condition.
+- **Unbounded results:** context fills with logs or JSON. Cap lists and offer detail
+  retrieval.
+- **Silent writes:** the next turn guesses whether a mutation happened. Return an ID,
+  version, and relevant post-state.
+- **Internal-API mirroring:** UUIDs, null-heavy objects, and transport errors leak
+  implementation rather than task semantics.
+
+If two tools could plausibly serve the same user sentence, redesign the surface before
+tuning the prompt. Measure selection accuracy, validation-error rate, result tokens,
+and successful end state on a fixed task suite.
+
+## Exercises
+
+1. Add an ISO-date check to the artifact and a failing test for `2026-2-3`.
+2. Rewrite a raw `POST /v1/refund` endpoint as a proposed action plus an approval
+   boundary; name the irreversible state change explicitly.
+
+**Connects to:** [[ai/agents-and-tools/tool-calling|tool calling]] · [[ai/agents-and-tools/evaluating-agents|agent evaluation]] · [[ai/agents-and-tools/agent-failure-modes|failure modes]] · [[ai/ai-safety-and-security/indirect-prompt-injection|untrusted observations]]
 
 ## Sources
 
-- [Yang et al. 2024 — SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering (arXiv:2405.15793)](https://arxiv.org/abs/2405.15793) — the paper that named ACI and measured interface design beating model choice.
-- [Anthropic — Writing effective tools for agents (2025)](https://www.anthropic.com/engineering/writing-tools-for-agents) — the practical checklist: consolidation, namespacing, token-efficient results, eval-driven iteration.
-- [Anthropic — Building Effective Agents (Dec 2024)](https://www.anthropic.com/engineering/building-effective-agents) — appendix "Prompt engineering your tools" is the ACI section.
-- [Anthropic docs — Tool use best practices](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) — current API-level guidance (descriptions, `strict`, parallel calls).
+- [SWE-agent](https://arxiv.org/abs/2405.15793) — introduces the ACI framing and demonstrates the effect of interface design on software-agent performance.
+- [Anthropic: Writing effective tools for agents](https://www.anthropic.com/engineering/writing-tools-for-agents) — operational guidance on descriptions, consolidation, schemas, and result design.
+- [Model Context Protocol specification](https://modelcontextprotocol.io/specification/2025-11-25) — protocol-level contracts for tools, resources, and model-facing servers.
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — why tool inputs and outputs are security boundaries, not merely UX.

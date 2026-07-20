@@ -3,9 +3,29 @@ title: "Data pipelines, versioning, and lineage"
 description: Data pipelines need versioning and lineage so training, evaluation, retrieval, and monitoring datasets can be reproduced and audited.
 tags: [data-for-ai, pipelines, lineage, versioning]
 order: 9
-updated: 2026-06-07
+updated: 2026-07-20
+kind: implementation
+level: intermediate
+status: current
+prerequisites: [ai/data-for-ai/datasheets-and-data-documentation]
+last_verified: 2026-07-20
 ---
 # Data pipelines, versioning, and lineage
+
+## Mechanism: immutable input → transformation version → output manifest
+
+```python
+manifest = {"raw":"sha256:a", "transform":"clean:v3", "output":"sha256:b"}
+assert len(manifest) == 3
+print("lineage is reproducible")
+```
+
+Run with `python3`; expected output is `lineage is reproducible`. Record code, configuration, environment, source snapshot, validation result, and consumer; rollback by restoring the manifest, not guessing from a mutable table.
+
+## Sources
+
+- [ML Metadata](https://www.tensorflow.org/tfx/guide/mlmd) — lineage metadata concepts.
+- [Google Rules of ML](https://developers.google.com/machine-learning/guides/rules-of-ml) — data-pipeline discipline.
 
 AI teams need to know exactly which data produced a model, eval score, vector index, or
 product behavior. Versioning and lineage turn datasets from loose files into auditable

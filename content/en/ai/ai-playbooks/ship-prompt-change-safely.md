@@ -3,9 +3,18 @@ title: "Ship a prompt change safely"
 description: A release procedure for treating prompt edits like product logic: versioned, evaluated, compared, monitored, and rolled back when needed.
 tags: [playbook, prompts, release, evaluation]
 order: 7
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/evaluation/prompt-regression-testing]
+last_verified: 2026-07-20
 ---
 # Ship a prompt change safely
+
+**Mental model:** a prompt is production logic. Treat every edit as a versioned behavioral change with a baseline, holdout comparison, launch gate, monitoring plan, and rollback owner.
+
+## Mechanism: candidate → differential eval → gradual release or rollback
 
 Use this playbook when a prompt edit is ready to move beyond local testing and into a
 shared environment, release branch, or production traffic.
@@ -48,3 +57,18 @@ example is now a dev case; the regression suite decides.
 **Connects to:** [[ai/evaluation/prompt-regression-testing|prompt regression testing]] ·
 [[ai/prompt-engineering/evaluating-and-iterating-prompts|evaluating prompts]] ·
 [[ai/mlops/model-and-prompt-registry|prompt registry]]
+
+## Executable release gate
+
+```python
+baseline, candidate, safety_ok = .88, .90, True
+print("release" if candidate >= baseline and safety_ok else "rollback")
+```
+
+Run with `python3`; expected output is `release`. Compare critical slices, p95 latency, cost, format validity, refusals, and incident cases—not one aggregate score.
+
+## Sources
+
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — lifecycle controls.
+- [HELM](https://crfm.stanford.edu/helm/) — scenario-based evaluation.
+- [OpenAI Cookbook](https://cookbook.openai.com/) — executable eval patterns.

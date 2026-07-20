@@ -3,9 +3,35 @@ title: "Product guardrails"
 description: Product guardrails define what the AI feature may do, when it must refuse, when it must ask, and when it must escalate.
 tags: [ai-product, guardrails, safety, policy]
 order: 9
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/guardrails-and-human-in-the-loop]
+last_verified: 2026-07-20
 ---
 # Product guardrails
+
+## Mechanism: user intent → policy check → safe action or recovery
+
+```python
+requested, allowed = "send_email", {"search", "draft"}
+print("block" if requested not in allowed else "execute")
+```
+
+Run with `python3`; expected output is `block`. Product guardrails must be deterministic, observable, tested against adversarial input, and paired with a usable recovery path.
+
+## Production lens and exercises
+
+Log the policy version, input class, decision, reason, latency, override, and downstream state. Monitor block and false-block rates by workflow; a guardrail that silently blocks legitimate work invites unsafe bypasses.
+
+1. Add tenant scope and an approval tier to the artifact.
+2. Test that a retrieved instruction cannot expand the allowlist.
+
+## Sources
+
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — application guardrail risks.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — governance controls.
 
 Product guardrails are the product-level rules around model behavior: what the feature
 can do, what it must not do, when it asks clarification, and when it escalates to a

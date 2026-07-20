@@ -3,9 +3,28 @@ title: "Dataset design and sampling"
 description: Dataset design decides which distribution, slices, negatives, and splits a model learns from and is evaluated against.
 tags: [data-for-ai, sampling, splits]
 order: 4
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/data-for-ai/data-quality-dimensions]
+last_verified: 2026-07-20
 ---
 # Dataset design and sampling
+
+## Mechanism: population → inclusion rule → sample → coverage audit
+
+```python
+population, sampled = 1000, 100
+print("sampling_fraction", sampled/population)
+```
+
+Run with `python3`; expected output is `sampling_fraction 0.1`. Define the target population, unit, time window, inclusion/exclusion criteria, collection process, and subgroup coverage before fitting a model.
+
+## Sources
+
+- [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) — design and collection documentation.
+- [Fairness and Machine Learning](https://fairmlbook.org/) — representation and sampling implications.
 
 A dataset is not a random pile of examples. It is an engineered sample of a task,
 distribution, user population, time period, and risk surface.

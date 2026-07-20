@@ -3,9 +3,28 @@ title: "Data-centric AI"
 description: Data-centric AI holds the model mostly fixed and improves the data, because data quality, coverage, and labels often dominate model choice.
 tags: [data-for-ai, data-centric-ai, datasets]
 order: 1
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: foundational
+status: current
+prerequisites: [ai/data-for-ai/data-quality-dimensions]
+last_verified: 2026-07-20
 ---
 # Data-centric AI
+
+## Mechanism: data failure → measurable intervention → held-out outcome
+
+```python
+labels_before, labels_after = .82, .91
+print("improved" if labels_after > labels_before else "investigate")
+```
+
+Run with `python3`; expected output is `improved`. Improve data coverage, labels, measurement, and lineage before assuming a model change is the remedy; validate every intervention on a held-out task slice.
+
+## Sources
+
+- [Data Cascades in High-Stakes AI](https://research.google/pubs/data-cascades-in-high-stakes-ai/) — compounding data failures.
+- [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) — data lifecycle questions.
 
 Data-centric AI treats the dataset as the main product of iteration. Instead of
 immediately swapping architectures or prompts, you improve labels, coverage, examples,

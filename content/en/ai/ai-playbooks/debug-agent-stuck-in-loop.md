@@ -3,9 +3,18 @@ title: "Debug an agent stuck in a loop"
 description: A practical procedure for diagnosing agent loops caused by unclear goals, bad tool feedback, weak state, missing stop rules, or excessive autonomy.
 tags: [playbook, agents, debugging]
 order: 3
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/agent-failure-modes]
+last_verified: 2026-07-20
 ---
 # Debug an agent stuck in a loop
+
+**Mental model:** a loop is a control failure: an unchanged state produces the same proposal. Find the earliest repeated observation, tool precondition, or absent stop rule; do not pay for another identical turn.
+
+## Mechanism: trace → detector → recovery or stop
 
 Use this playbook when an agent repeats the same tool call, retries without progress,
 oscillates between plans, or burns tokens without reaching a terminal state.
@@ -40,6 +49,20 @@ oscillates between plans, or burns tokens without reaching a terminal state.
 
 Do not only raise the step limit. A higher limit turns a loop into a more expensive
 loop unless the agent receives new state, better feedback, or a stopping rule.
+
+## Executable detector
+
+```python
+calls = [("search", "x"), ("search", "x")]
+print("REPEAT_CALL" if calls[-1] == calls[-2] else "continue")
+```
+
+Run with `python3`; expected output is `REPEAT_CALL`. Persist the trace, steer once with the exact failure, then abort or escalate at the budget boundary.
+
+## Sources
+
+- [τ-bench](https://arxiv.org/abs/2406.12045) — repeated-use reliability for tool agents.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — operational risk controls.
 
 **Connects to:** [[ai/agents-and-tools/agent-failure-modes|agent failure modes]] ·
 [[ai/agents-and-tools/react-loop|ReAct loop]] ·

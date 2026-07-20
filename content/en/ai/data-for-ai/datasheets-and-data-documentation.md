@@ -3,9 +3,29 @@ title: "Datasheets and data documentation"
 description: Datasheets and data cards document why a dataset exists, how it was collected, what it contains, where it fails, and how it should be used.
 tags: [data-for-ai, documentation, datasheets]
 order: 11
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/data-for-ai/data-pipelines-versioning-and-lineage]
+last_verified: 2026-07-20
 ---
 # Datasheets and data documentation
+
+## Mechanism: dataset decision → documented evidence → consumer constraint
+
+```python
+card = {"purpose":"support", "collection":"opt-in", "limits":"English only", "owner":"data"}
+assert all(card.values())
+print("dataset contract exists")
+```
+
+Run with `python3`; expected output is `dataset contract exists`. Document motivation, composition, collection, preprocessing, recommended and prohibited use, rights, maintenance, and change history; consumers must treat gaps as constraints, not footnotes.
+
+## Sources
+
+- [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) — original documentation framework.
+- [Data Cards](https://research.google/pubs/data-cards-purposeful-and-transparent-dataset-documentation-for-responsible-ai/) — structured communication.
 
 Dataset documentation makes data assumptions visible. A datasheet or data card records
 how a dataset was created, what it represents, what it excludes, and how it should or

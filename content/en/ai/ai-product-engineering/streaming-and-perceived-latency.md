@@ -3,9 +3,28 @@ title: "Streaming and perceived latency"
 description: Streaming does not make generation faster, but it can make the product feel responsive when the partial output is useful.
 tags: [ai-product, streaming, latency, ux]
 order: 2
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/inference-and-optimization/latency-vs-throughput]
+last_verified: 2026-07-20
 ---
 # Streaming and perceived latency
+
+## Mechanism: first signal → useful partial → validated final state
+
+```python
+ttft, useful, final = .3, 1.1, 4.8
+print("time_to_useful", useful, "time_to_final", final)
+```
+
+Run with `python3`; expected output separates perceived responsiveness from completion. Stream only content that can safely be shown; buffer strict schemas and high-impact actions until validation passes.
+
+## Sources
+
+- [Google SRE Book: Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/) — latency and failure-management context.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — user-facing risk management.
 
 Streaming sends partial output as the model generates it. It does not reduce total
 generation time, but it reduces perceived waiting and gives the user early evidence

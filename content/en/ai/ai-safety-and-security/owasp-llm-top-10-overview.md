@@ -3,9 +3,29 @@ title: "OWASP LLM Top 10 overview"
 description: OWASP's LLM Top 10 is a practical taxonomy for LLM application risks such as prompt injection, data leakage, excessive agency, and insecure output handling.
 tags: [ai-safety, owasp, threat-modeling]
 order: 1
-updated: 2026-06-07
+updated: 2026-07-20
+kind: overview
+level: foundational
+status: current
+prerequisites: [ai/ai-safety-and-security/index]
+last_verified: 2026-07-20
 ---
 # OWASP LLM Top 10 overview
+
+## Mechanism: threat scenario → system control → tested residual risk
+
+```python
+finding = {"risk":"prompt injection", "owner":"security", "test":"indirect fixture"}
+assert all(finding.values())
+print("risk is operationalized")
+```
+
+Run with `python3`; expected output is `risk is operationalized`. Use OWASP as a threat taxonomy, not a compliance stamp: map each applicable risk to owners, evidence, monitoring, and a remediation decision.
+
+## Sources
+
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — authoritative risk taxonomy.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk-management process.
 
 OWASP's LLM Top 10 is useful because it names LLM-specific application risks in a
 language security engineers can act on. It is not a checklist to memorize; it is a map

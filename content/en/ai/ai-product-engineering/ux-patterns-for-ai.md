@@ -3,9 +3,28 @@ title: "UX patterns for AI"
 description: AI UX is about exposing capability while making uncertainty, control, review, and recovery visible to the user.
 tags: [ai-product, ux, interface-patterns]
 order: 1
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-product-engineering/onboarding-and-expectations]
+last_verified: 2026-07-20
 ---
 # UX patterns for AI
+
+## Mechanism: task stakes → interaction pattern → correction and recourse
+
+```python
+risk, reversible = "high", False
+print("review_queue" if risk == "high" or not reversible else "copilot")
+```
+
+Run with `python3`; expected output is `review_queue`. Test comprehension, user control, correction success, escalation, and overreliance—not visual polish alone.
+
+## Sources
+
+- [People + AI Guidebook](https://pair.withgoogle.com/guidebook/) — AI interaction patterns.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — transparency and accountability context.
 
 AI features need interfaces that admit uncertainty. The product should make it clear
 what the system can do, what evidence it used, how the user can steer it, and how to

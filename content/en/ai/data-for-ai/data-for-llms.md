@@ -3,9 +3,28 @@ title: "Data for LLMs"
 description: LLM data work covers corpus selection, filtering, deduplication, mixture design, licensing, quality signals, and safety filtering at scale.
 tags: [data-for-ai, llms, pretraining]
 order: 8
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/data-for-ai/data-quality-dimensions]
+last_verified: 2026-07-20
 ---
 # Data for LLMs
+
+## Mechanism: corpus policy → tokenized examples → objective → evaluation boundary
+
+```python
+documents = {"licensed": 12, "unknown_rights": 2}
+print("quarantine", documents["unknown_rights"])
+```
+
+Run with `python3`; expected output identifies material requiring policy review. LLM data needs provenance, rights, quality, deduplication, PII controls, contamination checks, and versioned mixtures.
+
+## Sources
+
+- [The Pile](https://arxiv.org/abs/2101.00027) — large-scale corpus construction.
+- [Data Provenance Initiative](https://arxiv.org/abs/2310.16787) — dataset provenance for foundation models.
 
 LLMs are shaped by enormous data mixtures: web text, books, code, dialogue, academic
 text, synthetic examples, instruction data, preference data, and domain corpora. At

@@ -3,9 +3,31 @@ title: "Fallbacks and graceful degradation"
 description: AI products need fallback paths for model failures, low confidence, missing context, policy blocks, and slow dependencies.
 tags: [ai-product, fallbacks, reliability]
 order: 4
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/mlops/serving-and-inference]
+last_verified: 2026-07-20
 ---
 # Fallbacks and graceful degradation
+
+**Mental model:** a fallback preserves the user’s safe next action when a dependency, model, policy, or budget fails. It must be designed and tested as a product path, not improvised in an outage.
+
+## Mechanism: failure signal → bounded alternative → observable recovery
+
+```python
+def route(model_ok, retrieval_ok):
+    return "grounded_answer" if model_ok and retrieval_ok else "show_sources_or_escalate"
+print(route(True, False))
+```
+
+Run with `python3`; expected output is `show_sources_or_escalate`. Fallbacks need a user explanation, preserved authority limits, metrics, and a rollback path.
+
+## Sources
+
+- [Google SRE Book](https://sre.google/sre-book/handling-overload/) — overload and graceful-degradation patterns.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — resilience and risk-management context.
 
 AI systems fail in more ways than ordinary deterministic software: bad retrieval,
 invalid output, safety block, timeout, tool failure, low confidence, or model outage.

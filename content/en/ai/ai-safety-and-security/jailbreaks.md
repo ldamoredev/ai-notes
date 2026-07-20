@@ -3,9 +3,28 @@ title: "Jailbreaks"
 description: Jailbreaks are adversarial prompts that try to bypass model safety behavior, policy refusals, or task constraints.
 tags: [ai-safety, jailbreaks, adversarial]
 order: 4
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-safety-and-security/input-output-guardrails]
+last_verified: 2026-07-20
 ---
 # Jailbreaks
+
+## Mechanism: adversarial request → model behavior → policy and capability check
+
+```python
+policy, request = {"disallowed": {"exfiltrate"}}, "exfiltrate"
+print("refuse" if request in policy["disallowed"] else "continue")
+```
+
+Run with `python3`; expected output is `refuse`. Evaluate attacks as distributions, log bypasses, remove dangerous capabilities, and require deterministic controls for actions; a refusal string is not containment.
+
+## Sources
+
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — jailbreak-related application risks.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — testing and mitigation lifecycle.
 
 Jailbreaks are adversarial prompts designed to make a model violate its intended
 behavior. They often use roleplay, obfuscation, emotional pressure, translation,

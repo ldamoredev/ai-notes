@@ -3,9 +3,28 @@ title: "Data quality dimensions"
 description: Data quality is multi-dimensional: accuracy, completeness, consistency, validity, timeliness, uniqueness, coverage, and label reliability.
 tags: [data-for-ai, data-quality, validation]
 order: 2
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: foundational
+status: current
+prerequisites: [ai/data-for-ai/dataset-design-and-sampling]
+last_verified: 2026-07-20
 ---
 # Data quality dimensions
+
+## Mechanism: intended use → quality dimension → acceptance test
+
+```python
+quality = {"completeness": .98, "timeliness_days": 1}
+print("pass" if quality["completeness"] >= .95 and quality["timeliness_days"] <= 2 else "hold")
+```
+
+Run with `python3`; expected output is `pass`. Define accuracy, completeness, consistency, timeliness, coverage, provenance, and representativeness against the decision they support—not as universal scores.
+
+## Sources
+
+- [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) — data quality and lifecycle questions.
+- [Data Cascades in High-Stakes AI](https://research.google/pubs/data-cascades-in-high-stakes-ai/) — operational data failures.
 
 "Bad data" is too vague to fix. Data quality improves when you name the dimension that
 is broken and attach a validation check, owner, or review loop to it.

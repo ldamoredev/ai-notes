@@ -3,9 +3,18 @@ title: "Debug a hallucination"
 description: A diagnostic procedure for finding whether a hallucination came from missing context, bad retrieval, weak grounding, prompt pressure, or model behavior.
 tags: [playbook, hallucination, debugging, rag]
 order: 11
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/rag-and-retrieval/grounding-and-citations]
+last_verified: 2026-07-20
 ---
 # Debug a hallucination
+
+**Mental model:** an unsupported claim is a traceable failure of evidence availability, selection, synthesis, citation, or abstention policy—not automatically a model defect.
+
+## Mechanism: claim → evidence → stage diagnosis
 
 Use this playbook when an AI answer contains unsupported, contradicted, fabricated, or
 overconfident claims.
@@ -40,6 +49,21 @@ overconfident claims.
 
 Do not label every hallucination as "model problem". Many are architecture problems:
 missing evidence, unsafe product pressure, weak citation checks, or stale retrieval.
+
+## Executable claim ledger
+
+```python
+claims = {"annual revenue doubled": "unsupported", "launch date": "supported"}
+assert "unsupported" in claims.values()
+print("requires abstention or retrieval repair")
+```
+
+Run with `python3`; expected output names the required next action. Do not release a prompt-only fix until retrieval and citation regressions pass.
+
+## Sources
+
+- [RAG](https://arxiv.org/abs/2005.11401) — retriever-generator formulation.
+- [RAGAS](https://docs.ragas.io/) — component-level groundedness and retrieval metrics.
 
 **Connects to:** [[ai/evaluation/hallucination-detection|hallucination detection]] ·
 [[ai/llms/why-llms-hallucinate|why LLMs hallucinate]] ·

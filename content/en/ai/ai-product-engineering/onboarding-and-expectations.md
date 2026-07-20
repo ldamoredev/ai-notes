@@ -3,9 +3,35 @@ title: "Onboarding and expectations"
 description: AI onboarding should teach the user what the feature is good at, what it cannot do, and how to steer or verify it.
 tags: [ai-product, onboarding, ux, expectations]
 order: 10
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-product-engineering/handling-errors-and-hallucinations-in-ui]
+last_verified: 2026-07-20
 ---
 # Onboarding and expectations
+
+## Mechanism: capability boundary → user mental model → corrective feedback
+
+```python
+expectation = {"can": "draft with cited sources", "cannot": "guarantee correctness"}
+print(expectation["cannot"])
+```
+
+Run with `python3`; expected output names the limit. Onboarding should state role, evidence, authority, privacy, correction, and escalation before a user relies on the feature.
+
+## Production lens and exercises
+
+Measure first-task success, correction use, escalation, abandonment, and overreliance reports. Update onboarding when model, permissions, evidence sources, or fallback behavior changes; stale expectations are a product defect.
+
+1. Write a first-run disclosure for an AI feature that can draft but cannot submit.
+2. Test whether a user can find and correct a wrong answer without rereading a help center.
+
+## Sources
+
+- [People + AI Guidebook](https://pair.withgoogle.com/guidebook/) — expectation-setting patterns.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — transparency context.
 
 AI features fail when users expect magic or when they do not know how to steer the
 system. Onboarding should set usable expectations without burying the product in

@@ -1,48 +1,56 @@
 ---
 title: "Defense in depth and least privilege"
-description: AI security depends on layered controls and narrow permissions because no single model, prompt, classifier, or guardrail is reliable enough alone.
-tags: [ai-safety, defense-in-depth, least-privilege]
-order: 11
-updated: 2026-06-07
+description: Limit AI-system blast radius with independent controls across identity, data, tools, networks, approvals, observability, and recovery.
+tags: [security, least-privilege, defense-in-depth, agents]
+order: 3
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/agents-and-tools/autonomy-and-control, ai/ai-safety-and-security/indirect-prompt-injection]
+last_verified: 2026-07-20
 ---
 # Defense in depth and least privilege
 
-Defense in depth assumes one control will fail. Least privilege assumes the model will
-eventually make a bad decision. Together, they make failures contained instead of
-catastrophic.
+**Mental model:** an AI model is an untrusted proposal generator. Defense in depth assumes a prompt, classifier, provider, or reviewer will eventually fail; independent controls must prevent one failure from becoming unauthorized disclosure or action. Least privilege gives every identity, tool, and workflow only the authority required for its current task.
 
-## Layered controls
+## Mechanism: identity → scoped capability → verified side effect
 
-| Layer | Example control |
-|---|---|
-| Identity | per-user and per-agent authorization |
-| Data | permission-filtered retrieval and tenant isolation |
-| Prompt | role separation and clear task boundaries |
-| Model | safer model choice for riskier tasks |
-| Guardrail | input and output classifiers, schema checks |
-| Tool | allowlists, scoped credentials, argument validation |
-| Human | approval for irreversible or high-impact actions |
-| Operations | monitoring, rate limits, alerts, incident response |
+Resolve the user and tenant before retrieval, issue a service identity with a narrow allowlist, validate arguments and current state at execution, and require approval for consequential actions. Log the decision and keep a kill switch. A model cannot upgrade its authority because retrieved text says so.
 
-## Least privilege for AI
+```python
+policy = {"support-agent": {"search_orders", "draft_reply"}}
+def authorize(role, tool): return tool in policy.get(role, set())
+print(authorize("support-agent", "issue_refund"))
+assert not authorize("support-agent", "issue_refund")
+```
 
-- Expose fewer tools than the model could theoretically use.
-- Give read-only access unless writes are essential.
-- Scope credentials to the task, tenant, and time window.
-- Bound amounts, destinations, file paths, recipients, and APIs.
-- Require approval when an action has irreversible or external side effects.
+Run with `python3`; expected output is `False`. The executor must also enforce tenant scope, amount limits, idempotency, and approval policy; an allowlist alone is not a full control.
 
-## Failure containment
+## Layers that should fail independently
 
-Design for the moment when prompt injection succeeds, retrieval returns poisoned
-content, a judge misses a violation, or an agent chooses the wrong tool. The question
-is whether that failure can reach data, money, production, or users.
+| Layer | Control | Failure it contains |
+|---|---|---|
+| Identity | separate service principals, tenant scoping | cross-user access |
+| Data | authorization before retrieval, minimization | private context exposure |
+| Tools | narrow schemas and semantic checks | malformed or excessive action |
+| Network | egress allowlists and secret isolation | exfiltration |
+| Workflow | budgets, approvals, idempotency | runaway or irreversible action |
+| Operations | traces, alerts, kill switch, rollback | delayed incident response |
 
-## Pitfall
+## Failure modes and decision rule
 
-Security by model behavior is fragile. A model refusal is helpful, but it is not an
-access-control system, a transaction limit, or an audit trail.
+Prompt rules and post-hoc output filters are not authorization. A broad database token, shell access, or shared admin credential defeats the whole design. Remove unnecessary capabilities first; then add compensating controls for the remaining high-impact paths. Release only when each external action has a named identity, policy, audit record, and recovery route.
 
-**Connects to:** [[ai/agents-and-tools/autonomy-and-control|autonomy and least privilege]] ·
-[[ai/ai-safety-and-security/excessive-agency|excessive agency]] ·
-[[ai/mlops/monitoring-and-drift|monitoring]]
+## Exercises
+
+1. Add a tenant identifier to the artifact and test a cross-tenant denial.
+2. Classify five tools by reversibility and decide which requires human approval.
+
+**Connects to:** [[ai/agents-and-tools/autonomy-and-control|autonomy control]] · [[ai/agents-and-tools/guardrails-and-human-in-the-loop|approval gates]] · [[ai/ai-safety-and-security/indirect-prompt-injection|indirect injection]] · [[ai/mlops/llm-observability-and-tracing|tracing]]
+
+## Sources
+
+- [OWASP LLM06: Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) — excessive functionality, permissions, and autonomy risks.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — secure, resilient lifecycle controls.
+- [MITRE ATLAS](https://atlas.mitre.org/) — adversarial ML tactics and mitigations.

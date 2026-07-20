@@ -3,9 +3,28 @@ title: "Privacy and data governance"
 description: AI data governance defines what data can enter prompts, retrieval, training, logs, caches, traces, and human review workflows.
 tags: [ai-safety, privacy, governance, data]
 order: 12
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-ethics-and-governance/privacy-consent-and-data-rights]
+last_verified: 2026-07-20
 ---
 # Privacy and data governance
+
+## Mechanism: inventory → purpose/access/retention → deletion evidence
+
+```python
+stores = {"prompt": 30, "trace": 30, "index": 30}
+print("covered" if len(stores) == 3 else "missing store")
+```
+
+Run with `python3`; expected output is `covered`. Map personal data through prompts, retrieval, caches, logs, evaluation, training, and vendors; permission and retention must propagate to every derivative store.
+
+## Sources
+
+- [European Data Protection Board: AI](https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en) — data-protection guidance.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — privacy-enhanced AI controls.
 
 Privacy and data governance decide what data an AI system may collect, process, store,
 retrieve, expose, and learn from. Without those rules, every prompt, trace, embedding,

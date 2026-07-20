@@ -3,9 +3,18 @@ title: "Decide prompt vs RAG vs fine-tune"
 description: A decision procedure for choosing whether to improve an AI system with prompting, retrieval, fine-tuning, tools, or product constraints.
 tags: [playbook, architecture, rag, fine-tuning]
 order: 5
-updated: 2026-06-07
+updated: 2026-07-20
+kind: playbook
+level: intermediate
+status: current
+prerequisites: [ai/evaluation/task-specific-evals]
+last_verified: 2026-07-20
 ---
 # Decide prompt vs RAG vs fine-tune
+
+**Mental model:** select the smallest mechanism that repairs measured failure: prompts clarify instructions, retrieval supplies controlled knowledge, fine-tuning changes recurring behavior, and tools perform verified work.
+
+## Mechanism: failure evidence → architecture choice → eval
 
 Use this playbook when a model is underperforming and the team is debating whether to
 change the prompt, add RAG, fine-tune, add tools, or redesign the product boundary.
@@ -46,3 +55,18 @@ citations, retrieval usually belongs in the architecture.
 **Connects to:** [[ai/fine-tuning-and-alignment/when-to-fine-tune|when to fine-tune]] ·
 [[ai/rag-and-retrieval/why-rag|why RAG]] ·
 [[ai/prompt-engineering/prompt-to-context-engineering|context engineering]]
+
+## Executable decision rule
+
+```python
+failure = "private-changing-facts"
+print("RAG" if failure == "private-changing-facts" else "measure first")
+```
+
+Run with `python3`; expected output is `RAG`. Validate the choice on task, cost, latency, safety, and freshness evals.
+
+## Sources
+
+- [RAG](https://arxiv.org/abs/2005.11401) — controlled retrieval for knowledge-intensive generation.
+- [LoRA](https://arxiv.org/abs/2106.09685) — parameter-efficient behavioral adaptation.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk-aware architecture decisions.

@@ -3,9 +3,28 @@ title: "Excessive agency"
 description: Excessive agency happens when an AI system has more autonomy, tool access, permissions, or budget than the task requires.
 tags: [ai-safety, agents, autonomy, least-privilege]
 order: 6
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-safety-and-security/defense-in-depth-and-least-privilege]
+last_verified: 2026-07-20
 ---
 # Excessive agency
+
+## Mechanism: task authority → narrow capability → bounded blast radius
+
+```python
+allowed = {"search", "draft"}
+print("deny" if "delete" not in allowed else "allow")
+```
+
+Run with `python3`; expected output is `deny`. Give every agent its own identity, scoped tools, semantic validation, budgets, approval tiers, and a kill switch; prompts are not enforcement.
+
+## Sources
+
+- [OWASP LLM06: Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) — authority and permission risks.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — lifecycle controls.
 
 Excessive agency is the risk of giving an AI system too much power. The model might be
 tricked, confused, or wrong, but the damage comes from the permissions and actions the

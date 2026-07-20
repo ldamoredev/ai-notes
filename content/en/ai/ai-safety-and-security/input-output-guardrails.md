@@ -3,9 +3,28 @@ title: "Input and output guardrails"
 description: Guardrails are layered checks around the model that classify inputs, constrain context, validate outputs, and route risky cases to safer workflows.
 tags: [ai-safety, guardrails, policy]
 order: 9
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/ai-safety-and-security/defense-in-depth-and-least-privilege]
+last_verified: 2026-07-20
 ---
 # Input and output guardrails
+
+## Mechanism: classify → validate → allow, transform, escalate, or block
+
+```python
+decision = "escalate" if "payment" in "refund payment" else "allow"
+print(decision)
+```
+
+Run with `python3`; expected output is `escalate`. Guardrails need a policy owner, false-positive monitoring, adversarial tests, and action-layer enforcement; filters alone cannot authorize a tool call.
+
+## Sources
+
+- [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) — guardrail failure classes.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — measurement and control context.
 
 Guardrails are controls around the model, not magic words inside the prompt. They help
 detect unsafe requests, constrain what context enters the model, validate output, and

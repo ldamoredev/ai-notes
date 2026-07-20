@@ -3,9 +3,28 @@ title: "Feedback data and active learning"
 description: Feedback data and active learning turn production uncertainty, corrections, and failures into targeted data improvements.
 tags: [data-for-ai, feedback, active-learning]
 order: 12
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/evaluation/systematic-error-analysis]
+last_verified: 2026-07-20
 ---
 # Feedback data and active learning
+
+## Mechanism: uncertainty/error → selected example → label → evaluated update
+
+```python
+scores = [0.51, 0.92, 0.49]
+print(min(scores, key=lambda s: abs(s-.5)))
+```
+
+Run with `python3`; expected output selects the most uncertain example. Feedback is not ground truth: log source, incentives, reviewer agreement, exposure bias, and label policy; assess whether sampling amplifies existing representation gaps.
+
+## Sources
+
+- [Active Learning Literature Survey](http://burrsettles.com/pub/settles.activelearning.pdf) — active-learning foundations.
+- [Data Cascades in High-Stakes AI](https://research.google/pubs/data-cascades-in-high-stakes-ai/) — feedback-loop risks.
 
 Production feedback is one of the best sources of new data, but only if it is captured,
 triaged, labeled, and fed back deliberately. Otherwise it becomes noisy telemetry.

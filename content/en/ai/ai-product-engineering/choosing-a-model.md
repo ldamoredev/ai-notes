@@ -3,9 +3,16 @@ title: "Choosing a model: open vs closed, capability vs cost"
 description: There is no "best model" — only the best fit for a task's quality bar, latency, cost, privacy, and control needs. A framework for picking and not over-paying.
 tags: [model-selection, open-source, cost, product]
 order: 14
-updated: 2026-06-07
+updated: 2026-07-20
+kind: concept
+level: intermediate
+status: current
+prerequisites: [ai/evaluation/designing-eval-sets]
+last_verified: 2026-07-20
 ---
 # Choosing a model: open vs closed, capability vs cost
+
+## Mechanism: held-out workload → admissible models → lowest-cost route
 
 Model choice is a recurring product decision, not a one-time pick. The frontier moves
 monthly and your tasks differ, so the question is never "what's the best model?" but
@@ -57,3 +64,15 @@ evals, not vibes or leaderboards.
 **Connects to:** [[ai/mlops/build-vs-buy-api-vs-self-hosting|build vs buy]] ·
 [[ai/inference-and-optimization/right-sizing-models|right-sizing]] ·
 [[ai/evaluation/designing-eval-sets|eval on your task]]
+
+```python
+models = [{"name":"small", "quality":.86, "cost":.01}, {"name":"large", "quality":.91, "cost":.04}]
+print(min((m for m in models if m["quality"] >= .90), key=lambda m: m["cost"])["name"])
+```
+
+Run with `python3`; expected output is `large`. Add safety, latency, region, availability, and fallback gates before release.
+
+## Sources
+
+- [HELM](https://crfm.stanford.edu/helm/) — scenario-based model evaluation.
+- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) — risk-aware selection.
