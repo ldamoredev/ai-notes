@@ -64,16 +64,16 @@ Implemented delta at this refoundation checkpoint: +7 branches, +10 canonical pa
 | ES overlay files | 84 |
 | Real ES overlays | 83 |
 | Real ES coverage | 32.7% |
-| Notes without Sources/References heading | 126 |
+| Notes without Sources/References heading | 116 |
 | Notes without `Connects to` | 2 |
-| Notes without limits/failure/tradeoff signal | 26 |
-| Notes without code or explicit example | 84 |
-| Notes without exercises | 188 |
-| Notes with fenced code | 94 |
+| Notes without limits/failure/tradeoff signal | 25 |
+| Notes without code or explicit example | 79 |
+| Notes without exercises | 178 |
+| Notes with fenced code | 104 |
 
-Action distribution: `{"CANONICAL": 42, "DEEPEN": 48, "KEEP_AS_OVERVIEW": 28, "REWRITE": 136}`.
+Action distribution: `{"CANONICAL": 52, "DEEPEN": 48, "KEEP_AS_OVERVIEW": 28, "REWRITE": 126}`.
 
-Average-score bands (floor, atomic notes): `{"0": 23, "1": 103, "2": 32, "3": 60}`.
+Average-score bands (floor, atomic notes): `{"0": 20, "1": 96, "2": 32, "3": 70}`.
 
 ## Rubric
 
@@ -90,8 +90,8 @@ Every page is scored 0–4 in this fixed order: `concept`, `first-principles`, `
 | `ai-safety-and-security` | 12 | 2.99/4 | 12/12 | 12/12 | KEEP_AND_DEEPEN | See target taxonomy and migration map |
 | `classical-ai-and-reasoning` | 0 | 0.00/4 | 0/0 | 0/0 | KEEP_AND_DEEPEN | See target taxonomy and migration map |
 | `computation-and-autodiff` | 1 | 3.83/4 | 1/1 | 1/1 | KEEP_AND_DEEPEN | See target taxonomy and migration map |
-| `data-for-ai` | 13 | 2.30/4 | 9/13 | 9/13 | KEEP_AND_DEEPEN | See target taxonomy and migration map |
-| `deep-learning` | 11 | 1.22/4 | 0/11 | 0/11 | SPLIT | See target taxonomy and migration map |
+| `data-for-ai` | 13 | 3.07/4 | 13/13 | 13/13 | KEEP_AND_DEEPEN | See target taxonomy and migration map |
+| `deep-learning` | 11 | 2.56/4 | 6/11 | 6/11 | SPLIT | See target taxonomy and migration map |
 | `evaluation` | 14 | 1.28/4 | 0/14 | 0/14 | RENAME | See target taxonomy and migration map |
 | `fine-tuning-and-alignment` | 12 | 1.33/4 | 0/12 | 1/12 | RENAME | See target taxonomy and migration map |
 | `foundations` | 10 | 1.33/4 | 0/10 | 0/10 | SPLIT | See target taxonomy and migration map |
@@ -208,17 +208,17 @@ Score columns are: path, title, type, mean, 12-score vector, freshness date, sou
 | `ai/data-for-ai/datasheets-and-data-documentation.md` | Datasheets and data documentation | concept | 2.67 | `3/2/2/3/3/4/3/4/3/0/4/1` | 2026-07-20 | 3 | 2 | 3 | review by branch | declared | **REWRITE** | `ai/data-for-ai/datasheets-and-data-documentation.md` |
 | `ai/data-for-ai/feedback-data-and-active-learning.md` | Feedback data and active learning | concept | 2.92 | `3/2/2/3/3/4/3/4/3/3/4/1` | 2026-07-20 | 3 | 2 | 3 | review by branch | declared | **DEEPEN** | `ai/data-for-ai/feedback-data-and-active-learning.md` |
 | `ai/data-for-ai/index.md` | Data for AI | overview | 1.75 | `2/1/0/0/0/0/4/3/3/2/3/3` | 2026-06-07 | 4 | 0 | 0 | review by branch | implicit | **KEEP_AS_OVERVIEW** | `ai/data-for-ai/index.md` |
-| `ai/data-for-ai/labeling-and-annotation.md` | Labeling and annotation | concept | 0.83 | `0/0/0/0/0/0/0/3/3/0/3/1` | 2026-06-07 | 0 | 0 | 0 | review by branch | implicit | **REWRITE** | `ai/data-for-ai/labeling-and-annotation.md` |
-| `ai/data-for-ai/privacy-and-pii-in-datasets.md` | Privacy and PII in datasets | concept | 1.17 | `0/0/1/0/1/2/0/3/3/0/3/1` | 2026-06-07 | 0 | 1 | 1 | review by branch | implicit | **REWRITE** | `ai/data-for-ai/privacy-and-pii-in-datasets.md` |
-| `ai/data-for-ai/synthetic-data.md` | Synthetic data | concept | 1.08 | `0/0/0/0/1/2/0/3/3/0/3/1` | 2026-06-07 | 0 | 0 | 1 | review by branch | implicit | **REWRITE** | `ai/data-for-ai/synthetic-data.md` |
-| `ai/data-for-ai/the-data-flywheel.md` | The data flywheel | concept | 1.58 | `2/2/1/2/0/0/0/3/3/2/3/1` | 2026-06-07 | 0 | 1 | 0 | review by branch | implicit | **REWRITE** | `ai/data-for-ai/the-data-flywheel.md` |
-| `ai/deep-learning/activation-functions.md` | Activation functions & why nonlinearity matters | concept | 1.33 | `1/1/2/1/0/0/0/3/3/0/3/2` | 2026-06-07 | 0 | 2 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/activation-functions.md` |
-| `ai/deep-learning/cnns.md` | CNNs: convolution & spatial structure | concept | 1.42 | `1/1/1/1/0/0/0/3/3/2/3/2` | 2026-06-07 | 0 | 1 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/cnns.md` |
-| `ai/deep-learning/embeddings-and-latent-spaces.md` | Embeddings & latent spaces | concept | 1.33 | `1/1/2/1/0/0/0/3/3/0/3/2` | 2026-06-07 | 0 | 2 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/embeddings-and-latent-spaces.md` |
+| `ai/data-for-ai/labeling-and-annotation.md` | Labeling and annotation | concept | 3.67 | `4/3/3/4/3/4/4/4/4/3/4/4` | 2026-07-20 | 4 | 3 | 3 | review by branch | declared | **CANONICAL** | `ai/data-for-ai/labeling-and-annotation.md` |
+| `ai/data-for-ai/privacy-and-pii-in-datasets.md` | Privacy and PII in datasets | concept | 3.75 | `4/4/4/4/3/4/4/4/4/2/4/4` | 2026-07-20 | 4 | 4 | 3 | review by branch | declared | **CANONICAL** | `ai/data-for-ai/privacy-and-pii-in-datasets.md` |
+| `ai/data-for-ai/synthetic-data.md` | Synthetic data | concept | 3.58 | `4/3/3/4/3/4/4/4/4/2/4/4` | 2026-07-20 | 4 | 3 | 3 | review by branch | declared | **CANONICAL** | `ai/data-for-ai/synthetic-data.md` |
+| `ai/data-for-ai/the-data-flywheel.md` | The data flywheel | concept | 3.67 | `4/3/3/4/3/4/4/4/4/3/4/4` | 2026-07-20 | 4 | 3 | 3 | review by branch | declared | **CANONICAL** | `ai/data-for-ai/the-data-flywheel.md` |
+| `ai/deep-learning/activation-functions.md` | Activation functions & why nonlinearity matters | concept | 3.67 | `4/3/3/4/3/4/4/4/4/3/4/4` | 2026-07-20 | 4 | 3 | 3 | review by branch | declared | **CANONICAL** | `ai/deep-learning/activation-functions.md` |
+| `ai/deep-learning/cnns.md` | CNNs: convolution & spatial structure | concept | 3.67 | `4/4/3/4/3/4/4/4/4/2/4/4` | 2026-07-20 | 4 | 3 | 3 | review by branch | declared | **CANONICAL** | `ai/deep-learning/cnns.md` |
+| `ai/deep-learning/embeddings-and-latent-spaces.md` | Embeddings & latent spaces | concept | 3.42 | `4/3/3/4/3/4/4/4/4/0/4/4` | 2026-07-20 | 4 | 3 | 3 | review by branch | declared | **CANONICAL** | `ai/deep-learning/embeddings-and-latent-spaces.md` |
 | `ai/deep-learning/index.md` | Deep Learning | overview | 2.33 | `3/3/3/3/0/0/4/3/3/0/3/3` | 2026-06-07 | 4 | 3 | 0 | review by branch | implicit | **KEEP_AS_OVERVIEW** | `ai/deep-learning/index.md` |
-| `ai/deep-learning/initialization-and-normalization.md` | Initialization & normalization | concept | 0.92 | `1/0/0/0/0/0/0/3/3/0/3/1` | 2026-06-07 | 0 | 0 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/initialization-and-normalization.md` |
-| `ai/deep-learning/loss-functions-in-dl.md` | Loss functions in deep learning | concept | 1.42 | `1/1/3/1/0/0/0/3/3/0/3/2` | 2026-06-07 | 0 | 3 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/loss-functions-in-dl.md` |
-| `ai/deep-learning/optimizers.md` | Optimizers: from SGD to AdamW | concept | 0.83 | `1/1/1/0/0/0/0/3/0/0/3/1` | 2026-06-07 | 0 | 1 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/optimizers.md` |
+| `ai/deep-learning/initialization-and-normalization.md` | Initialization & normalization | concept | 3.67 | `4/3/4/4/3/4/4/4/4/2/4/4` | 2026-07-20 | 4 | 4 | 3 | review by branch | declared | **CANONICAL** | `ai/deep-learning/initialization-and-normalization.md` |
+| `ai/deep-learning/loss-functions-in-dl.md` | Loss functions in deep learning | concept | 3.75 | `4/3/4/4/3/4/4/4/4/3/4/4` | 2026-07-20 | 4 | 4 | 3 | review by branch | declared | **CANONICAL** | `ai/deep-learning/loss-functions-in-dl.md` |
+| `ai/deep-learning/optimizers.md` | Optimizers: from SGD to AdamW | concept | 3.83 | `4/4/4/4/3/4/4/4/4/3/4/4` | 2026-07-20 | 4 | 4 | 3 | review by branch | declared | **CANONICAL** | `ai/deep-learning/optimizers.md` |
 | `ai/deep-learning/regularization-in-deep-nets.md` | Regularization: dropout, weight decay & augmentation | concept | 1.08 | `1/1/1/0/0/0/0/3/3/0/3/1` | 2026-06-07 | 0 | 1 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/regularization-in-deep-nets.md` |
 | `ai/deep-learning/rnns-and-their-limits.md` | RNNs & their limits | concept | 1.58 | `1/1/2/1/0/0/0/3/3/3/3/2` | 2026-06-07 | 0 | 2 | 0 | review by branch | implicit | **REWRITE** | `ai/deep-learning/rnns-and-their-limits.md` |
 | `ai/deep-learning/scaling-laws.md` | Scaling laws: why bigger keeps working | concept | 1.50 | `1/0/1/0/1/2/0/3/3/3/3/1` | 2026-06-07 | 0 | 1 | 1 | review by branch | implicit | **REWRITE** | `ai/deep-learning/scaling-laws.md` |
